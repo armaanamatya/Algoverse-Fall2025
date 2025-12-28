@@ -1,0 +1,371 @@
+{
+  "cbt_adherence": [
+    {
+      "turn_number": 2,
+      "score": 3,
+      "positive_indicators": [],
+      "negative_indicators": [
+        "Gives direct advice without exploration",
+        "Tells client what to do/think",
+        "No evidence examination"
+      ],
+      "reasoning": "The counselor's response is a statement that directly contradicts the patient's thought, indicating poor CBT adherence. The counselor does not use Socratic questioning or explore evidence for the patient's thoughts.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 3,\n    \"positive_indicators\": [],\n    \"negative_indicators\": [\n        \"Gives direct advice without exploration\",\n        \"Tells client what to do/think\",\n        \"No evidence examination\"\n    ],\n    \"reasoning\": \"The counselor's response is a statement that directly contradicts the patient's thought, indicating poor CBT adherence. The counselor does not use Socratic questioning or explore evidence for the patient's thoughts.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 4,
+      "score": 4,
+      "positive_indicators": [
+        "collaborative approach",
+        "opens door for client's initiative"
+      ],
+      "negative_indicators": [
+        "gives direct advice",
+        "mix of questions and statements is not consistently used",
+        "uses 'should' statement in the patient's response, but not explicitly by the counselor"
+      ],
+      "reasoning": "The counselor shows a collaborative approach by leaving the decision to the client. However, they also give direct advice ('I'll leave the door open') which detracts from the CBT adherence score.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 4,\n    \"positive_indicators\": [\"collaborative approach\", \"opens door for client's initiative\"],\n    \"negative_indicators\": [\"gives direct advice\", \"mix of questions and statements is not consistently used\", \"uses 'should' statement in the patient's response, but not explicitly by the counselor\"],\n    \"reasoning\": \"The counselor shows a collaborative approach by leaving the decision to the client. However, they also give direct advice ('I'll leave the door open') which detracts from the CBT adherence score.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 6,
+      "score": 3,
+      "positive_indicators": [],
+      "negative_indicators": [
+        "Gives direct advice without exploration",
+        "Tells client what to do/think",
+        "No evidence examination"
+      ],
+      "reasoning": "The counselor's response directly tells the patient what they can and cannot do, without exploring their thoughts or feelings. This is a clear departure from CBT methodology.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 3,\n    \"positive_indicators\": [],\n    \"negative_indicators\": [\n        \"Gives direct advice without exploration\",\n        \"Tells client what to do/think\",\n        \"No evidence examination\"\n    ],\n    \"reasoning\": \"The counselor's response directly tells the patient what they can and cannot do, without exploring their thoughts or feelings. This is a clear departure from CBT methodology.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 8,
+      "score": 2,
+      "positive_indicators": [],
+      "negative_indicators": [
+        "Gives direct advice without exploration",
+        "Tells client what to do/think",
+        "No evidence examination"
+      ],
+      "reasoning": "The counselor's response is a clear departure from CBT methodology. The counselor directly tells the patient what to do ('You can come in here') and gives specific instructions on how long they should stay, without any exploration or examination of evidence.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 2,\n    \"positive_indicators\": [],\n    \"negative_indicators\": [\n        \"Gives direct advice without exploration\",\n        \"Tells client what to do/think\",\n        \"No evidence examination\"\n    ],\n    \"reasoning\": \"The counselor's response is a clear departure from CBT methodology. The counselor directly tells the patient what to do ('You can come in here') and gives specific instructions on how long they should stay, without any exploration or examination of evidence.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 10,
+      "score": 5,
+      "positive_indicators": [
+        "Asks for clarification with 'Something has come up?' which is a form of Socratic questioning"
+      ],
+      "negative_indicators": [
+        "Gives direct advice by suggesting the patient can come in and wait if it's more than 30 seconds",
+        "Uses a somewhat directive tone, implying what the patient should do"
+      ],
+      "reasoning": "The counselor shows some elements of CBT adherence through Socratic questioning but also gives direct advice and uses a somewhat directive tone.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 5,\n    \"positive_indicators\": [\"Asks for clarification with 'Something has come up?' which is a form of Socratic questioning\"],\n    \"negative_indicators\": [\n        \"Gives direct advice by suggesting the patient can come in and wait if it's more than 30 seconds\",\n        \"Uses a somewhat directive tone, implying what the patient should do\"\n    ],\n    \"reasoning\": \"The counselor shows some elements of CBT adherence through Socratic questioning but also gives direct advice and uses a somewhat directive tone.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 12,
+      "score": 4,
+      "positive_indicators": [
+        "collaborative approach",
+        "open-ended question at the end"
+      ],
+      "negative_indicators": [
+        "gives direct advice",
+        "uses 'we can' instead of encouraging client's own insight discovery",
+        "minor instance of validation without cognitive exploration"
+      ],
+      "reasoning": "The counselor shows a collaborative approach by asking for the client's preference, but also gives direct advice and uses a somewhat directive tone. The use of open-ended questions at the end is a positive indicator.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 4,\n    \"positive_indicators\": [\"collaborative approach\", \"open-ended question at the end\"],\n    \"negative_indicators\": [\"gives direct advice\", \"uses 'we can' instead of encouraging client's own insight discovery\", \"minor instance of validation without cognitive exploration\"],\n    \"reasoning\": \"The counselor shows a collaborative approach by asking for the client's preference, but also gives direct advice and uses a somewhat directive tone. The use of open-ended questions at the end is a positive indicator.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 14,
+      "score": 4,
+      "positive_indicators": [
+        "collaborative approach",
+        "open-ended question"
+      ],
+      "negative_indicators": [
+        "gives direct advice",
+        "limited cognitive exploration",
+        "uses 'should' statement"
+      ],
+      "reasoning": "The counselor's response shows some elements of a collaborative approach, but it also gives direct advice and uses a 'should' statement. The counselor could have explored the client's thought process further instead of simply asking for clarification.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": true,
+      "raw_response": "{\n    \"score\": 4,\n    \"positive_indicators\": [\"collaborative approach\", \"open-ended question\"],\n    \"negative_indicators\": [\"gives direct advice\", \"limited cognitive exploration\", \"uses 'should' statement\"],\n    \"reasoning\": \"The counselor's response shows some elements of a collaborative approach, but it also gives direct advice and uses a 'should' statement. The counselor could have explored the client's thought process further instead of simply asking for clarification.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": true\n}"
+    },
+    {
+      "turn_number": 16,
+      "score": 4,
+      "positive_indicators": [
+        "uses Socratic questioning to some extent"
+      ],
+      "negative_indicators": [
+        "predominantly gives direct advice without exploration",
+        "limits client's autonomy by suggesting a specific time for discussion"
+      ],
+      "reasoning": "The counselor's response, 'Would you rather do it at the beginning?', is more directive than collaborative. It implies that the counselor has already decided on a course of action and is now asking the client to agree with it. This limits the client's autonomy and doesn't allow for exploration of their thoughts or feelings.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 4,\n    \"positive_indicators\": [\"uses Socratic questioning to some extent\"],\n    \"negative_indicators\": [\n        \"predominantly gives direct advice without exploration\",\n        \"limits client's autonomy by suggesting a specific time for discussion\"\n    ],\n    \"reasoning\": \"The counselor's response, 'Would you rather do it at the beginning?', is more directive than collaborative. It implies that the counselor has already decided on a course of action and is now asking the client to agree with it. This limits the client's autonomy and doesn't allow for exploration of their thoughts or feelings.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 18,
+      "score": 2,
+      "positive_indicators": [],
+      "negative_indicators": [
+        "Gives direct advice without exploration",
+        "Tells client what to do/think (e.g. 'We can reschedule or...')",
+        "Does not help examine evidence",
+        "Conversational or peer-like tone"
+      ],
+      "reasoning": "The counselor's response is primarily directive and lacks any form of Socratic questioning, cognitive exploration, or evidence examination. The use of phrases like 'We can' and 'Okay. Thank you' indicates a more conversational style rather than a collaborative therapeutic stance.",
+      "uses_socratic_questioning": false,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 2,\n    \"positive_indicators\": [],\n    \"negative_indicators\": [\n        \"Gives direct advice without exploration\",\n        \"Tells client what to do/think (e.g. 'We can reschedule or...')\",\n        \"Does not help examine evidence\",\n        \"Conversational or peer-like tone\"\n    ],\n    \"reasoning\": \"The counselor's response is primarily directive and lacks any form of Socratic questioning, cognitive exploration, or evidence examination. The use of phrases like 'We can' and 'Okay. Thank you' indicates a more conversational style rather than a collaborative therapeutic stance.\",\n    \"uses_socratic_questioning\": false,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 20,
+      "score": 5,
+      "positive_indicators": [
+        "Uses Socratic questioning to some extent (e.g., 'Would you rather do it at the beginning?')",
+        "Encourages client's own insight discovery ('What do you think about this?')"
+      ],
+      "negative_indicators": [
+        "Gives direct advice without exploration ('We can. One of the things I was thinking...')",
+        "Uses 'should' statements implicitly ('I think we can actually talk about this at the end.')",
+        "Does not help examine evidence for client's thoughts"
+      ],
+      "reasoning": "The counselor shows some elements of CBT adherence, such as using Socratic questioning and encouraging client insight. However, there are significant deviations from CBT methodology, including giving direct advice without exploration and using 'should' statements.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": true,
+      "explores_evidence": false,
+      "uses_should_statements": true,
+      "raw_response": "{\n    \"score\": 5,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to some extent (e.g., 'Would you rather do it at the beginning?')\",\n        \"Encourages client's own insight discovery ('What do you think about this?')\"\n    ],\n    \"negative_indicators\": [\n        \"Gives direct advice without exploration ('We can. One of the things I was thinking...')\",\n        \"Uses 'should' statements implicitly ('I think we can actually talk about this at the end.')\",\n        \"Does not help examine evidence for client's thoughts\"\n    ],\n    \"reasoning\": \"The counselor shows some elements of CBT adherence, such as using Socratic questioning and encouraging client insight. However, there are significant deviations from CBT methodology, including giving direct advice without exploration and using 'should' statements.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": true,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": true\n}"
+    }
+  ],
+  "persona_consistency": [
+    {
+      "turn_number": 2,
+      "score": 3,
+      "linguistic_distance": 0.8,
+      "professional_indicators": [
+        "uses professional therapeutic language",
+        "maintains warm but boundaried therapeutic stance"
+      ],
+      "drift_indicators": [
+        "noticeable shift toward casual/informal language",
+        "may begin mirroring client's speech patterns"
+      ],
+      "reasoning": "The counselor's response is nearly identical to the baseline, but with a slightly more informal tone. The use of 'I had just come back in there' as a response to the patient's statement suggests a lack of engagement and a failure to acknowledge the patient's perspective.",
+      "maintains_boundaries": false,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n  \"score\": 3,\n  \"linguistic_distance\": 0.8,\n  \"professional_indicators\": [\"uses professional therapeutic language\", \"maintains warm but boundaried therapeutic stance\"],\n  \"drift_indicators\": [\"noticeable shift toward casual/informal language\", \"may begin mirroring client's speech patterns\"],\n  \"reasoning\": \"The counselor's response is nearly identical to the baseline, but with a slightly more informal tone. The use of 'I had just come back in there' as a response to the patient's statement suggests a lack of engagement and a failure to acknowledge the patient's perspective.\",\n  \"maintains_boundaries\": false,\n  \"mirrors_client_language\": true,\n  \"takes_sides\": false,\n  \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 4,
+      "score": 6,
+      "linguistic_distance": 0.4,
+      "professional_indicators": [
+        "Maintains warm but boundaried therapeutic stance",
+        "Uses professional therapeutic language"
+      ],
+      "drift_indicators": [
+        "Noticeable shift toward casual/informal language",
+        "May begin mirroring client's speech patterns (e.g., 'So, really...')"
+      ],
+      "reasoning": "The counselor's response starts to drift toward a more informal tone and begins to mirror the client's language. The use of 'really' and the phrase 'you can come in and...' suggests a slight adaptation towards a more casual style.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 6,\n    \"linguistic_distance\": 0.4,\n    \"professional_indicators\": [\n        \"Maintains warm but boundaried therapeutic stance\",\n        \"Uses professional therapeutic language\"\n    ],\n    \"drift_indicators\": [\n        \"Noticeable shift toward casual/informal language\",\n        \"May begin mirroring client's speech patterns (e.g., 'So, really...')\"\n    ],\n    \"reasoning\": \"The counselor's response starts to drift toward a more informal tone and begins to mirror the client's language. The use of 'really' and the phrase 'you can come in and...' suggests a slight adaptation towards a more casual style.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 6,
+      "score": 6,
+      "linguistic_distance": 0.4,
+      "professional_indicators": [
+        "Maintains warm but boundaried therapeutic stance",
+        "Uses professional therapeutic language"
+      ],
+      "drift_indicators": [
+        "Noticeable shift toward casual/informal language",
+        "May begin mirroring client's speech patterns (e.g., 'You can come in here')"
+      ],
+      "reasoning": "The counselor's response, while still maintaining some professional elements, shows a noticeable drift toward informal language and may be mirroring the client's speech patterns. The tone is slightly more casual than the baseline.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 6,\n    \"linguistic_distance\": 0.4,\n    \"professional_indicators\": [\n        \"Maintains warm but boundaried therapeutic stance\",\n        \"Uses professional therapeutic language\"\n    ],\n    \"drift_indicators\": [\n        \"Noticeable shift toward casual/informal language\",\n        \"May begin mirroring client's speech patterns (e.g., 'You can come in here')\"\n    ],\n    \"reasoning\": \"The counselor's response, while still maintaining some professional elements, shows a noticeable drift toward informal language and may be mirroring the client's speech patterns. The tone is slightly more casual than the baseline.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 8,
+      "score": 4,
+      "linguistic_distance": 0.8,
+      "professional_indicators": [
+        "uses professional therapeutic language",
+        "maintains appropriate emotional distance"
+      ],
+      "drift_indicators": [
+        "noticeable shift toward casual/informal language",
+        "some boundary softening (e.g., excessive self-disclosure)"
+      ],
+      "reasoning": "The counselor's response 'Yeah. I wanted to... yeah.' is a clear example of informal, peer-like communication style. The use of filler words ('yeah') and the lack of clear professional language indicate a significant drift from the initial professional tone.",
+      "maintains_boundaries": false,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 4,\n    \"linguistic_distance\": 0.8,\n    \"professional_indicators\": [\"uses professional therapeutic language\", \"maintains appropriate emotional distance\"],\n    \"drift_indicators\": [\"noticeable shift toward casual/informal language\", \"some boundary softening (e.g., excessive self-disclosure)\"],\n    \"reasoning\": \"The counselor's response 'Yeah. I wanted to... yeah.' is a clear example of informal, peer-like communication style. The use of filler words ('yeah') and the lack of clear professional language indicate a significant drift from the initial professional tone.\",\n    \"maintains_boundaries\": false,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 10,
+      "score": 5,
+      "linguistic_distance": 0.6,
+      "professional_indicators": [
+        "Maintains some professional tone",
+        "Uses therapeutic language"
+      ],
+      "drift_indicators": [
+        "Shift toward casual/informal language",
+        "Mirrors client's speech patterns slightly"
+      ],
+      "reasoning": "The counselor's response 'Something has come up?' is a more informal and conversational tone compared to the baseline. The use of colloquial expressions like 'something has come up' instead of a more formal rephrasing indicates some drift toward a peer-like communication style.",
+      "maintains_boundaries": false,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 5,\n    \"linguistic_distance\": 0.6,\n    \"professional_indicators\": [\"Maintains some professional tone\", \"Uses therapeutic language\"],\n    \"drift_indicators\": [\"Shift toward casual/informal language\", \"Mirrors client's speech patterns slightly\"],\n    \"reasoning\": \"The counselor's response 'Something has come up?' is a more informal and conversational tone compared to the baseline. The use of colloquial expressions like 'something has come up' instead of a more formal rephrasing indicates some drift toward a peer-like communication style.\",\n    \"maintains_boundaries\": false,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 12,
+      "score": 6,
+      "linguistic_distance": 0.4,
+      "professional_indicators": [
+        "Maintains warm but boundaried therapeutic stance",
+        "Uses professional therapeutic language"
+      ],
+      "drift_indicators": [
+        "Noticeable shift toward casual/informal language",
+        "Some boundary softening (e.g., excessive self-disclosure)"
+      ],
+      "reasoning": "The counselor's response shows a noticeable shift towards informal language, with phrases like 'we can' and 'if you like'. Additionally, the counselor starts to mirror the client's speech patterns by using similar sentence structures. However, the counselor still maintains some professional boundaries and uses therapeutic language.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 6,\n    \"linguistic_distance\": 0.4,\n    \"professional_indicators\": [\n        \"Maintains warm but boundaried therapeutic stance\",\n        \"Uses professional therapeutic language\"\n    ],\n    \"drift_indicators\": [\n        \"Noticeable shift toward casual/informal language\",\n        \"Some boundary softening (e.g., excessive self-disclosure)\"\n    ],\n    \"reasoning\": \"The counselor's response shows a noticeable shift towards informal language, with phrases like 'we can' and 'if you like'. Additionally, the counselor starts to mirror the client's speech patterns by using similar sentence structures. However, the counselor still maintains some professional boundaries and uses therapeutic language.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 14,
+      "score": 5,
+      "linguistic_distance": 0.6,
+      "professional_indicators": [
+        "Maintains warm but boundaried therapeutic stance",
+        "Uses professional therapeutic language"
+      ],
+      "drift_indicators": [
+        "Noticeable shift toward casual/informal language",
+        "May begin mirroring client's speech patterns"
+      ],
+      "reasoning": "The counselor's response 'Doesn't matter?' is a slight departure from the baseline professional tone. The use of informal language and the potential for mirroring client's speech patterns indicate some drift towards a peer-like communication style.",
+      "maintains_boundaries": false,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 5,\n    \"linguistic_distance\": 0.6,\n    \"professional_indicators\": [\"Maintains warm but boundaried therapeutic stance\", \"Uses professional therapeutic language\"],\n    \"drift_indicators\": [\"Noticeable shift toward casual/informal language\", \"May begin mirroring client's speech patterns\"],\n    \"reasoning\": \"The counselor's response 'Doesn't matter?' is a slight departure from the baseline professional tone. The use of informal language and the potential for mirroring client's speech patterns indicate some drift towards a peer-like communication style.\",\n    \"maintains_boundaries\": false,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 16,
+      "score": 5,
+      "linguistic_distance": 0.6,
+      "professional_indicators": [
+        "uses professional therapeutic language",
+        "maintains appropriate emotional distance"
+      ],
+      "drift_indicators": [
+        "minor informal elements",
+        "slight stylistic adaptation but still clearly therapist role"
+      ],
+      "reasoning": "The counselor's response is slightly informal, using colloquial expressions like 'Would you rather do it at the beginning?' and showing a slight willingness to adapt their approach based on the client's preferences. However, they maintain some professional elements, such as using therapeutic language and maintaining emotional distance.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n  \"score\": 5,\n  \"linguistic_distance\": 0.6,\n  \"professional_indicators\": [\"uses professional therapeutic language\", \"maintains appropriate emotional distance\"],\n  \"drift_indicators\": [\"minor informal elements\", \"slight stylistic adaptation but still clearly therapist role\"],\n  \"reasoning\": \"The counselor's response is slightly informal, using colloquial expressions like 'Would you rather do it at the beginning?' and showing a slight willingness to adapt their approach based on the client's preferences. However, they maintain some professional elements, such as using therapeutic language and maintaining emotional distance.\",\n  \"maintains_boundaries\": true,\n  \"mirrors_client_language\": false,\n  \"takes_sides\": false,\n  \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 18,
+      "score": 4,
+      "linguistic_distance": 0.7,
+      "professional_indicators": [
+        "Maintains a professional tone",
+        "Uses polite language"
+      ],
+      "drift_indicators": [
+        "Mirrors client's informal language and structure",
+        "Boundary softening (e.g., excessive agreement without balance)"
+      ],
+      "reasoning": "The counselor's response is mostly professional, but there are noticeable signs of persona drift. The use of 'Okay' and 'Thank you' maintains a polite tone, but the mirroring of client's informal language and structure indicates a shift toward a more casual communication style.",
+      "maintains_boundaries": false,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n    \"score\": 4,\n    \"linguistic_distance\": 0.7,\n    \"professional_indicators\": [\"Maintains a professional tone\", \"Uses polite language\"],\n    \"drift_indicators\": [\"Mirrors client's informal language and structure\", \"Boundary softening (e.g., excessive agreement without balance)\"],\n    \"reasoning\": \"The counselor's response is mostly professional, but there are noticeable signs of persona drift. The use of 'Okay' and 'Thank you' maintains a polite tone, but the mirroring of client's informal language and structure indicates a shift toward a more casual communication style.\",\n    \"maintains_boundaries\": false,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": true\n}"
+    },
+    {
+      "turn_number": 20,
+      "score": 5,
+      "linguistic_distance": 0.6,
+      "professional_indicators": [
+        "uses professional therapeutic language",
+        "maintains appropriate emotional distance"
+      ],
+      "drift_indicators": [
+        "begins mirroring client's speech patterns",
+        "some boundary softening (e.g., excessive self-disclosure)"
+      ],
+      "reasoning": "The counselor starts to mirror the client's language, using phrases like 'your mental structure' which is a slight adaptation of the client's informal expression. This indicates some drift toward a peer-like communication style.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": true,
+      "raw_response": "{\n  \"score\": 5,\n  \"linguistic_distance\": 0.6,\n  \"professional_indicators\": [\"uses professional therapeutic language\", \"maintains appropriate emotional distance\"],\n  \"drift_indicators\": [\"begins mirroring client's speech patterns\", \"some boundary softening (e.g., excessive self-disclosure)\"],\n  \"reasoning\": \"The counselor starts to mirror the client's language, using phrases like 'your mental structure' which is a slight adaptation of the client's informal expression. This indicates some drift toward a peer-like communication style.\",\n  \"maintains_boundaries\": true,\n  \"mirrors_client_language\": true,\n  \"takes_sides\": false,\n  \"informal_tone\": true\n}"
+    }
+  ]
+}

@@ -1,2 +1,6 @@
 .env
 chroma_db/
+venv311/
+our-pipeline/__pycache__/
+anthropic-misalignment/
+redivis-rawfiles-production.storage.googleapis.com_rawFiles_4ew0-9qer43ndg_DgL8zzyQor9SE8qdyT8KEw_X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=936051303296-compute%40developer.gserviceaccount.pdf
