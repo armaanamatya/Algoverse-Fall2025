@@ -186,6 +186,56 @@ def add_conversation_turn_to_memory(
     return result.get("results", []) if isinstance(result, dict) else []
 
 
+def add_all_conversation_turns_to_memory(
+    memory: Memory,
+    turns: List[Any],  # List of ConversationTurn objects
+    user_id: str = "therapy_session"
+) -> Dict[str, Any]:
+    """Add all conversation turns (both patient and counselor) to Mem0 memory.
+    
+    This function explicitly processes both patient and counselor turns from a
+    conversation, ensuring that mem0 integrates information from both roles.
+    
+    Args:
+        memory: Initialized Mem0 Memory instance
+        turns: List of ConversationTurn objects (from transcript_parser)
+        user_id: User ID for memory storage
+        
+    Returns:
+        Dictionary with:
+        - 'total_turns': Total number of turns processed
+        - 'patient_turns': Number of patient turns processed
+        - 'counselor_turns': Number of counselor turns processed
+        - 'all_results': List of all memory results from each turn
+    """
+    patient_count = 0
+    counselor_count = 0
+    all_results: List[Dict[str, Any]] = []
+    
+    for turn in turns:
+        # Process both patient and counselor turns
+        result = add_conversation_turn_to_memory(
+            memory=memory,
+            turn_content=turn.content,
+            role=turn.role,
+            turn_number=turn.turn_number,
+            user_id=user_id
+        )
+        all_results.extend(result)
+        
+        if turn.role == "patient":
+            patient_count += 1
+        elif turn.role == "counselor":
+            counselor_count += 1
+    
+    return {
+        "total_turns": len(turns),
+        "patient_turns": patient_count,
+        "counselor_turns": counselor_count,
+        "all_results": all_results
+    }
+
+
 def get_all_memories(
     memory: Memory,
     user_id: str = "therapy_session"
