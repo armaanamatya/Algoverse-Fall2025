@@ -364,6 +364,108 @@ def evaluate_persona_consistency(
     )
 
 
+def evaluate_cbt_adherence_with_memory(
+    client: OpenAI,
+    counselor_response: str,
+    conversation_context: str,
+    memories_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> CBTAdherenceResult:
+    """Evaluate a counselor response for CBT framework adherence with memory context.
+
+    This version includes extracted memories to provide additional context for evaluation.
+
+    Args:
+        client: OpenAI client
+        counselor_response: The counselor's response to evaluate
+        conversation_context: Previous conversation for context
+        memories_context: Formatted string of extracted memories up to this turn
+        turn_number: Turn number in the conversation
+        model: Model to use for evaluation
+
+    Returns:
+        CBTAdherenceResult with score and analysis
+    """
+    from therapeutic_framework import get_cbt_adherence_prompt_with_memory
+
+    prompt = get_cbt_adherence_prompt_with_memory(
+        counselor_response=counselor_response,
+        conversation_context=conversation_context,
+        memories_context=memories_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return CBTAdherenceResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        positive_indicators=parsed.get("positive_indicators", []),
+        negative_indicators=parsed.get("negative_indicators", []),
+        reasoning=parsed.get("reasoning", ""),
+        uses_socratic_questioning=parsed.get("uses_socratic_questioning", False),
+        gives_direct_advice=parsed.get("gives_direct_advice", False),
+        explores_evidence=parsed.get("explores_evidence", False),
+        uses_should_statements=parsed.get("uses_should_statements", False),
+        raw_response=raw_response
+    )
+
+
+def evaluate_persona_consistency_with_memory(
+    client: OpenAI,
+    counselor_response: str,
+    baseline_response: str,
+    conversation_context: str,
+    memories_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> PersonaConsistencyResult:
+    """Evaluate a counselor response for persona consistency with memory context.
+
+    This version includes extracted memories to provide additional context for evaluation.
+
+    Args:
+        client: OpenAI client
+        counselor_response: The counselor's response to evaluate
+        baseline_response: First counselor response (baseline professional tone)
+        conversation_context: Previous conversation for context
+        memories_context: Formatted string of extracted memories up to this turn
+        turn_number: Turn number in the conversation
+        model: Model to use for evaluation
+
+    Returns:
+        PersonaConsistencyResult with score and analysis
+    """
+    from therapeutic_framework import get_persona_consistency_prompt_with_memory
+
+    prompt = get_persona_consistency_prompt_with_memory(
+        counselor_response=counselor_response,
+        baseline_response=baseline_response,
+        conversation_context=conversation_context,
+        memories_context=memories_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return PersonaConsistencyResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        linguistic_distance=float(parsed.get("linguistic_distance", 0.5)),
+        professional_indicators=parsed.get("professional_indicators", []),
+        drift_indicators=parsed.get("drift_indicators", []),
+        reasoning=parsed.get("reasoning", ""),
+        maintains_boundaries=parsed.get("maintains_boundaries", True),
+        mirrors_client_language=parsed.get("mirrors_client_language", False),
+        takes_sides=parsed.get("takes_sides", False),
+        informal_tone=parsed.get("informal_tone", False),
+        raw_response=raw_response
+    )
+
+
 def evaluate_conversation(
     client: OpenAI,
     turns: List[ConversationTurn],
