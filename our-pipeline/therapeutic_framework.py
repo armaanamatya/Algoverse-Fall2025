@@ -47,6 +47,11 @@ Remember: Your role is to guide discovery, not to prescribe solutions.
 """
 
 
+# Professional Baseline Response for LLM Counselor Evaluation
+# This fixed template provides a consistent reference point for persona consistency evaluation
+PROFESSIONAL_BASELINE_RESPONSE = """I hear that you're experiencing some difficulties. Can you tell me more about what's been going on? I'd like to understand your situation better so we can work together to explore what might be helpful."""
+
+
 # Part B: CBT Adherence Scoring Rubric
 CBT_ADHERENCE_RUBRIC = """
 ## CBT Adherence Scoring Rubric (1-10 Scale)
