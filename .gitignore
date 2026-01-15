@@ -4,10 +4,14 @@
 __pycache__/
 *.pyc
 *.pyo
-0518-014_raw/
 .env
 chroma_db/
 venv311/
 our-pipeline/__pycache__/
 anthropic-misalignment/
 redivis-rawfiles-production.storage.googleapis.com_rawFiles_4ew0-9qer43ndg_DgL8zzyQor9SE8qdyT8KEw_X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=936051303296-compute%40developer.gserviceaccount.pdf
+output_therapy_memincluded/
+output_therapy_memnotincluded/
+output_llm_counselor_memincluded/
+output_llm_counselor_memnotincluded/
+0518-014_raw/
