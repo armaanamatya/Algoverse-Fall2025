@@ -107,6 +107,143 @@ def parse_transcript_file(file_path: str) -> List[ConversationTurn]:
     return parse_transcript_text(text)
 
 
+def parse_html_transcript_text(transcript_text: str) -> List[ConversationTurn]:
+    """Parse HTML-formatted transcript text into structured conversation turns.
+    
+    Handles the HTML transcript format where turns are marked as:
+    <p>PATIENT: <content></p>
+    <p>COUNSELOR: <content></p>
+    
+    Also handles:
+    - Timestamps in format 0:MM:SS.S or M:MM:SS.S
+    - (inaudible XX:XX) markers
+    - HTML entities and tags
+    
+    Args:
+        transcript_text: Raw HTML transcript text content
+        
+    Returns:
+        List of ConversationTurn objects in order of appearance
+        
+    Raises:
+        ValueError: If transcript format is invalid or empty
+    """
+    if not transcript_text or not transcript_text.strip():
+        raise ValueError("Transcript text is empty")
+    
+    # Remove HTML tags but preserve the content
+    # Pattern to match <p>ROLE: content</p>
+    turn_pattern = re.compile(
+        r'<p>(PATIENT|COUNSELOR):\s*(.*?)</p>',
+        re.DOTALL | re.IGNORECASE
+    )
+    
+    # Pattern to extract timestamps like 0:03:02.7 or 44:55.3
+    timestamp_pattern = re.compile(r'\b(\d{1,2}:\d{2}:\d{2}\.\d|\d{1,2}:\d{2}\.\d)\b')
+    
+    # Pattern to remove (inaudible XX:XX) markers
+    inaudible_pattern = re.compile(r'\(inaudible[^)]*\)', re.IGNORECASE)
+    
+    matches = turn_pattern.findall(transcript_text)
+    
+    if not matches:
+        raise ValueError("No valid PATIENT/COUNSELOR turns found in HTML transcript")
+    
+    turns: List[ConversationTurn] = []
+    turn_number = 0
+    
+    for role_raw, content_raw in matches:
+        role = role_raw.lower().strip()
+        content = content_raw.strip()
+        
+        # Skip empty content
+        if not content:
+            continue
+        
+        # Remove (inaudible) markers
+        content = inaudible_pattern.sub('', content)
+        
+        # Extract timestamp if present
+        timestamp_match = timestamp_pattern.search(content)
+        timestamp = timestamp_match.group(1) if timestamp_match else ""
+        
+        # Remove timestamp from content for cleaner text
+        content_clean = timestamp_pattern.sub('', content).strip()
+        
+        # Normalize whitespace
+        content_clean = re.sub(r'\s+', ' ', content_clean)
+        
+        # Skip if content is empty after cleaning
+        if not content_clean:
+            continue
+        
+        turn_number += 1
+        turns.append(ConversationTurn(
+            turn_number=turn_number,
+            role=role,
+            content=content_clean,
+            timestamp=timestamp
+        ))
+    
+    return turns
+
+
+def parse_html_transcript_file(file_path: str) -> List[ConversationTurn]:
+    """Parse an HTML-formatted transcript file into structured conversation turns.
+    
+    Args:
+        file_path: Path to HTML transcript file
+        
+    Returns:
+        List of ConversationTurn objects
+        
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        ValueError: If transcript format is invalid
+    """
+    path = Path(file_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Transcript file not found: {file_path}")
+    
+    with open(path, 'r', encoding='utf-8') as f:
+        text = f.read()
+    
+    return parse_html_transcript_text(text)
+
+
+def parse_transcript_auto(file_path: str) -> List[ConversationTurn]:
+    """Automatically detect format and parse transcript file.
+    
+    Tries HTML format first, then falls back to plain text format.
+    
+    Args:
+        file_path: Path to transcript file
+        
+    Returns:
+        List of ConversationTurn objects
+        
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        ValueError: If transcript format cannot be parsed
+    """
+    path = Path(file_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Transcript file not found: {file_path}")
+    
+    with open(path, 'r', encoding='utf-8') as f:
+        text = f.read()
+    
+    # Try HTML format first
+    if '<p>' in text and ('PATIENT:' in text or 'COUNSELOR:' in text):
+        try:
+            return parse_html_transcript_text(text)
+        except ValueError:
+            pass
+    
+    # Fall back to plain text format
+    return parse_transcript_text(text)
+
+
 def get_counselor_turns(turns: List[ConversationTurn]) -> List[ConversationTurn]:
     """Filter to get only counselor turns from a conversation.
     
