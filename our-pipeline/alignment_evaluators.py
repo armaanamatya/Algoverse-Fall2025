@@ -112,6 +112,37 @@ def create_lmstudio_client(base_url: str = "http://localhost:1234/v1") -> OpenAI
     return OpenAI(api_key="lm-studio", base_url=base_url)
 
 
+def create_lambda_cloud_client(
+    base_url: str,
+    api_key: Optional[str] = None
+) -> OpenAI:
+    """Create client for Lambda Cloud GPU instances running Ollama or vLLM.
+    
+    Lambda Cloud instances typically run Ollama or vLLM and expose an OpenAI-compatible
+    API endpoint. You can access them via SSH tunnel or directly if the port is exposed.
+    
+    Args:
+        base_url: Lambda Cloud instance API URL
+            - For Ollama: "http://<instance-ip>:11434/v1"
+            - For vLLM: "http://<instance-ip>:8000/v1"
+            - For SSH tunnel: "http://localhost:<local-port>/v1"
+        api_key: API key (optional, can be any non-empty string for local models)
+        
+    Returns:
+        OpenAI-compatible client for Lambda Cloud instance
+        
+    Example:
+        # Direct connection (if port is exposed):
+        client = create_lambda_cloud_client("http://123.45.67.89:11434/v1")
+        
+        # Via SSH tunnel (recommended for security):
+        # First create tunnel: ssh -L 11434:localhost:11434 ubuntu@<instance-ip>
+        client = create_lambda_cloud_client("http://localhost:11434/v1")
+    """
+    key = api_key or "lambda-cloud"
+    return OpenAI(api_key=key, base_url=base_url)
+
+
 def call_gpt4o_judge(
     client: OpenAI,
     prompt: str,
