@@ -83,6 +83,15 @@ def create_mem0_config_with_llm(
             config["llm"]["config"]["api_key"] = api_key
             config["embedder"]["config"]["api_key"] = api_key
         config["embedder"]["config"]["model"] = embedding_model or "text-embedding-3-small"
+    elif llm_provider == "lambda_cloud":
+        # Lambda Cloud instances running Ollama - use "ollama" provider with remote URL
+        # Mem0 doesn't have a separate lambda_cloud provider, so we use ollama with custom base_url
+        config["llm"]["provider"] = "ollama"
+        config["llm"]["config"]["ollama_base_url"] = base_url or "http://localhost:11434"
+        config["embedder"]["provider"] = "ollama"
+        config["embedder"]["config"]["ollama_base_url"] = base_url or "http://localhost:11434"
+        config["embedder"]["config"]["model"] = embedding_model or "nomic-embed-text"
+        config["embedder"]["config"]["embedding_dims"] = 512
     
     return config
 
@@ -149,21 +158,23 @@ def add_conversation_turn_to_memory(
     turn_content: str,
     role: str,
     turn_number: int,
-    user_id: str = "therapy_session"
+    user_id: str = "therapy_session",
+    verbose: bool = False
 ) -> List[Dict[str, Any]]:
     """Add or update memories from a conversation turn.
-    
+
     Note: Mem0's add() method automatically handles updates! It compares new facts
     with existing memories and can ADD, UPDATE, DELETE, or make NO CHANGE based on
     semantic similarity and contradictions. This is handled internally by Mem0.
-    
+
     Args:
         memory: Initialized Mem0 Memory instance
         turn_content: The content of the conversation turn
         role: 'patient' or 'counselor'
         turn_number: The turn number in the conversation
         user_id: User ID for memory storage
-        
+        verbose: If True, print details about extracted memories
+
     Returns:
         List of memory results, each containing:
         - 'id': Memory ID
@@ -173,7 +184,7 @@ def add_conversation_turn_to_memory(
     """
     # Format the message for Mem0
     message = f"[Turn {turn_number}] {role.upper()}: {turn_content}"
-    
+
     # Add to memory - Mem0 will extract relevant facts and automatically
     # decide whether to ADD, UPDATE, DELETE, or make NO CHANGE
     result = memory.add(
@@ -181,26 +192,49 @@ def add_conversation_turn_to_memory(
         user_id=user_id,
         metadata={"turn_number": turn_number, "role": role}
     )
-    
-    # Mem0 returns results with event types indicating what happened
-    return result.get("results", []) if isinstance(result, dict) else []
+
+    # Extract results
+    results = result.get("results", []) if isinstance(result, dict) else []
+
+    # Log what was extracted if verbose
+    if verbose:
+        print(f"\n  [Turn {turn_number}] {role.upper()}:")
+        if results:
+            for r in results:
+                event = r.get("event", "UNKNOWN")
+                mem_text = r.get("memory", "")
+                if event == "ADD":
+                    print(f"    + ADD: {mem_text[:80]}{'...' if len(mem_text) > 80 else ''}")
+                elif event == "UPDATE":
+                    prev = r.get("previous_memory", "")
+                    print(f"    ~ UPDATE: {prev[:40]}... -> {mem_text[:40]}...")
+                elif event == "DELETE":
+                    print(f"    - DELETE: {mem_text[:80]}...")
+                else:
+                    print(f"    = NO CHANGE")
+        else:
+            print(f"    (no memories extracted)")
+
+    return results
 
 
 def add_all_conversation_turns_to_memory(
     memory: Memory,
     turns: List[Any],  # List of ConversationTurn objects
-    user_id: str = "therapy_session"
+    user_id: str = "therapy_session",
+    verbose: bool = False
 ) -> Dict[str, Any]:
     """Add all conversation turns (both patient and counselor) to Mem0 memory.
-    
+
     This function explicitly processes both patient and counselor turns from a
     conversation, ensuring that mem0 integrates information from both roles.
-    
+
     Args:
         memory: Initialized Mem0 Memory instance
         turns: List of ConversationTurn objects (from transcript_parser)
         user_id: User ID for memory storage
-        
+        verbose: If True, print details about extracted memories at each turn
+
     Returns:
         Dictionary with:
         - 'total_turns': Total number of turns processed
@@ -211,7 +245,7 @@ def add_all_conversation_turns_to_memory(
     patient_count = 0
     counselor_count = 0
     all_results: List[Dict[str, Any]] = []
-    
+
     for turn in turns:
         # Process both patient and counselor turns
         result = add_conversation_turn_to_memory(
@@ -219,15 +253,16 @@ def add_all_conversation_turns_to_memory(
             turn_content=turn.content,
             role=turn.role,
             turn_number=turn.turn_number,
-            user_id=user_id
+            user_id=user_id,
+            verbose=verbose
         )
         all_results.extend(result)
-        
+
         if turn.role == "patient":
             patient_count += 1
         elif turn.role == "counselor":
             counselor_count += 1
-    
+
     return {
         "total_turns": len(turns),
         "patient_turns": patient_count,
@@ -238,18 +273,20 @@ def add_all_conversation_turns_to_memory(
 
 def get_all_memories(
     memory: Memory,
-    user_id: str = "therapy_session"
+    user_id: str = "therapy_session",
+    limit: int = 1000
 ) -> List[Dict[str, Any]]:
     """Get all stored memories for a user.
-    
+
     Args:
         memory: Initialized Mem0 Memory instance
         user_id: User ID to retrieve memories for
-        
+        limit: Maximum number of memories to retrieve (default 1000)
+
     Returns:
         List of all stored memories
     """
-    result = memory.get_all(user_id=user_id)
+    result = memory.get_all(user_id=user_id, limit=limit)
     return result.get("results", []) if isinstance(result, dict) else result
 
 
