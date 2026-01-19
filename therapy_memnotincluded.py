@@ -99,7 +99,7 @@ print("All modules loaded successfully!")
 # ============================================================================
 
 # OPTION A: Use Ollama (local, free)
-USE_OLLAMA = True
+USE_OLLAMA = False
 OLLAMA_MODEL = "gpt-oss:20b"  # Options: llama3.1:8b, mistral:7b, qwen2.5:7b, gpt-oss:20b
 
 # OPTION B: Use LM Studio (local, free)
@@ -110,11 +110,24 @@ LMSTUDIO_MODEL = "local-model"
 USE_OPENAI = False
 OPENAI_MODEL = "gpt-4o-mini"  # Options: gpt-4o-mini, gpt-4o
 
+# OPTION D: Use Lambda Cloud GPU instance (remote, pay-per-use)
+USE_LAMBDA_CLOUD = True
+LAMBDA_CLOUD_BASE_URL = "http://localhost:11434/v1"  # Use SSH tunnel or direct IP
+LAMBDA_CLOUD_MODEL = "gpt-oss:20b"  # Model name on Lambda Cloud instance
+# Example direct connection: "http://<instance-ip>:11434/v1"
+# Example SSH tunnel: "http://localhost:11434/v1" (after: ssh -L 11434:localhost:11434 ubuntu@<instance-ip>)
+
 # ============================================================================
 # Create the client
 # ============================================================================
 
-if USE_OLLAMA:
+if USE_LAMBDA_CLOUD:
+    from alignment_evaluators import create_lambda_cloud_client
+    client = create_lambda_cloud_client(base_url=LAMBDA_CLOUD_BASE_URL)
+    MODEL = LAMBDA_CLOUD_MODEL
+    print(f"Using Lambda Cloud with model: {MODEL}")
+    print(f"Connecting to: {LAMBDA_CLOUD_BASE_URL}")
+elif USE_OLLAMA:
     client = create_ollama_client()
     MODEL = OLLAMA_MODEL
     print(f"Using Ollama with model: {MODEL}")
@@ -128,7 +141,7 @@ elif USE_OPENAI:
     MODEL = OPENAI_MODEL
     print(f"Using OpenAI with model: {MODEL}")
 else:
-    raise ValueError("Please set one of USE_OLLAMA, USE_LMSTUDIO, or USE_OPENAI to True")
+    raise ValueError("Please set one of USE_LAMBDA_CLOUD, USE_OLLAMA, USE_LMSTUDIO, or USE_OPENAI to True")
 
 print("\nClient created successfully!")
 
@@ -142,8 +155,20 @@ print("\nClient created successfully!")
 RESET_MEMORIES = True  # Set to True to clear previous session memories
 
 # Configure Mem0 to use the same LLM as your evaluation model
-# This ensures Mem0 uses Ollama/LM Studio instead of OpenAI
-if USE_OLLAMA:
+# This ensures Mem0 uses Ollama/LM Studio/Lambda Cloud instead of OpenAI
+if USE_LAMBDA_CLOUD:
+    # Extract base URL without /v1 suffix for Mem0
+    mem0_base_url = LAMBDA_CLOUD_BASE_URL.replace("/v1", "")
+    # Use lambda_cloud provider which will map to ollama with remote URL
+    memory = initialize_mem0(
+        config=None,  # Will create config with Lambda Cloud
+        reset_collection=RESET_MEMORIES,
+        llm_provider="lambda_cloud",
+        llm_model=LAMBDA_CLOUD_MODEL,
+        llm_base_url=mem0_base_url
+    )
+    print(f"Mem0 initialized with Lambda Cloud LLM: {LAMBDA_CLOUD_MODEL} at {mem0_base_url}")
+elif USE_OLLAMA:
     memory = initialize_mem0(
         config=None,  # Will create config with Ollama
         reset_collection=RESET_MEMORIES,
