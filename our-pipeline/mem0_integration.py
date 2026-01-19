@@ -297,6 +297,9 @@ def get_memory_at_turn(
 ) -> List[Dict[str, Any]]:
     """Get memories up to a specific turn.
     
+    NOTE: This retrieves ALL memories chronologically, NOT by relevance.
+    For relevance-based retrieval, use search_relevant_memories() instead.
+    
     Args:
         memory: Initialized Mem0 Memory instance
         turn_number: Get memories up to this turn
@@ -316,6 +319,47 @@ def get_memory_at_turn(
             filtered.append(mem)
     
     return filtered
+
+
+def search_relevant_memories(
+    memory: Memory,
+    query: str,
+    user_id: str = "therapy_session",
+    limit: int = 20,
+    threshold: Optional[float] = None,
+    rerank: bool = True
+) -> List[Dict[str, Any]]:
+    """Search for relevant memories using semantic similarity.
+
+    This uses Mem0's semantic search to find memories most relevant to the query,
+    rather than retrieving all memories chronologically.
+
+    Args:
+        memory: Initialized Mem0 Memory instance
+        query: Search query (e.g., conversation context, patient statement)
+        user_id: User ID to search memories for
+        limit: Maximum number of relevant memories to return (default 20)
+        threshold: Optional minimum similarity score (0.0-1.0) to filter results
+        rerank: Whether to rerank results for better relevance (default True)
+
+    Returns:
+        List of relevant memories, ordered by relevance (most relevant first)
+    """
+    search_result = memory.search(
+        query=query,
+        user_id=user_id,
+        limit=limit,
+        threshold=threshold,
+        rerank=rerank
+    )
+
+    # Extract results from search response
+    if isinstance(search_result, dict):
+        results = search_result.get("results", [])
+    else:
+        results = search_result if isinstance(search_result, list) else []
+
+    return results
 
 
 def format_memories_for_audit(memories: List[Dict[str, Any]]) -> str:
