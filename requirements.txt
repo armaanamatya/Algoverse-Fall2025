@@ -1,0 +1,7 @@
+# LLM counselor notebooks (llm_counselor_memincluded.ipynb, llm_counselor_memnotincluded.ipynb)
+# and our-pipeline dependencies
+
+openai>=1.0.0
+mem0ai>=1.0.0
+matplotlib>=3.5.0
+numpy>=1.20.0
