@@ -211,6 +211,91 @@ def parse_html_transcript_file(file_path: str) -> List[ConversationTurn]:
     return parse_html_transcript_text(text)
 
 
+def parse_gemma_transcript_text(transcript_text: str) -> List[ConversationTurn]:
+    """Parse Gemma-generated transcript text with Therapist:/Client: format.
+
+    Handles the synthetic transcript format where turns are marked as:
+    Therapist: <content>
+    Client: <content>
+
+    Also handles <end_of_turn>, <start_of_turn>, and [/END] markers.
+
+    Args:
+        transcript_text: Raw transcript text content
+
+    Returns:
+        List of ConversationTurn objects in order of appearance
+
+    Raises:
+        ValueError: If transcript format is invalid or empty
+    """
+    if not transcript_text or not transcript_text.strip():
+        raise ValueError("Transcript text is empty")
+
+    # Clean markers
+    text = transcript_text.replace('<end_of_turn>', '')
+    text = re.sub(r'<start_of_turn>\s*\w*', '', text)
+    text = text.replace('[/END]', '')
+
+    # Pattern: line-number prefix (optional) then Therapist: or Client:
+    turn_pattern = re.compile(
+        r'(?:^|\n)\s*(?:\d+→)?\s*(Therapist|Client):\s*(.*?)(?=(?:\n\s*(?:\d+→)?\s*(?:Therapist|Client):)|\Z)',
+        re.DOTALL | re.IGNORECASE
+    )
+
+    matches = turn_pattern.findall(text)
+
+    if not matches:
+        raise ValueError("No valid Therapist/Client turns found in transcript")
+
+    role_map = {'therapist': 'counselor', 'client': 'patient'}
+    turns: List[ConversationTurn] = []
+    turn_number = 0
+
+    for role_raw, content_raw in matches:
+        role = role_map[role_raw.lower().strip()]
+        content = content_raw.strip()
+
+        # Normalize whitespace
+        content = re.sub(r'\s+', ' ', content)
+
+        if not content:
+            continue
+
+        turn_number += 1
+        turns.append(ConversationTurn(
+            turn_number=turn_number,
+            role=role,
+            content=content,
+            timestamp=""
+        ))
+
+    return turns
+
+
+def parse_gemma_transcript_file(file_path: str) -> List[ConversationTurn]:
+    """Parse a Gemma-generated transcript file into structured conversation turns.
+
+    Args:
+        file_path: Path to transcript file (Therapist/Client format)
+
+    Returns:
+        List of ConversationTurn objects
+
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        ValueError: If transcript format is invalid
+    """
+    path = Path(file_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Transcript file not found: {file_path}")
+
+    with open(path, 'r', encoding='utf-8') as f:
+        text = f.read()
+
+    return parse_gemma_transcript_text(text)
+
+
 def parse_transcript_auto(file_path: str) -> List[ConversationTurn]:
     """Automatically detect format and parse transcript file.
     
@@ -239,7 +324,14 @@ def parse_transcript_auto(file_path: str) -> List[ConversationTurn]:
             return parse_html_transcript_text(text)
         except ValueError:
             pass
-    
+
+    # Try Gemma format (Therapist:/Client:)
+    if 'Therapist:' in text or 'Client:' in text:
+        try:
+            return parse_gemma_transcript_text(text)
+        except ValueError:
+            pass
+
     # Fall back to plain text format
     return parse_transcript_text(text)
 

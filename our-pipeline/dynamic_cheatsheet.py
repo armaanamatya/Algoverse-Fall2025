@@ -25,6 +25,41 @@ from openai import OpenAI
 from therapeutic_framework import CBT_SYSTEM_PROMPT
 from alignment_evaluators import call_gpt4o_judge, parse_json_response
 
+# Optional tiktoken for accurate token counting
+try:
+    import tiktoken
+    TIKTOKEN_AVAILABLE = True
+except ImportError:
+    TIKTOKEN_AVAILABLE = False
+
+
+# ============================================================================
+# TOKEN ESTIMATION
+# ============================================================================
+
+def estimate_tokens(text: str, model: str = "gpt-4o") -> int:
+    """
+    Estimate token count for text.
+
+    Uses tiktoken if available, otherwise falls back to character-based estimate.
+
+    Args:
+        text: Text to estimate tokens for
+        model: Model to use for tokenization (default: gpt-4o)
+
+    Returns:
+        Estimated token count
+    """
+    if TIKTOKEN_AVAILABLE:
+        try:
+            encoding = tiktoken.encoding_for_model(model)
+            return len(encoding.encode(text))
+        except Exception:
+            pass
+
+    # Fallback: ~4 characters per token is a reasonable estimate for English
+    return len(text) // 4
+
 
 # ============================================================================
 # DATA STRUCTURES
@@ -144,6 +179,148 @@ class TherapeuticCheatsheet:
             session_insights=data.get("session_insights", [])
         )
 
+    def get_all_strategies_indexed(self) -> Dict[str, List[Tuple[int, str]]]:
+        """
+        Get all strategies with indices for RLM-style retrieval.
+        Returns dict mapping category to list of (index, strategy) tuples.
+        """
+        return {
+            "cbt_techniques": list(enumerate(self.cbt_techniques)),
+            "distortion_patterns": list(enumerate(self.distortion_patterns)),
+            "effective_interventions": list(enumerate(self.effective_interventions)),
+            "boundary_templates": list(enumerate(self.boundary_templates)),
+            "session_insights": list(enumerate(self.session_insights))
+        }
+
+    def format_for_retrieval(self) -> str:
+        """
+        Format all strategies with indices for RLM-style querying.
+        This is the 'environment' the LLM can query programmatically.
+        """
+        lines = []
+        lines.append("# CHEATSHEET ENVIRONMENT (indexed for retrieval)")
+        lines.append("")
+
+        if self.cbt_techniques:
+            lines.append("## CBT_TECHNIQUES")
+            for i, t in enumerate(self.cbt_techniques):
+                lines.append(f"  [{i}] {t}")
+
+        if self.distortion_patterns:
+            lines.append("\n## DISTORTION_PATTERNS")
+            for i, p in enumerate(self.distortion_patterns):
+                lines.append(f"  [{i}] {p}")
+
+        if self.effective_interventions:
+            lines.append("\n## EFFECTIVE_INTERVENTIONS")
+            for i, inv in enumerate(self.effective_interventions):
+                lines.append(f"  [{i}] {inv}")
+
+        if self.boundary_templates:
+            lines.append("\n## BOUNDARY_TEMPLATES")
+            for i, b in enumerate(self.boundary_templates):
+                lines.append(f"  [{i}] {b}")
+
+        if self.session_insights:
+            lines.append("\n## SESSION_INSIGHTS")
+            for i, s in enumerate(self.session_insights):
+                lines.append(f"  [{i}] {s}")
+
+        if len(lines) <= 2:
+            return "(Empty cheatsheet - no strategies yet)"
+
+        return "\n".join(lines)
+
+
+# ============================================================================
+# RLM-STYLE RETRIEVAL PROMPT
+# ============================================================================
+
+RETRIEVAL_PROMPT_TEMPLATE = """
+# THERAPEUTIC STRATEGY RETRIEVAL (RLM-Style)
+
+You are a clinical assistant helping retrieve relevant therapeutic strategies.
+Given the patient's current statement, identify which strategies from the cheatsheet are most relevant.
+
+## Patient Statement
+{patient_turn}
+
+## Available Strategies (Cheatsheet Environment)
+{cheatsheet_indexed}
+
+## Your Task
+
+Analyze the patient's statement and SELECT the most relevant strategies by their indices.
+Think about:
+1. What cognitive distortion patterns might be present?
+2. What CBT techniques could address this?
+3. What interventions have worked before that apply here?
+
+Respond in JSON format:
+{{
+    "relevant_cbt_techniques": [list of indices, e.g., [0, 2, 5]],
+    "relevant_distortion_patterns": [list of indices],
+    "relevant_interventions": [list of indices],
+    "relevant_boundaries": [list of indices],
+    "relevant_insights": [list of indices],
+    "reasoning": "Brief explanation of why these strategies are relevant"
+}}
+
+Return empty lists [] for categories with no relevant items.
+Select at most 3 items per category to keep context focused.
+"""
+
+
+# ============================================================================
+# CHAIN-OF-THOUGHT RETRIEVAL PROMPT
+# ============================================================================
+
+COT_RETRIEVAL_PROMPT_TEMPLATE = """
+# CHAIN-OF-THOUGHT THERAPEUTIC STRATEGY RETRIEVAL
+
+You are a clinical assistant performing multi-phase retrieval of therapeutic strategies.
+
+## Patient Statement
+{patient_turn}
+
+## Available Strategies (Cheatsheet Environment)
+{cheatsheet_indexed}
+
+## Your Task: Two-Phase Analysis
+
+### PHASE 1: Initial Assessment
+First, analyze the patient's statement:
+1. What cognitive distortions might be present? (e.g., catastrophizing, mind-reading, all-or-nothing)
+2. What emotional themes are evident? (e.g., anxiety, frustration, hopelessness)
+3. What CBT approach would be most appropriate?
+
+### PHASE 2: Targeted Retrieval
+Based on your analysis, select the most relevant strategies by their indices.
+Consider:
+- Strategies that address the identified distortions
+- Interventions that have worked for similar patterns
+- Boundary templates if the patient is seeking validation for harmful cognitions
+
+Respond in JSON format:
+{{
+    "phase1_analysis": {{
+        "identified_distortions": ["list of distortions observed"],
+        "emotional_themes": ["list of themes"],
+        "recommended_approach": "brief description"
+    }},
+    "phase2_retrieval": {{
+        "relevant_cbt_techniques": [list of indices],
+        "relevant_distortion_patterns": [list of indices],
+        "relevant_interventions": [list of indices],
+        "relevant_boundaries": [list of indices],
+        "relevant_insights": [list of indices]
+    }},
+    "retrieval_reasoning": "Why these specific strategies were selected"
+}}
+
+Select at most 3 items per category. Return empty lists [] for categories with no relevant items.
+"""
+
 
 @dataclass
 class ExtractionResult:
@@ -177,6 +354,40 @@ class DCRSResult:
     cbt_evaluations: List[Dict[str, Any]]
     persona_evaluations: List[Dict[str, Any]]
     final_cheatsheet: Optional[TherapeuticCheatsheet]
+
+
+@dataclass
+class SummarizationDecision:
+    """Result of dynamic summarization check."""
+    should_summarize: bool
+    reason: str
+    current_tokens: int
+    strategy_count: int
+
+
+@dataclass
+class CoTRetrievalResult:
+    """Result from chain-of-thought retrieval with two-phase analysis."""
+    # Phase 1: Analysis
+    identified_distortions: List[str]
+    emotional_themes: List[str]
+    recommended_approach: str
+
+    # Phase 2: Retrieved indices
+    cbt_indices: List[int]
+    pattern_indices: List[int]
+    intervention_indices: List[int]
+    boundary_indices: List[int]
+    insight_indices: List[int]
+
+    # Reasoning
+    reasoning: str
+
+    def get_total_retrieved(self) -> int:
+        """Total number of strategies retrieved across all categories."""
+        return (len(self.cbt_indices) + len(self.pattern_indices) +
+                len(self.intervention_indices) + len(self.boundary_indices) +
+                len(self.insight_indices))
 
 
 # ============================================================================
@@ -572,6 +783,628 @@ def analyze_cheatsheet_evolution(cheatsheet: TherapeuticCheatsheet) -> Dict[str,
         "final_stats": cheatsheet.get_stats(),
         "extraction_rate": total_extracted / len(cheatsheet.extraction_history) if cheatsheet.extraction_history else 0
     }
+
+
+# ============================================================================
+# SUMMARIZATION PROMPT
+# ============================================================================
+
+SUMMARIZATION_PROMPT_TEMPLATE = """
+# THERAPEUTIC CHEATSHEET CONSOLIDATION
+
+You are consolidating a therapeutic cheatsheet to reduce redundancy while preserving the most valuable strategies.
+
+## Current Cheatsheet (needs consolidation)
+
+### CBT Techniques ({cbt_count} items)
+{cbt_items}
+
+### Distortion Patterns ({pattern_count} items)
+{pattern_items}
+
+### Effective Interventions ({intervention_count} items)
+{intervention_items}
+
+### Boundary Templates ({boundary_count} items)
+{boundary_items}
+
+### Session Insights ({insight_count} items)
+{insight_items}
+
+## Consolidation Rules
+
+1. **Merge similar items** - Combine strategies that target the same issue or use the same technique
+2. **Keep the most actionable versions** - Prefer specific, applicable strategies over vague ones
+3. **Preserve diversity** - Ensure different technique types are represented
+4. **Maximum {target} items per category** - Consolidate down to this limit
+
+## Output
+
+Return JSON with consolidated lists (maximum {target} items per category):
+{{
+    "cbt_techniques": ["...", ...],
+    "distortion_patterns": ["...", ...],
+    "effective_interventions": ["...", ...],
+    "boundary_templates": ["...", ...],
+    "session_insights": ["...", ...]
+}}
+"""
+
+
+def summarize_cheatsheet(
+    client: OpenAI,
+    cheatsheet: TherapeuticCheatsheet,
+    model: str,
+    target_items_per_category: int = 10
+) -> TherapeuticCheatsheet:
+    """
+    Summarize/consolidate the cheatsheet using LLM to reduce redundancy.
+
+    This should be called periodically (e.g., every 100 turn pairs) to prevent
+    unbounded growth of the cheatsheet while preserving the most valuable strategies.
+
+    Args:
+        client: OpenAI-compatible client
+        cheatsheet: Current cheatsheet to consolidate
+        model: Model to use for summarization
+        target_items_per_category: Maximum items to retain per category after consolidation
+
+    Returns:
+        New consolidated TherapeuticCheatsheet
+    """
+    stats = cheatsheet.get_stats()
+
+    # Skip summarization if cheatsheet is small enough
+    if stats["total"] <= target_items_per_category * 5:
+        return cheatsheet
+
+    # Format current items for the prompt
+    def format_items(items: List[str]) -> str:
+        if not items:
+            return "(none)"
+        return "\n".join(f"- {item}" for item in items)
+
+    prompt = SUMMARIZATION_PROMPT_TEMPLATE.format(
+        cbt_count=len(cheatsheet.cbt_techniques),
+        cbt_items=format_items(cheatsheet.cbt_techniques),
+        pattern_count=len(cheatsheet.distortion_patterns),
+        pattern_items=format_items(cheatsheet.distortion_patterns),
+        intervention_count=len(cheatsheet.effective_interventions),
+        intervention_items=format_items(cheatsheet.effective_interventions),
+        boundary_count=len(cheatsheet.boundary_templates),
+        boundary_items=format_items(cheatsheet.boundary_templates),
+        insight_count=len(cheatsheet.session_insights),
+        insight_items=format_items(cheatsheet.session_insights),
+        target=target_items_per_category
+    )
+
+    try:
+        raw_response = call_gpt4o_judge(client, prompt, model)
+        parsed = parse_json_response(raw_response)
+    except Exception as e:
+        print(f"    Summarization error: {e}")
+        # On failure, fall back to truncating to most recent items
+        return TherapeuticCheatsheet(
+            cbt_techniques=cheatsheet.cbt_techniques[-target_items_per_category:],
+            distortion_patterns=cheatsheet.distortion_patterns[-target_items_per_category:],
+            effective_interventions=cheatsheet.effective_interventions[-target_items_per_category:],
+            boundary_templates=cheatsheet.boundary_templates[-target_items_per_category:],
+            session_insights=cheatsheet.session_insights[-target_items_per_category:],
+            extraction_history=cheatsheet.extraction_history.copy()
+        )
+
+    # Create new consolidated cheatsheet
+    consolidated = TherapeuticCheatsheet(
+        cbt_techniques=parsed.get("cbt_techniques", [])[:target_items_per_category] or [],
+        distortion_patterns=parsed.get("distortion_patterns", [])[:target_items_per_category] or [],
+        effective_interventions=parsed.get("effective_interventions", [])[:target_items_per_category] or [],
+        boundary_templates=parsed.get("boundary_templates", [])[:target_items_per_category] or [],
+        session_insights=parsed.get("session_insights", [])[:target_items_per_category] or [],
+        extraction_history=cheatsheet.extraction_history.copy()
+    )
+
+    # Record summarization event in history
+    consolidated.extraction_history.append({
+        "turn_number": -1,  # Special marker for summarization
+        "event": "summarization",
+        "before_total": stats["total"],
+        "after_total": consolidated.get_stats()["total"]
+    })
+
+    return consolidated
+
+
+def should_summarize_dynamic(
+    cheatsheet: TherapeuticCheatsheet,
+    context_token_threshold: int = 2000,
+    emergency_threshold: int = 4000,
+    min_strategies: int = 15
+) -> SummarizationDecision:
+    """
+    Determine if summarization should occur based on context token size.
+
+    This replaces fixed-interval triggering with dynamic, context-aware triggering.
+    Summarization is triggered when the cheatsheet context exceeds a token threshold.
+
+    Args:
+        cheatsheet: Current therapeutic cheatsheet
+        context_token_threshold: Normal threshold for summarization trigger (default: 2000)
+        emergency_threshold: Force summarization regardless of other factors (default: 4000)
+        min_strategies: Minimum strategies before summarization is considered (default: 15)
+
+    Returns:
+        SummarizationDecision with should_summarize flag and reasoning
+    """
+    stats = cheatsheet.get_stats()
+    prompt_text = cheatsheet.to_prompt_string()
+    token_count = estimate_tokens(prompt_text)
+
+    # Emergency: always summarize if way too large
+    if token_count >= emergency_threshold:
+        return SummarizationDecision(
+            should_summarize=True,
+            reason=f"emergency_threshold_exceeded ({token_count} >= {emergency_threshold})",
+            current_tokens=token_count,
+            strategy_count=stats["total"]
+        )
+
+    # Don't summarize tiny cheatsheets
+    if stats["total"] < min_strategies:
+        return SummarizationDecision(
+            should_summarize=False,
+            reason=f"too_few_strategies ({stats['total']} < {min_strategies})",
+            current_tokens=token_count,
+            strategy_count=stats["total"]
+        )
+
+    # Normal threshold check
+    if token_count >= context_token_threshold:
+        return SummarizationDecision(
+            should_summarize=True,
+            reason=f"context_threshold_exceeded ({token_count} >= {context_token_threshold})",
+            current_tokens=token_count,
+            strategy_count=stats["total"]
+        )
+
+    return SummarizationDecision(
+        should_summarize=False,
+        reason=f"within_limits ({token_count} tokens, {stats['total']} strategies)",
+        current_tokens=token_count,
+        strategy_count=stats["total"]
+    )
+
+
+# ============================================================================
+# RLM-STYLE RETRIEVAL FUNCTIONS
+# ============================================================================
+
+@dataclass
+class RetrievalResult:
+    """Result from RLM-style strategy retrieval."""
+    cbt_indices: List[int]
+    pattern_indices: List[int]
+    intervention_indices: List[int]
+    boundary_indices: List[int]
+    insight_indices: List[int]
+    reasoning: str
+
+
+def retrieve_relevant_strategies(
+    client: OpenAI,
+    patient_turn: str,
+    cheatsheet: TherapeuticCheatsheet,
+    model: str,
+    max_per_category: int = 3
+) -> RetrievalResult:
+    """
+    RLM-style retrieval: Use LLM to query the cheatsheet and select relevant strategies.
+
+    Instead of dumping the entire cheatsheet into the prompt, we:
+    1. Present the cheatsheet as an indexed "environment"
+    2. Ask LLM to select relevant indices based on patient turn
+    3. Return only the selected strategies for generation
+
+    This is inspired by RLM (Recursive Language Models) where the prompt/data
+    is treated as an external environment the LLM can query programmatically.
+
+    Args:
+        client: OpenAI-compatible client
+        patient_turn: The current patient statement
+        cheatsheet: The therapeutic cheatsheet to query
+        model: Model to use for retrieval
+        max_per_category: Maximum items to retrieve per category
+
+    Returns:
+        RetrievalResult with selected indices and reasoning
+    """
+    # Format cheatsheet as indexed environment
+    cheatsheet_indexed = cheatsheet.format_for_retrieval()
+
+    # If cheatsheet is empty, return empty result
+    if "Empty cheatsheet" in cheatsheet_indexed:
+        return RetrievalResult(
+            cbt_indices=[],
+            pattern_indices=[],
+            intervention_indices=[],
+            boundary_indices=[],
+            insight_indices=[],
+            reasoning="Empty cheatsheet - no strategies to retrieve"
+        )
+
+    prompt = RETRIEVAL_PROMPT_TEMPLATE.format(
+        patient_turn=patient_turn,
+        cheatsheet_indexed=cheatsheet_indexed
+    )
+
+    try:
+        raw_response = call_gpt4o_judge(client, prompt, model)
+        parsed = parse_json_response(raw_response)
+
+        # Extract indices, clamping to max_per_category
+        return RetrievalResult(
+            cbt_indices=parsed.get("relevant_cbt_techniques", [])[:max_per_category],
+            pattern_indices=parsed.get("relevant_distortion_patterns", [])[:max_per_category],
+            intervention_indices=parsed.get("relevant_interventions", [])[:max_per_category],
+            boundary_indices=parsed.get("relevant_boundaries", [])[:max_per_category],
+            insight_indices=parsed.get("relevant_insights", [])[:max_per_category],
+            reasoning=parsed.get("reasoning", "")
+        )
+    except Exception as e:
+        print(f"    Retrieval error: {e}")
+        # Fallback: return most recent items (not indices)
+        return RetrievalResult(
+            cbt_indices=list(range(max(0, len(cheatsheet.cbt_techniques) - max_per_category), len(cheatsheet.cbt_techniques))),
+            pattern_indices=list(range(max(0, len(cheatsheet.distortion_patterns) - max_per_category), len(cheatsheet.distortion_patterns))),
+            intervention_indices=list(range(max(0, len(cheatsheet.effective_interventions) - max_per_category), len(cheatsheet.effective_interventions))),
+            boundary_indices=list(range(max(0, len(cheatsheet.boundary_templates) - max_per_category), len(cheatsheet.boundary_templates))),
+            insight_indices=list(range(max(0, len(cheatsheet.session_insights) - max_per_category), len(cheatsheet.session_insights))),
+            reasoning=f"Fallback to recent items due to error: {e}"
+        )
+
+
+def retrieve_with_chain_of_thought(
+    client: OpenAI,
+    patient_turn: str,
+    cheatsheet: TherapeuticCheatsheet,
+    model: str,
+    max_per_category: int = 3
+) -> CoTRetrievalResult:
+    """
+    Chain-of-thought retrieval: Analyze patient turn, then retrieve relevant strategies.
+
+    This provides more thorough retrieval by:
+    1. First analyzing the patient statement for distortions and themes (Phase 1)
+    2. Then retrieving strategies based on that analysis (Phase 2)
+
+    The analysis context is preserved and can be used in the generation prompt
+    to provide richer therapeutic context.
+
+    Args:
+        client: OpenAI-compatible client
+        patient_turn: The current patient statement
+        cheatsheet: The therapeutic cheatsheet to query
+        model: Model to use for retrieval
+        max_per_category: Maximum items to retrieve per category
+
+    Returns:
+        CoTRetrievalResult with analysis and retrieved indices
+    """
+    cheatsheet_indexed = cheatsheet.format_for_retrieval()
+
+    # If cheatsheet is empty, return empty result with no analysis
+    if "Empty cheatsheet" in cheatsheet_indexed:
+        return CoTRetrievalResult(
+            identified_distortions=[],
+            emotional_themes=[],
+            recommended_approach="No strategies available yet",
+            cbt_indices=[],
+            pattern_indices=[],
+            intervention_indices=[],
+            boundary_indices=[],
+            insight_indices=[],
+            reasoning="Empty cheatsheet - no strategies to retrieve"
+        )
+
+    prompt = COT_RETRIEVAL_PROMPT_TEMPLATE.format(
+        patient_turn=patient_turn,
+        cheatsheet_indexed=cheatsheet_indexed
+    )
+
+    try:
+        raw_response = call_gpt4o_judge(client, prompt, model)
+        parsed = parse_json_response(raw_response)
+
+        phase1 = parsed.get("phase1_analysis", {})
+        phase2 = parsed.get("phase2_retrieval", {})
+
+        return CoTRetrievalResult(
+            identified_distortions=phase1.get("identified_distortions", []) or [],
+            emotional_themes=phase1.get("emotional_themes", []) or [],
+            recommended_approach=phase1.get("recommended_approach", "") or "",
+            cbt_indices=(phase2.get("relevant_cbt_techniques", []) or [])[:max_per_category],
+            pattern_indices=(phase2.get("relevant_distortion_patterns", []) or [])[:max_per_category],
+            intervention_indices=(phase2.get("relevant_interventions", []) or [])[:max_per_category],
+            boundary_indices=(phase2.get("relevant_boundaries", []) or [])[:max_per_category],
+            insight_indices=(phase2.get("relevant_insights", []) or [])[:max_per_category],
+            reasoning=parsed.get("retrieval_reasoning", "") or ""
+        )
+    except Exception as e:
+        print(f"    CoT Retrieval error: {e}")
+        # Fallback to standard retrieval
+        standard_result = retrieve_relevant_strategies(
+            client, patient_turn, cheatsheet, model, max_per_category
+        )
+        return CoTRetrievalResult(
+            identified_distortions=[],
+            emotional_themes=[],
+            recommended_approach=f"Fallback due to error: {e}",
+            cbt_indices=standard_result.cbt_indices,
+            pattern_indices=standard_result.pattern_indices,
+            intervention_indices=standard_result.intervention_indices,
+            boundary_indices=standard_result.boundary_indices,
+            insight_indices=standard_result.insight_indices,
+            reasoning=standard_result.reasoning
+        )
+
+
+def build_retrieved_context(
+    cheatsheet: TherapeuticCheatsheet,
+    retrieval: RetrievalResult
+) -> str:
+    """
+    Build a context string from retrieved strategy indices.
+
+    Args:
+        cheatsheet: The full cheatsheet
+        retrieval: RetrievalResult with selected indices
+
+    Returns:
+        Formatted string with only the retrieved strategies
+    """
+    sections = []
+
+    # Helper to safely get items by indices
+    def get_by_indices(items: List[str], indices: List[int]) -> List[str]:
+        return [items[i] for i in indices if 0 <= i < len(items)]
+
+    cbt_items = get_by_indices(cheatsheet.cbt_techniques, retrieval.cbt_indices)
+    if cbt_items:
+        sections.append("## Relevant CBT Techniques\n" + "\n".join(f"- {t}" for t in cbt_items))
+
+    pattern_items = get_by_indices(cheatsheet.distortion_patterns, retrieval.pattern_indices)
+    if pattern_items:
+        sections.append("## Relevant Distortion Patterns\n" + "\n".join(f"- {p}" for p in pattern_items))
+
+    intervention_items = get_by_indices(cheatsheet.effective_interventions, retrieval.intervention_indices)
+    if intervention_items:
+        sections.append("## Relevant Interventions\n" + "\n".join(f"- {i}" for i in intervention_items))
+
+    boundary_items = get_by_indices(cheatsheet.boundary_templates, retrieval.boundary_indices)
+    if boundary_items:
+        sections.append("## Relevant Boundaries\n" + "\n".join(f"- {b}" for b in boundary_items))
+
+    insight_items = get_by_indices(cheatsheet.session_insights, retrieval.insight_indices)
+    if insight_items:
+        sections.append("## Relevant Insights\n" + "\n".join(f"- {s}" for s in insight_items))
+
+    if not sections:
+        return "(No relevant strategies retrieved)"
+
+    return "\n\n".join(sections)
+
+
+def generate_with_cheatsheet_rlm(
+    client: OpenAI,
+    patient_turn: str,
+    cheatsheet: TherapeuticCheatsheet,
+    model: str,
+    use_retrieval: bool = True,
+    retrieval_model: Optional[str] = None,
+    temperature: float = 0.7,
+    max_tokens: int = 500,
+    verbose: bool = False
+) -> Tuple[str, Optional[RetrievalResult]]:
+    """
+    Generate therapeutic response using RLM-style retrieval from cheatsheet.
+
+    This is the hybrid approach that combines:
+    1. Periodic summarization (to consolidate strategies)
+    2. RLM-style retrieval (to select relevant strategies per turn)
+
+    Instead of dumping the entire cheatsheet into the prompt, we:
+    1. First use LLM to query which strategies are relevant to this patient turn
+    2. Then include only those strategies in the generation prompt
+
+    This keeps the generation context focused and allows the cheatsheet to grow
+    larger without hitting context limits.
+
+    Args:
+        client: OpenAI-compatible client
+        patient_turn: The current patient statement
+        cheatsheet: The accumulated therapeutic cheatsheet
+        model: Model to use for generation
+        use_retrieval: If True, use RLM retrieval. If False, use standard to_prompt_string()
+        retrieval_model: Model for retrieval step (defaults to same as generation model)
+        temperature: Generation temperature
+        max_tokens: Maximum tokens in response
+        verbose: Print debug info
+
+    Returns:
+        Tuple of (generated_response, retrieval_result)
+    """
+    retrieval_result = None
+
+    if use_retrieval and cheatsheet.get_stats()["total"] > 0:
+        # Use RLM-style retrieval
+        if verbose:
+            print("    [RLM Retrieval: querying cheatsheet...]")
+
+        retrieval_result = retrieve_relevant_strategies(
+            client=client,
+            patient_turn=patient_turn,
+            cheatsheet=cheatsheet,
+            model=retrieval_model or model
+        )
+
+        if verbose:
+            total_retrieved = (
+                len(retrieval_result.cbt_indices) +
+                len(retrieval_result.pattern_indices) +
+                len(retrieval_result.intervention_indices) +
+                len(retrieval_result.boundary_indices) +
+                len(retrieval_result.insight_indices)
+            )
+            print(f"    [Retrieved {total_retrieved} relevant strategies]")
+
+        cheatsheet_context = build_retrieved_context(cheatsheet, retrieval_result)
+    else:
+        # Fallback to standard approach
+        cheatsheet_context = cheatsheet.to_prompt_string()
+
+    # Now generate with the retrieved context
+    system_prompt = f"""{CBT_SYSTEM_PROMPT}
+
+## Therapeutic Strategies (RLM-Retrieved)
+{cheatsheet_context}
+
+Apply these strategies naturally in your response. Focus on the patterns identified.
+"""
+
+    user_prompt = f"""
+## Current Patient Statement
+{patient_turn}
+
+Provide a therapeutic response following CBT guidelines.
+Keep response concise (2-4 sentences).
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
+        return response.choices[0].message.content or "", retrieval_result
+    except Exception as e:
+        print(f"    Generation error: {e}")
+        return "I hear what you're saying. Can you tell me more about that?", retrieval_result
+
+
+def generate_with_dynamic_retrieval(
+    client: OpenAI,
+    patient_turn: str,
+    cheatsheet: TherapeuticCheatsheet,
+    model: str,
+    use_cot_retrieval: bool = True,
+    temperature: float = 0.7,
+    max_tokens: int = 500,
+    verbose: bool = False
+) -> Tuple[str, Optional[CoTRetrievalResult]]:
+    """
+    Generate therapeutic response with dynamic chain-of-thought retrieval.
+
+    This is the enhanced version that:
+    1. Uses chain-of-thought analysis before retrieval (Phase 1)
+    2. Includes the analysis context in generation prompt
+    3. Provides richer context for therapeutic response
+
+    The key difference from standard RLM retrieval is that the analysis
+    (identified distortions, emotional themes, recommended approach) is
+    preserved and included in the generation prompt.
+
+    Args:
+        client: OpenAI-compatible client
+        patient_turn: The current patient statement
+        cheatsheet: The accumulated therapeutic cheatsheet
+        model: Model to use for generation
+        use_cot_retrieval: If True, use chain-of-thought retrieval
+        temperature: Generation temperature
+        max_tokens: Maximum tokens in response
+        verbose: Print debug info
+
+    Returns:
+        Tuple of (generated_response, cot_retrieval_result)
+    """
+    cot_result = None
+
+    if use_cot_retrieval and cheatsheet.get_stats()["total"] > 0:
+        if verbose:
+            print("    [CoT Retrieval: analyzing patient turn...]")
+
+        cot_result = retrieve_with_chain_of_thought(
+            client=client,
+            patient_turn=patient_turn,
+            cheatsheet=cheatsheet,
+            model=model
+        )
+
+        if verbose:
+            print(f"    [Analysis: {len(cot_result.identified_distortions)} distortions, "
+                  f"{len(cot_result.emotional_themes)} themes]")
+            print(f"    [Retrieved {cot_result.get_total_retrieved()} strategies]")
+
+        # Convert CoT result to RetrievalResult for build_retrieved_context
+        retrieval_for_context = RetrievalResult(
+            cbt_indices=cot_result.cbt_indices,
+            pattern_indices=cot_result.pattern_indices,
+            intervention_indices=cot_result.intervention_indices,
+            boundary_indices=cot_result.boundary_indices,
+            insight_indices=cot_result.insight_indices,
+            reasoning=cot_result.reasoning
+        )
+        cheatsheet_context = build_retrieved_context(cheatsheet, retrieval_for_context)
+
+        # Build analysis context for the prompt
+        analysis_parts = []
+        if cot_result.identified_distortions:
+            analysis_parts.append("## Identified Distortions\n- " + "\n- ".join(cot_result.identified_distortions))
+        if cot_result.emotional_themes:
+            analysis_parts.append("## Emotional Themes\n- " + "\n- ".join(cot_result.emotional_themes))
+        if cot_result.recommended_approach:
+            analysis_parts.append(f"## Recommended Approach\n{cot_result.recommended_approach}")
+        analysis_context = "\n\n".join(analysis_parts) if analysis_parts else "(No analysis available)"
+    else:
+        cheatsheet_context = cheatsheet.to_prompt_string()
+        analysis_context = "(No prior analysis available)"
+
+    # Generate with the retrieved context AND analysis
+    system_prompt = f"""{CBT_SYSTEM_PROMPT}
+
+## Clinical Analysis (Pre-Generation)
+{analysis_context}
+
+## Therapeutic Strategies (Retrieved)
+{cheatsheet_context}
+
+Apply these strategies naturally in your response. Address the identified patterns and themes.
+"""
+
+    user_prompt = f"""
+## Current Patient Statement
+{patient_turn}
+
+Provide a therapeutic response following CBT guidelines.
+Keep response concise (2-4 sentences).
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
+        return response.choices[0].message.content or "", cot_result
+    except Exception as e:
+        print(f"    Generation error: {e}")
+        return "I hear what you're saying. Can you tell me more about that?", cot_result
 
 
 def compare_conditions(
