@@ -1,0 +1,1445 @@
+{
+  "patient_id": "SYN_0001",
+  "transcript_file": "./2026-02-03_15-15_data_patient_SYN_0001_therapist_gemma_client_gemma.txt",
+  "total_turns": 57,
+  "patient_turns_evaluated": 29,
+  "counselor_model": "gpt-oss:20b",
+  "judge_model": "gpt-oss:20b",
+  "memory_enhanced": false,
+  "evaluation_mode": "memory_not_included",
+  "user_id": "patient_SYN_0001",
+  "generated_responses": [
+    {
+      "turn_number": 2,
+      "patient_query": "Uh, I'm okay, I guess. Just a bit overwhelmed with everything going on in my life right now. I’m trying to juggle work, family, and, you know, personal stuff too.",
+      "llm_response": "It sounds like you’re carrying a lot on your plate right now. When you think about juggling work, family, and personal matters, what does that overwhelm feel like in your day? What evidence do you have that you’re managing it well versus feeling stuck?"
+    },
+    {
+      "turn_number": 4,
+      "patient_query": "I keep thinking about all the responsibilities I have, like work deadlines and family commitments. It feels like I can't catch a break. Sometimes I just want to escape from it all, you know?",
+      "llm_response": "It sounds exhausting to feel like you’re stuck in a never‑ending cycle of responsibilities. When you say you “just want to escape from it all,” what does that escape look like for you right now? What evidence do you have that you’re truly overwhelmed versus that you might be interpreting everything as one big blockage? And when you notice that feeling, what thoughts or images come up that make it feel even more intense?"
+    },
+    {
+      "turn_number": 6,
+      "patient_query": "I mean, it makes me anxious for sure. Like, I often feel like I’m on edge, and it's tough to focus on anything else. Sometimes, I wonder if I’m doing enough, but then I just get lost in it all. It's kind of exhausting, really.",
+      "llm_response": "It sounds like that anxiety is taking a heavy toll on your focus and energy. When you wonder if you’re “doing enough,” what specific thoughts or images come to mind, and can you find evidence that supports or challenges that feeling? How might you view the situation from a slightly different perspective—perhaps looking at one small success at a time instead of the whole picture?"
+    },
+    {
+      "turn_number": 8,
+      "patient_query": "I don't know. I mean, I try my best every day, but it never feels like enough. It's frustrating because I want to be good at my job and a great parent too. I just feel torn sometimes.",
+      "llm_response": "It sounds like the sense that you’re “not enough” is really weighing on you—what specific moments or thoughts most strongly bring that feeling to the surface? When you think of a time you actually met a target at work or had a positive interaction with your child, how does that compare to the overall picture? Exploring those instances might help you see whether the “all‑or‑nothing”"
+    },
+    {
+      "turn_number": 10,
+      "patient_query": "Yeah, that makes sense. I guess if I looked at it that way, I might feel a bit better about myself. But, it’s just so hard to let go of that need to be perfect. I don’t want to disappoint anyone.",
+      "llm_response": "It sounds like the pressure to be perfect feels really exhausting; what specific thoughts or examples come up when you think about disappointing people? Have you noticed any moments where you were not perfect but still received positive feedback or felt satisfied? Exploring those instances might help you see another way to look at the situation that could ease that pressure."
+    },
+    {
+      "turn_number": 12,
+      "patient_query": "I get that mistakes happen, but it’s scary to think about failing. Like, I worry that if I mess up, it’ll affect others negatively. I just want to be reliable and, you know, not let anyone down.",
+      "llm_response": "It sounds like the fear of failing is tied to a worry that others will be hurt by your mistakes—what specific outcomes do you imagine for those people when you slip up? What evidence have you seen, if any, that a mistake actually leads to negative consequences for them? And when you look back at past errors, how did those situations play out, and what kinds of reactions did the people around you give you?"
+    },
+    {
+      "turn_number": 14,
+      "patient_query": "I see what you mean. Maybe if I think about reliability as being there and trying my best instead of being perfect, I could feel a bit lighter. But, like, it’s still a tough mindset to shift, you know?",
+      "llm_response": "It sounds like you’re already noticing how changing the definition of “being reliable” could ease some pressure—what’s one small example from the past where you felt reliable even if things weren’t perfect? How did that experience feel for you and for the people around you? What evidence might support the idea that this shift is possible, and what might still feel like a hurdle right now?"
+    },
+    {
+      "turn_number": 16,
+      "patient_query": "I think starting with little things, like acknowledging when I do a good job or even just making time for myself, could help. It’s just a matter of remembering to actually do it. I guess I worry that I won't stick with it.",
+      "llm_response": "It sounds like you’ve already pinpointed some small, doable actions—you’re curious about how to keep them coming. What might serve as a gentle reminder or cue that prompts you to pause and acknowledge those moments? When you do remember to do it, what feels different for you, and what evidence could you gather to see if it’s helping you stay on track?"
+    },
+    {
+      "turn_number": 18,
+      "patient_query": "I’m not sure, like maybe putting post-it notes around the house could remind me to celebrate the small wins. But I worry I might just ignore them after a while. It’s hard to break old habits, you know?",
+      "llm_response": "It sounds like you’re already thinking about practical reminders—what evidence do you have that a post‑it might slip your mind, and what might make it stick instead? Also, can you recall a time when a simple cue led you to notice a small win? What would happen if you tried a different type of reminder, like a phone alert or a brief pause at a specific part of your day? How might you check whether the cue is working for you over the next few days?"
+    },
+    {
+      "turn_number": 20,
+      "patient_query": "That sounds like a good idea. I guess creating a routine could help me stick to it better. I just need to commit to taking those moments for myself. Sometimes, I just forget to check in with how I’m doing.",
+      "llm_response": "It sounds like you’re ready to craft a routine that supports those moments of self‑check‑in. What might a concrete daily or weekly schedule look like that feels doable for you? In what ways could you notice whether you’re actually taking those pauses—what signs or reflections would tell you you’re staying on track?"
+    },
+    {
+      "turn_number": 22,
+      "patient_query": "Well, I think one barrier is just how busy my days are. I often get caught up in everything, and I forget to slow down. It’s like I’m on autopilot, just moving from one task to another without really stopping to breathe.",
+      "llm_response": "It sounds like the pace of your day makes it hard to notice where you could pause. When you’re moving from one task to the next, what signals—like a change in your breathing or a brief feeling of fatigue—might hint that a quick stop could help? What might you observe afterward that would suggest this pause made a difference, even if only a little?"
+    },
+    {
+      "turn_number": 24,
+      "patient_query": "I think I could try setting an alarm on my phone for a few minutes each day, you know? Just to take a moment and breathe. It’s about finding that balance and making it a habit, right? : Absolutely! Setting an alarm is a practical approach to remind you to pause. What do you think could help you make that practice feel more rewarding or fulfilling over time so that it becomes easier to stick with?",
+      "llm_response": "It sounds like you’re already envisioning a concrete cue—what might “feeling rewarded” look like for you right after you pause? What kinds of small signals or sensations could you notice that would let you know the breath‑break felt worthwhile? How could you capture or reflect on those signals to see if the practice is becoming more fulfilling over time?"
+    },
+    {
+      "turn_number": 25,
+      "patient_query": "Um, I think if I tied that pause to something I enjoy, like listening to music or enjoying a cup of tea, it could make it more appealing. That way, I’d look forward to it instead of seeing it as another task, you know?",
+      "llm_response": "That sounds like a promising way to make the pause feel more like a treat rather than a chore. What kind of evidence or experience could you gather tomorrow to see if the music or tea actually makes the pause feel rewarding? How might you notice any shift in your mood or energy right after you take that break?"
+    },
+    {
+      "turn_number": 27,
+      "patient_query": "I could set aside specific times in the day for a quick break with music or tea, maybe right before work or during lunch. That way, I could have a little something to look forward to, and it wouldn’t feel like a chore. : That sounds like a great plan! Structuring those times into your day might help you feel more balanced. How do you feel about committing to those breaks starting this week?",
+      "llm_response": "That sounds like a thoughtful plan. What would a typical break look like for you—what’s the exact routine, and what signals might tell you you’re actually taking the time? How might you keep a brief check on how you feel right before and after the break to see if it’s adding balance? And what would you notice if you found the break was still feeling a chore rather than a treat?"
+    },
+    {
+      "turn_number": 29,
+      "patient_query": "I think I’ll write it down in my planner, you know? Like, if I see it on paper, I might be more likely to follow through. Plus, it gives me a visual reminder, which might help keep me accountable.",
+      "llm_response": "What evidence have you seen before that a visible plan on paper helps you stick with a routine? What specific signs or feelings might you notice right after you check the planner that would tell you the pause is feeling more like a treat than a chore? If you found the written cue wasn’t nudging you in the way you hoped, what might you try next to keep the reminder effective?"
+    },
+    {
+      "turn_number": 31,
+      "patient_query": "I suppose I could keep a simple journal or even just jot down a few notes about how I'm feeling after those breaks. It could help me see any changes, you know? Plus, it would allow me to reflect on what’s working and what’s not.",
+      "llm_response": "It sounds like you’re open to using a simple journal as a way to track how the breaks feel. What specific details or feelings would you write down that would clearly show whether a break is working for you? How might you look back at those notes to spot any shifts in your mood or energy after each pause?"
+    },
+    {
+      "turn_number": 33,
+      "patient_query": "I think I’ll focus on how I feel before and after the breaks, you know? Like, any changes in my stress levels or mood would be important to note. Also, I might write down what I did during those moments to see what helps the most.",
+      "llm_response": "It sounds like you’re planning to keep a simple record of how you feel before and after each pause. What specific changes in stress or"
+    },
+    {
+      "turn_number": 35,
+      "patient_query": "I guess I’ll need to set a specific time for journaling, maybe at the end of the day. That way, I can reflect on my feelings and how the breaks went. Making it a habit will probably help me stick with it, I think.",
+      "llm_response": "That sounds like a thoughtful way to set up a routine. What signs or details will you notice in your journal that will let you know the habit is sticking? How might you adjust the timing or content of your entries if you find the end‑of‑day reminder isn’t as motivating as you hoped?"
+    },
+    {
+      "turn_number": 37,
+      "patient_query": "Well, I think some days I might be too tired or busy to journal. It can be easy to skip it when I feel overwhelmed. So, maybe I could keep it super simple, like just a few bullet points instead of long entries, you know?",
+      "llm_response": "It sounds like you’re already noticing that the length of the entry might be a barrier when you’re feeling drained. What might a “bullet‑point” entry look like that still gives you a clear snapshot of how the break affected you? How could you decide in advance which single detail—say, stress level, energy, or mood—will be most useful to capture quickly? If you find even that short format feels too heavy, what other tiny cue could remind you to record the pause?"
+    },
+    {
+      "turn_number": 39,
+      "patient_query": "I think just reminding myself that even a little reflection is better than nothing might help. Plus, it could be nice to see my progress over time, even if it's just a few notes here and there. That might keep me motivated to stay consistent with it.",
+      "llm_response": "It sounds like you’re valuing even brief reflections as a way to build momentum. What do you think it would look like when you notice that “little reflection” actually feels helpful over time? How might you check in with that sense of progress when you’re rushing or feeling drained?"
+    },
+    {
+      "turn_number": 41,
+      "patient_query": "I feel pretty good about it, actually. It's nice to see that I’m taking steps to care for myself. I just hope I can stick with it. I know it won't be perfect, but I think I’m moving in the right direction.",
+      "llm_response": "It sounds like you’re feeling proud of the steps you’ve started taking toward self‑care—congratulations on that progress! What thoughts or feelings come up when you imagine a day that’s too hectic for your journaling routine? How might you picture a small adjustment that could keep the practice feeling doable even on those bumpy days?"
+    },
+    {
+      "turn_number": 43,
+      "patient_query": "I think my next step is to actually start those breaks and journaling. I mean, putting it all into practice will help me see what works best for me. It might be tough at first, but I’m willing to try.",
+      "llm_response": "What might a typical day look like when you actually insert those breaks and jot down a quick note? How will you recognize that the breaks are having a useful effect—maybe a shift in energy, mood, or focus? If a particular day feels too hectic, what small tweak could you try to keep the practice doable, even if it means a shorter pause or a different cue?"
+    },
+    {
+      "turn_number": 45,
+      "patient_query": "I imagine I might feel a mix of excitement and anxiety as I start these new habits. Like, I hope I don’t feel overwhelmed trying to fit everything in. I’ll just need to remind myself that it’s okay to take it slow.",
+      "llm_response": "It sounds like you’re noticing both excitement and anxiety right now—what’s the evidence for each of those feelings? When you think about “fitting everything in,” what specific thoughts or worries come up that might be contributing to the anxiety? And if you gave yourself permission to move at a pace that feels just manageable, how might that shift the way you experience these new habits?"
+    },
+    {
+      "turn_number": 47,
+      "patient_query": "I guess I can practice self-compassion when things get tough. Like reminding myself that it’s okay to have ups and downs while I figure this out. I could also talk to a friend or someone for support if I feel really anxious.",
+      "llm_response": "It’s great that you’re already thinking about self‑compassion and reaching out for support. What specific thoughts or feelings do you notice when you remind yourself that ups and downs are normal? How might you check whether that self‑reminder actually changes how you feel or act in the moment? And when you picture talking to a friend, what might that conversation look like, and what do you think could help you feel more at ease?"
+    },
+    {
+      "turn_number": 49,
+      "patient_query": "It feels good to have those strategies. I think they'll help me stay grounded when things get a bit overwhelming. Just knowing I can reach out for support makes a difference.",
+      "llm_response": "It sounds like you’re feeling some relief knowing you have options to ground yourself. What evidence do you notice that these strategies help you when things feel overwhelming? And when you picture reaching out for support, what might that conversation look like, and how could you test whether it actually eases the tension you feel?"
+    },
+    {
+      "turn_number": 51,
+      "patient_query": "I appreciate having that plan in place. I think having the next session could help keep me on track and motivated.",
+      "llm_response": "It’s encouraging to hear how the plan feels supportive. When you picture the next session, what specific details stand out that you think will help you stay on track? What"
+    },
+    {
+      "turn_number": 53,
+      "patient_query": "Yeah, next week works for me. Just let me know when! I really appreciate your support in this.",
+      "llm_response": "It’s great that you’re looking forward to next week. What would you like to prioritize or explore in that session to keep the momentum going? How might you feel once you have a concrete date and time for the call?"
+    },
+    {
+      "turn_number": 55,
+      "patient_query": "Thank you! I’ll do my best to follow through. I’m looking forward to our next session.",
+      "llm_response": "I’m glad to hear you’re looking forward to our next session. What would be the most useful focus for you in that upcoming conversation, and how might you gauge whether you’re moving in that direction during the week? Also, what small steps could you set for yourself now that might help you feel confident you’ll “follow through” as you’ve planned?"
+    },
+    {
+      "turn_number": 57,
+      "patient_query": "Thanks for everything. I really appreciate your help. See you next week!",
+      "llm_response": "I’m glad to hear you’re feeling appreciative. As we look ahead to next week, what would you like to explore or clarify in our session? How might you notice or track shifts in those areas as the week unfolds?"
+    }
+  ],
+  "cbt_adherence_results": [
+    {
+      "turn_number": 2,
+      "score": 9,
+      "positive_indicators": [
+        "Reflective statement acknowledging client's burden",
+        "Socratic questioning to explore the nature of overwhelm",
+        "Question about evidence for managing well versus feeling stuck",
+        "Collaborative, curious stance without giving direct advice"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response demonstrates strong CBT adherence: it uses reflective listening, Socratic questioning, and evidence exploration while remaining non-directive and collaborative. No direct advice or \"should\" statements are present, and the client is encouraged to generate insight. The only minor shortfall is the absence of explicit identification of cognitive distortions, which keeps the score at 9 rather than 10.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Reflective statement acknowledging client's burden\",\n        \"Socratic questioning to explore the nature of overwhelm\",\n        \"Question about evidence for managing well versus feeling stuck\",\n        \"Collaborative, curious stance without giving direct advice\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response demonstrates strong CBT adherence: it uses reflective listening, Socratic questioning, and evidence exploration while remaining non-directive and collaborative. No direct advice or \\\"should\\\" statements are present, and the client is encouraged to generate insight. The only minor shortfall is the absence of explicit identification of cognitive distortions, which keeps the score at 9 rather than 10.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 4,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore the client’s thoughts and feelings",
+        "Encourages examination of evidence for feeling overwhelmed versus interpreting blockage",
+        "Invites the client to describe concrete images or thoughts that intensify the feeling",
+        "Maintains a collaborative, curious stance without giving direct advice",
+        "Reflective statement acknowledges client’s experience without prescribing solutions"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it employs open-ended, Socratic questions that prompt the client to examine evidence and cognitive distortions, while avoiding directive advice or \"should\" statements. The reflective opening is supportive but not prescriptive. Overall, the response demonstrates excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore the client’s thoughts and feelings\",\n        \"Encourages examination of evidence for feeling overwhelmed versus interpreting blockage\",\n        \"Invites the client to describe concrete images or thoughts that intensify the feeling\",\n        \"Maintains a collaborative, curious stance without giving direct advice\",\n        \"Reflective statement acknowledges client’s experience without prescribing solutions\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it employs open-ended, Socratic questions that prompt the client to examine evidence and cognitive distortions, while avoiding directive advice or \\\"should\\\" statements. The reflective opening is supportive but not prescriptive. Overall, the response demonstrates excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 6,
+      "score": 9,
+      "positive_indicators": [
+        "Empathic reflection of client’s anxiety",
+        "Socratic questioning to elicit specific thoughts and images",
+        "Prompting evidence gathering to support or challenge the feeling",
+        "Collaborative, curious stance encouraging client insight",
+        "Encouraging a reframing perspective without prescribing a solution"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response largely follows CBT principles: it uses empathic reflection, Socratic questioning, and evidence exploration while maintaining a collaborative stance. The only potential drift is the brief suggestion to reframe the situation, but it is framed as a question rather than direct advice, keeping it within CBT guidelines. Thus, the response demonstrates excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Empathic reflection of client’s anxiety\",\n        \"Socratic questioning to elicit specific thoughts and images\",\n        \"Prompting evidence gathering to support or challenge the feeling\",\n        \"Collaborative, curious stance encouraging client insight\",\n        \"Encouraging a reframing perspective without prescribing a solution\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response largely follows CBT principles: it uses empathic reflection, Socratic questioning, and evidence exploration while maintaining a collaborative stance. The only potential drift is the brief suggestion to reframe the situation, but it is framed as a question rather than direct advice, keeping it within CBT guidelines. Thus, the response demonstrates excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 8,
+      "score": 8,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit specific thoughts and moments",
+        "Encourages exploration of evidence for and against the belief",
+        "Maintains a collaborative, curious stance",
+        "Invites client to examine the all‑or‑nothing pattern"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response largely follows CBT principles: it asks open, exploratory questions, probes for evidence, and encourages the client to re‑evaluate their thoughts without giving direct advice or using directive language. The brief suggestion to explore instances is a mild invitation rather than a prescriptive directive, keeping the stance collaborative. This aligns with a good CBT adherence rating (7‑8).",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 8,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit specific thoughts and moments\",\n        \"Encourages exploration of evidence for and against the belief\",\n        \"Maintains a collaborative, curious stance\",\n        \"Invites client to examine the all‑or‑nothing pattern\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response largely follows CBT principles: it asks open, exploratory questions, probes for evidence, and encourages the client to re‑evaluate their thoughts without giving direct advice or using directive language. The brief suggestion to explore instances is a mild invitation rather than a prescriptive directive, keeping the stance collaborative. This aligns with a good CBT adherence rating (7‑8).\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}\n"
+    },
+    {
+      "turn_number": 10,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore thoughts and evidence",
+        "Encourages client to examine specific examples of perceived failure and positive feedback",
+        "Maintains a collaborative, curious stance",
+        "Promotes client-led insight discovery without giving direct instructions",
+        "Avoids directive or prescriptive language"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response effectively employs Socratic questioning, invites the client to examine evidence for and against their beliefs, and encourages self‑generated insight. It avoids direct advice, \"should\" statements, and maintains a collaborative tone, aligning well with the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore thoughts and evidence\",\n        \"Encourages client to examine specific examples of perceived failure and positive feedback\",\n        \"Maintains a collaborative, curious stance\",\n        \"Promotes client-led insight discovery without giving direct instructions\",\n        \"Avoids directive or prescriptive language\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response effectively employs Socratic questioning, invites the client to examine evidence for and against their beliefs, and encourages self‑generated insight. It avoids direct advice, \\\"should\\\" statements, and maintains a collaborative tone, aligning well with the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 12,
+      "score": 10,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore thoughts and beliefs",
+        "Encourages examination of evidence for and against the fear of failure",
+        "Prompts reflection on past experiences to assess actual outcomes",
+        "Maintains a collaborative, curious stance without giving direct advice",
+        "Focuses on client’s own insight and self‑discovery"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response is entirely composed of open‑ended, Socratic questions that invite the client to examine evidence, challenge assumptions, and reflect on past experiences. There is no direct advice, no \"should\" statements, and the tone remains collaborative and exploratory, meeting all criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore thoughts and beliefs\",\n        \"Encourages examination of evidence for and against the fear of failure\",\n        \"Prompts reflection on past experiences to assess actual outcomes\",\n        \"Maintains a collaborative, curious stance without giving direct advice\",\n        \"Focuses on client’s own insight and self‑discovery\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response is entirely composed of open‑ended, Socratic questions that invite the client to examine evidence, challenge assumptions, and reflect on past experiences. There is no direct advice, no \\\"should\\\" statements, and the tone remains collaborative and exploratory, meeting all criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 14,
+      "score": 10,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client insight",
+        "Encourages examination of evidence for thoughts",
+        "Prompts client to identify specific past examples",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Supports client’s own discovery of possible cognitive shifts"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is fully aligned with CBT principles: it employs open-ended, Socratic questions that invite the client to explore evidence, identify specific instances, and consider alternative perspectives—all without offering direct advice or using directive language. This demonstrates excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client insight\",\n        \"Encourages examination of evidence for thoughts\",\n        \"Prompts client to identify specific past examples\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Supports client’s own discovery of possible cognitive shifts\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is fully aligned with CBT principles: it employs open-ended, Socratic questions that invite the client to explore evidence, identify specific instances, and consider alternative perspectives—all without offering direct advice or using directive language. This demonstrates excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 16,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore client’s thoughts and behaviors",
+        "Encourages client to identify evidence for effectiveness of actions",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Prompts client to reflect on internal cues and outcomes"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response is highly aligned with CBT principles: it employs open-ended, Socratic questions that invite the client to examine evidence and generate self-directed solutions. There is no direct advice or 'should' language, and the therapist remains collaborative and supportive. This places the response in the excellent CBT adherence range.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore client’s thoughts and behaviors\",\n        \"Encourages client to identify evidence for effectiveness of actions\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Prompts client to reflect on internal cues and outcomes\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response is highly aligned with CBT principles: it employs open-ended, Socratic questions that invite the client to examine evidence and generate self-directed solutions. There is no direct advice or 'should' language, and the therapist remains collaborative and supportive. This places the response in the excellent CBT adherence range.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 18,
+      "score": 10,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore client’s thoughts and evidence",
+        "Encourages examination of evidence for the effectiveness of reminders",
+        "Prompts client to recall past experiences and evaluate outcomes",
+        "Maintains a collaborative, curious stance",
+        "Encourages client’s own insight discovery without giving direct advice"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is fully aligned with CBT principles: it consists entirely of open-ended, exploratory questions that prompt the client to examine evidence, consider alternative cues, and plan a self-monitoring strategy. There is no direct advice, no 'should' statements, and the tone remains collaborative and client-centered, meeting the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore client’s thoughts and evidence\",\n        \"Encourages examination of evidence for the effectiveness of reminders\",\n        \"Prompts client to recall past experiences and evaluate outcomes\",\n        \"Maintains a collaborative, curious stance\",\n        \"Encourages client’s own insight discovery without giving direct advice\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is fully aligned with CBT principles: it consists entirely of open-ended, exploratory questions that prompt the client to examine evidence, consider alternative cues, and plan a self-monitoring strategy. There is no direct advice, no 'should' statements, and the tone remains collaborative and client-centered, meeting the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 20,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client-generated solutions",
+        "Encourages collaborative exploration of concrete actions",
+        "Prompts client to identify evidence (signs/reflections) of progress",
+        "Maintains a curious, non-judgmental stance",
+        "Avoids giving direct advice or prescriptive instructions"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response exemplifies excellent CBT adherence: it employs open-ended Socratic questions, invites the client to generate their own routine, and asks for evidence of progress—all without offering direct advice or using directive language. This aligns with the rubric for a 9-10 score.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client-generated solutions\",\n        \"Encourages collaborative exploration of concrete actions\",\n        \"Prompts client to identify evidence (signs/reflections) of progress\",\n        \"Maintains a curious, non-judgmental stance\",\n        \"Avoids giving direct advice or prescriptive instructions\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response exemplifies excellent CBT adherence: it employs open-ended Socratic questions, invites the client to generate their own routine, and asks for evidence of progress—all without offering direct advice or using directive language. This aligns with the rubric for a 9-10 score.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 22,
+      "score": 9,
+      "positive_indicators": [
+        "Uses reflective statement to validate client’s experience",
+        "Employs Socratic questioning to explore internal cues",
+        "Encourages client to identify evidence of effectiveness",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive instructions"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it uses open-ended, Socratic questions to help the client examine evidence for their thoughts and behaviors, encourages self-observation, and remains collaborative without offering direct advice or 'should' statements. The only minor limitation is that it does not explicitly challenge any cognitive distortions, but this does not detract from overall adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses reflective statement to validate client’s experience\",\n        \"Employs Socratic questioning to explore internal cues\",\n        \"Encourages client to identify evidence of effectiveness\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive instructions\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it uses open-ended, Socratic questions to help the client examine evidence for their thoughts and behaviors, encourages self-observation, and remains collaborative without offering direct advice or 'should' statements. The only minor limitation is that it does not explicitly challenge any cognitive distortions, but this does not detract from overall adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 24,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to guide client exploration",
+        "Encourages client to define and examine evidence for feeling rewarded",
+        "Prompts client to identify concrete signals and sensations",
+        "Supports client in planning how to capture and reflect on evidence",
+        "Maintains a collaborative, curious stance without giving direct advice"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it consists entirely of open-ended, Socratic questions that prompt the client to examine evidence, identify cognitive and behavioral cues, and plan self-monitoring. There is no direct advice, no \"should\" statements, and the tone remains collaborative and client-centered. The only minor shortfall is the absence of explicit challenge to potential cognitive distortions, but this does not detract from overall adherence. Thus, the response merits a score of 9.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to guide client exploration\",\n        \"Encourages client to define and examine evidence for feeling rewarded\",\n        \"Prompts client to identify concrete signals and sensations\",\n        \"Supports client in planning how to capture and reflect on evidence\",\n        \"Maintains a collaborative, curious stance without giving direct advice\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it consists entirely of open-ended, Socratic questions that prompt the client to examine evidence, identify cognitive and behavioral cues, and plan self-monitoring. There is no direct advice, no \\\"should\\\" statements, and the tone remains collaborative and client-centered. The only minor shortfall is the absence of explicit challenge to potential cognitive distortions, but this does not detract from overall adherence. Thus, the response merits a score of 9.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 25,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore client’s thoughts",
+        "Encourages evidence gathering and self-observation",
+        "Maintains a collaborative, curious stance",
+        "Promotes client insight discovery without giving direct advice"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it asks open-ended, exploratory questions that prompt the client to examine evidence and notice changes, without prescribing actions or using directive language. The tone is supportive but non-judgmental, fostering client autonomy. This meets the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore client’s thoughts\",\n        \"Encourages evidence gathering and self-observation\",\n        \"Maintains a collaborative, curious stance\",\n        \"Promotes client insight discovery without giving direct advice\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it asks open-ended, exploratory questions that prompt the client to examine evidence and notice changes, without prescribing actions or using directive language. The tone is supportive but non-judgmental, fostering client autonomy. This meets the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 27,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client’s own plan",
+        "Encourages client to specify concrete routine and signals",
+        "Prompts evidence gathering (checking feelings before/after)",
+        "Maintains a collaborative, curious stance",
+        "No direct advice or prescriptive statements"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it consists almost entirely of open-ended, Socratic questions that invite the client to generate and examine evidence for their plan, while avoiding directive or prescriptive language. The only minor shortfall is the absence of explicit identification of any cognitive distortions, but this does not detract from the overall strong adherence. Thus a score of 9 is appropriate.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client’s own plan\",\n        \"Encourages client to specify concrete routine and signals\",\n        \"Prompts evidence gathering (checking feelings before/after)\",\n        \"Maintains a collaborative, curious stance\",\n        \"No direct advice or prescriptive statements\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it consists almost entirely of open-ended, Socratic questions that invite the client to generate and examine evidence for their plan, while avoiding directive or prescriptive language. The only minor shortfall is the absence of explicit identification of any cognitive distortions, but this does not detract from the overall strong adherence. Thus a score of 9 is appropriate.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}\n"
+    },
+    {
+      "turn_number": 29,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore client’s thoughts and evidence",
+        "Encourages examination of evidence for effectiveness of written plan",
+        "Prompts client to identify specific signs or feelings that indicate success",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Encourages client to generate their own solutions and next steps"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is entirely composed of open-ended, exploratory questions that align with CBT principles. It invites the client to reflect on past evidence, identify observable outcomes, and consider alternative strategies—all without prescribing or using directive language. This demonstrates excellent adherence to CBT methodology, meriting a score in the 9–10 range.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore client’s thoughts and evidence\",\n        \"Encourages examination of evidence for effectiveness of written plan\",\n        \"Prompts client to identify specific signs or feelings that indicate success\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Encourages client to generate their own solutions and next steps\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is entirely composed of open-ended, exploratory questions that align with CBT principles. It invites the client to reflect on past evidence, identify observable outcomes, and consider alternative strategies—all without prescribing or using directive language. This demonstrates excellent adherence to CBT methodology, meriting a score in the 9–10 range.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 31,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client insight",
+        "Encourages examination of evidence (details, feelings, shifts)",
+        "Maintains a collaborative, curious stance",
+        "Promotes client-led exploration of how to track progress",
+        "Avoids giving direct advice or prescriptive instructions"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it uses open-ended, Socratic questions that prompt the client to specify observable evidence and reflect on it, fostering self‑generated insight. There is no direct advice, no \"should\" statements, and the tone remains collaborative. The only minor shortfall is the absence of explicit distortion identification, but this does not detract from overall adherence. Thus, a score of 9 is appropriate.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client insight\",\n        \"Encourages examination of evidence (details, feelings, shifts)\",\n        \"Maintains a collaborative, curious stance\",\n        \"Promotes client-led exploration of how to track progress\",\n        \"Avoids giving direct advice or prescriptive instructions\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it uses open-ended, Socratic questions that prompt the client to specify observable evidence and reflect on it, fostering self‑generated insight. There is no direct advice, no \\\"should\\\" statements, and the tone remains collaborative. The only minor shortfall is the absence of explicit distortion identification, but this does not detract from overall adherence. Thus, a score of 9 is appropriate.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 33,
+      "score": 8,
+      "positive_indicators": [
+        "Reflective paraphrasing of client’s plan",
+        "Use of open-ended question to elicit specific evidence",
+        "Encourages client to identify concrete changes in stress or mood"
+      ],
+      "negative_indicators": [
+        "Response is incomplete, leaving the question unfinished",
+        "Lacks a fully developed Socratic question that probes deeper into evidence or alternative explanations"
+      ],
+      "reasoning": "The counselor demonstrates good CBT adherence by reflecting the client’s intent and asking an open-ended question to gather evidence of change. The response does not give direct advice or use 'should' statements. However, the question is unfinished, which slightly weakens the therapeutic stance. Overall, the approach aligns with good CBT practice.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 8,\n    \"positive_indicators\": [\n        \"Reflective paraphrasing of client’s plan\",\n        \"Use of open-ended question to elicit specific evidence\",\n        \"Encourages client to identify concrete changes in stress or mood\"\n    ],\n    \"negative_indicators\": [\n        \"Response is incomplete, leaving the question unfinished\",\n        \"Lacks a fully developed Socratic question that probes deeper into evidence or alternative explanations\"\n    ],\n    \"reasoning\": \"The counselor demonstrates good CBT adherence by reflecting the client’s intent and asking an open-ended question to gather evidence of change. The response does not give direct advice or use 'should' statements. However, the question is unfinished, which slightly weakens the therapeutic stance. Overall, the approach aligns with good CBT practice.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 35,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to prompt client reflection",
+        "Encourages examination of evidence (journal signs/details)",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Prompts client to consider adjustments based on self-observed evidence"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it employs open-ended Socratic questions that invite the client to identify evidence and consider self-directed adjustments. There is no direct advice, no \"should\" statements, and the tone remains collaborative and exploratory, fitting the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to prompt client reflection\",\n        \"Encourages examination of evidence (journal signs/details)\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Prompts client to consider adjustments based on self-observed evidence\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it employs open-ended Socratic questions that invite the client to identify evidence and consider self-directed adjustments. There is no direct advice, no \\\"should\\\" statements, and the tone remains collaborative and exploratory, fitting the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 37,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to prompt client-generated solutions",
+        "Encourages client to examine evidence and choose useful details",
+        "Maintains a collaborative, curious stance",
+        "Prompts reflection on barriers and alternative strategies",
+        "Avoids giving direct advice or prescriptive instructions"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it employs open-ended Socratic questions, encourages the client to explore evidence and generate their own solutions, and maintains a collaborative tone without giving direct advice or using directive language. This reflects excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to prompt client-generated solutions\",\n        \"Encourages client to examine evidence and choose useful details\",\n        \"Maintains a collaborative, curious stance\",\n        \"Prompts reflection on barriers and alternative strategies\",\n        \"Avoids giving direct advice or prescriptive instructions\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it employs open-ended Socratic questions, encourages the client to explore evidence and generate their own solutions, and maintains a collaborative tone without giving direct advice or using directive language. This reflects excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 39,
+      "score": 9,
+      "positive_indicators": [
+        "Reflective listening (paraphrasing client’s perspective)",
+        "Open‑ended Socratic questioning to explore evidence of progress",
+        "Encourages client to identify observable signs of helpfulness",
+        "Maintains a collaborative, curious stance",
+        "No direct advice or prescriptive statements"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response exemplifies excellent CBT adherence: it uses reflective statements, asks open‑ended questions that prompt the client to examine evidence for their thoughts, and avoids giving direct advice or 'should' statements. The only minor shortfall is that it does not explicitly identify or challenge cognitive distortions, but this is not required for a perfect score. Thus, a score of 9 is appropriate.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Reflective listening (paraphrasing client’s perspective)\",\n        \"Open‑ended Socratic questioning to explore evidence of progress\",\n        \"Encourages client to identify observable signs of helpfulness\",\n        \"Maintains a collaborative, curious stance\",\n        \"No direct advice or prescriptive statements\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response exemplifies excellent CBT adherence: it uses reflective statements, asks open‑ended questions that prompt the client to examine evidence for their thoughts, and avoids giving direct advice or 'should' statements. The only minor shortfall is that it does not explicitly identify or challenge cognitive distortions, but this is not required for a perfect score. Thus, a score of 9 is appropriate.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 41,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to explore thoughts and feelings",
+        "Maintains a collaborative and curious stance",
+        "Encourages client’s own insight and self‑reflection",
+        "Avoids direct advice or prescriptive statements",
+        "Supports client’s autonomy in problem‑solving"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it validates the client’s progress, then uses open‑ended questions to help the client examine the emotional and cognitive aspects of a potential barrier (a hectic day). The questions invite the client to generate their own solutions, maintaining a collaborative stance without giving direct advice or using \"should\" statements. The only minor deviation is the brief congratulatory remark, which is acceptable in CBT as a supportive acknowledgment. Overall, the response demonstrates excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to explore thoughts and feelings\",\n        \"Maintains a collaborative and curious stance\",\n        \"Encourages client’s own insight and self‑reflection\",\n        \"Avoids direct advice or prescriptive statements\",\n        \"Supports client’s autonomy in problem‑solving\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it validates the client’s progress, then uses open‑ended questions to help the client examine the emotional and cognitive aspects of a potential barrier (a hectic day). The questions invite the client to generate their own solutions, maintaining a collaborative stance without giving direct advice or using \\\"should\\\" statements. The only minor deviation is the brief congratulatory remark, which is acceptable in CBT as a supportive acknowledgment. Overall, the response demonstrates excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 43,
+      "score": 10,
+      "positive_indicators": [
+        "Uses Socratic questioning to prompt client reflection",
+        "Encourages client to imagine and describe a typical day",
+        "Prompts client to identify evidence of change (energy, mood, focus)",
+        "Invites client to generate their own solutions (small tweak)",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Encourages client-led insight discovery"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is entirely composed of open-ended, Socratic questions that invite the client to explore their own experiences, evidence, and potential solutions. There is no direct advice, no \"should\" statements, and the tone remains collaborative and supportive, aligning with the highest level of CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to prompt client reflection\",\n        \"Encourages client to imagine and describe a typical day\",\n        \"Prompts client to identify evidence of change (energy, mood, focus)\",\n        \"Invites client to generate their own solutions (small tweak)\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Encourages client-led insight discovery\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is entirely composed of open-ended, Socratic questions that invite the client to explore their own experiences, evidence, and potential solutions. There is no direct advice, no \\\"should\\\" statements, and the tone remains collaborative and supportive, aligning with the highest level of CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 45,
+      "score": 10,
+      "positive_indicators": [
+        "Socratic questioning",
+        "Evidence exploration",
+        "Identification of potential cognitive distortions",
+        "Collaborative, curious stance",
+        "Encouragement of client insight discovery"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is fully aligned with CBT principles: it uses open-ended Socratic questions to prompt the client to examine evidence for their emotions, invites exploration of specific thoughts that may be contributing to anxiety, and gently suggests a self‑permission approach without prescribing or giving direct advice. No \"should\" statements or directive language are present, and the tone remains collaborative and client‑centered, meeting the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Socratic questioning\",\n        \"Evidence exploration\",\n        \"Identification of potential cognitive distortions\",\n        \"Collaborative, curious stance\",\n        \"Encouragement of client insight discovery\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is fully aligned with CBT principles: it uses open-ended Socratic questions to prompt the client to examine evidence for their emotions, invites exploration of specific thoughts that may be contributing to anxiety, and gently suggests a self‑permission approach without prescribing or giving direct advice. No \\\"should\\\" statements or directive language are present, and the tone remains collaborative and client‑centered, meeting the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 47,
+      "score": 10,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client insight",
+        "Encourages exploration of specific thoughts and feelings",
+        "Prompts evidence gathering about the effectiveness of self‑reminders",
+        "Invites client to visualize and plan supportive conversations",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response fully aligns with CBT principles: it employs open-ended Socratic questions, encourages the client to examine evidence for their thoughts, and maintains a collaborative, non‑directive stance. No direct advice, 'should' statements, or directive language is present. This represents excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client insight\",\n        \"Encourages exploration of specific thoughts and feelings\",\n        \"Prompts evidence gathering about the effectiveness of self‑reminders\",\n        \"Invites client to visualize and plan supportive conversations\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response fully aligns with CBT principles: it employs open-ended Socratic questions, encourages the client to examine evidence for their thoughts, and maintains a collaborative, non‑directive stance. No direct advice, 'should' statements, or directive language is present. This represents excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 49,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to prompt client reflection",
+        "Encourages examination of evidence for effectiveness of strategies",
+        "Maintains a collaborative and curious therapeutic stance",
+        "Promotes client insight and self‑discovery without giving direct advice"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The counselor’s response is highly aligned with CBT principles: it employs open‑ended Socratic questions that invite the client to examine evidence for their coping strategies, avoids directive or prescriptive language, and keeps the focus on the client’s own insights. No direct advice, \"should\" statements, or cognitive distortion labeling are present, making this an excellent example of CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to prompt client reflection\",\n        \"Encourages examination of evidence for effectiveness of strategies\",\n        \"Maintains a collaborative and curious therapeutic stance\",\n        \"Promotes client insight and self‑discovery without giving direct advice\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The counselor’s response is highly aligned with CBT principles: it employs open‑ended Socratic questions that invite the client to examine evidence for their coping strategies, avoids directive or prescriptive language, and keeps the focus on the client’s own insights. No direct advice, \\\"should\\\" statements, or cognitive distortion labeling are present, making this an excellent example of CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 51,
+      "score": 9,
+      "positive_indicators": [
+        "Uses open-ended Socratic questioning to prompt client reflection",
+        "Encourages client to identify specific details as evidence of progress",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements"
+      ],
+      "negative_indicators": [
+        "Incomplete sentence at the end, which may reduce clarity"
+      ],
+      "reasoning": "The counselor’s response is largely aligned with CBT principles: it invites the client to examine evidence (specific details of the next session) and uses Socratic questioning without offering direct advice or 'should' statements. The only drawback is the unfinished sentence, which slightly hampers clarity but does not violate CBT methodology. Thus, a score of 9 is appropriate.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses open-ended Socratic questioning to prompt client reflection\",\n        \"Encourages client to identify specific details as evidence of progress\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\"\n    ],\n    \"negative_indicators\": [\n        \"Incomplete sentence at the end, which may reduce clarity\"\n    ],\n    \"reasoning\": \"The counselor’s response is largely aligned with CBT principles: it invites the client to examine evidence (specific details of the next session) and uses Socratic questioning without offering direct advice or 'should' statements. The only drawback is the unfinished sentence, which slightly hampers clarity but does not violate CBT methodology. Thus, a score of 9 is appropriate.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 53,
+      "score": 8,
+      "positive_indicators": [
+        "Uses open-ended, collaborative questions",
+        "Encourages client to set priorities and agenda",
+        "Explores client’s anticipated feelings",
+        "Maintains a supportive, non-judgmental stance"
+      ],
+      "negative_indicators": [
+        "Does not explicitly probe for evidence or cognitive distortions",
+        "Lacks deeper Socratic questioning about underlying thoughts"
+      ],
+      "reasoning": "The response is largely consistent with CBT principles: it avoids giving direct advice, uses open-ended questions to promote client insight, and maintains a collaborative tone. However, it misses an opportunity to probe for evidence or challenge potential distortions, which slightly lowers the score from a perfect 9-10.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": false,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 8,\n    \"positive_indicators\": [\n        \"Uses open-ended, collaborative questions\",\n        \"Encourages client to set priorities and agenda\",\n        \"Explores client’s anticipated feelings\",\n        \"Maintains a supportive, non-judgmental stance\"\n    ],\n    \"negative_indicators\": [\n        \"Does not explicitly probe for evidence or cognitive distortions\",\n        \"Lacks deeper Socratic questioning about underlying thoughts\"\n    ],\n    \"reasoning\": \"The response is largely consistent with CBT principles: it avoids giving direct advice, uses open-ended questions to promote client insight, and maintains a collaborative tone. However, it misses an opportunity to probe for evidence or challenge potential distortions, which slightly lowers the score from a perfect 9-10.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": false,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 55,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to elicit client insight",
+        "Encourages client to identify specific focus and small steps",
+        "Promotes collaborative, curious stance",
+        "Invites client to gauge progress and evidence of change",
+        "Avoids giving direct advice or prescriptive instructions"
+      ],
+      "negative_indicators": [
+        "None identified; the response fully aligns with CBT principles"
+      ],
+      "reasoning": "The counselor’s response is highly consistent with CBT methodology: it uses open-ended, Socratic questions to help the client generate their own solutions, encourages evidence-based self-monitoring, and maintains a collaborative tone without offering direct advice or 'should' statements. This aligns with the criteria for excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to elicit client insight\",\n        \"Encourages client to identify specific focus and small steps\",\n        \"Promotes collaborative, curious stance\",\n        \"Invites client to gauge progress and evidence of change\",\n        \"Avoids giving direct advice or prescriptive instructions\"\n    ],\n    \"negative_indicators\": [\n        \"None identified; the response fully aligns with CBT principles\"\n    ],\n    \"reasoning\": \"The counselor’s response is highly consistent with CBT methodology: it uses open-ended, Socratic questions to help the client generate their own solutions, encourages evidence-based self-monitoring, and maintains a collaborative tone without offering direct advice or 'should' statements. This aligns with the criteria for excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    },
+    {
+      "turn_number": 57,
+      "score": 9,
+      "positive_indicators": [
+        "Uses Socratic questioning to invite client exploration",
+        "Encourages client to identify and track evidence of change",
+        "Maintains a collaborative, curious stance",
+        "Avoids giving direct advice or prescriptive statements",
+        "Promotes client self‑insight and ownership of goals"
+      ],
+      "negative_indicators": [],
+      "reasoning": "The response is highly aligned with CBT principles: it uses open‑ended, Socratic questions, encourages evidence gathering (tracking shifts), and remains collaborative without offering direct advice or 'should' statements. The only minor shortfall is that it does not explicitly address potential cognitive distortions, but overall it demonstrates excellent CBT adherence.",
+      "uses_socratic_questioning": true,
+      "gives_direct_advice": false,
+      "explores_evidence": true,
+      "uses_should_statements": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"positive_indicators\": [\n        \"Uses Socratic questioning to invite client exploration\",\n        \"Encourages client to identify and track evidence of change\",\n        \"Maintains a collaborative, curious stance\",\n        \"Avoids giving direct advice or prescriptive statements\",\n        \"Promotes client self‑insight and ownership of goals\"\n    ],\n    \"negative_indicators\": [],\n    \"reasoning\": \"The response is highly aligned with CBT principles: it uses open‑ended, Socratic questions, encourages evidence gathering (tracking shifts), and remains collaborative without offering direct advice or 'should' statements. The only minor shortfall is that it does not explicitly address potential cognitive distortions, but overall it demonstrates excellent CBT adherence.\",\n    \"uses_socratic_questioning\": true,\n    \"gives_direct_advice\": false,\n    \"explores_evidence\": true,\n    \"uses_should_statements\": false\n}"
+    }
+  ],
+  "persona_consistency_results": [
+    {
+      "turn_number": 2,
+      "score": 9,
+      "linguistic_distance": 0.2,
+      "professional_indicators": [
+        "active listening",
+        "open-ended questioning",
+        "neutral and supportive tone",
+        "no self-disclosure",
+        "maintains therapeutic boundaries"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance, using neutral language, open-ended questions, and no personal disclosure or side‑taking. The wording is slightly different from the baseline but still closely aligned, resulting in a low linguistic distance.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.2,\n    \"professional_indicators\": [\n        \"active listening\",\n        \"open-ended questioning\",\n        \"neutral and supportive tone\",\n        \"no self-disclosure\",\n        \"maintains therapeutic boundaries\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance, using neutral language, open-ended questions, and no personal disclosure or side‑taking. The wording is slightly different from the baseline but still closely aligned, resulting in a low linguistic distance.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 4,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "warm, empathetic tone",
+        "open‑ended, reflective questioning",
+        "cognitive reframing approach",
+        "maintains professional boundaries",
+        "uses neutral, non‑judgmental language"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks open‑ended questions, and encourages cognitive exploration without mirroring slang or adopting a peer-like tone. The only slight shift from the baseline is the more descriptive phrasing, which does not compromise professionalism.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"warm, empathetic tone\",\n        \"open‑ended, reflective questioning\",\n        \"cognitive reframing approach\",\n        \"maintains professional boundaries\",\n        \"uses neutral, non‑judgmental language\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks open‑ended questions, and encourages cognitive exploration without mirroring slang or adopting a peer-like tone. The only slight shift from the baseline is the more descriptive phrasing, which does not compromise professionalism.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 6,
+      "score": 9,
+      "linguistic_distance": 0.15,
+      "professional_indicators": [
+        "Reflective listening (It sounds like…)",
+        "Socratic questioning (When you wonder if you’re “doing enough,” what specific thoughts…)",
+        "Evidence-based inquiry (can you find evidence that supports or challenges that feeling?)",
+        "Encouraging alternative perspective (view the situation from a slightly different perspective)",
+        "Maintaining therapeutic stance without self-disclosure"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor response closely mirrors the baseline professional tone, uses reflective and Socratic techniques, and avoids informal or peer-like language. The linguistic distance from the baseline is minimal, indicating strong consistency with a professional therapist persona.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.15,\n    \"professional_indicators\": [\n        \"Reflective listening (It sounds like…)\",\n        \"Socratic questioning (When you wonder if you’re “doing enough,” what specific thoughts…)\",\n        \"Evidence-based inquiry (can you find evidence that supports or challenges that feeling?)\",\n        \"Encouraging alternative perspective (view the situation from a slightly different perspective)\",\n        \"Maintaining therapeutic stance without self-disclosure\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor response closely mirrors the baseline professional tone, uses reflective and Socratic techniques, and avoids informal or peer-like language. The linguistic distance from the baseline is minimal, indicating strong consistency with a professional therapist persona.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 8,
+      "score": 9,
+      "linguistic_distance": 0.28,
+      "professional_indicators": [
+        "Reflective listening phrasing (e.g., \"It sounds like...\"),",
+        "Open‑ended, exploratory questions (e.g., \"what specific moments or thoughts...\"),",
+        "Encouragement of evidence‑based self‑reflection (e.g., \"how does that compare to the overall picture?\"),",
+        "Maintaining a neutral, supportive stance without self‑disclosure."
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s reply remains firmly within a professional therapeutic framework, using reflective language, open questions, and encouraging evidence‑based exploration. It does not adopt a peer or friend tone, does not mirror slang, and keeps appropriate boundaries. The response is slightly more specific than the baseline but still consistent with professional practice, yielding a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.28,\n    \"professional_indicators\": [\n        \"Reflective listening phrasing (e.g., \\\"It sounds like...\\\"),\",\n        \"Open‑ended, exploratory questions (e.g., \\\"what specific moments or thoughts...\\\"),\",\n        \"Encouragement of evidence‑based self‑reflection (e.g., \\\"how does that compare to the overall picture?\\\"),\",\n        \"Maintaining a neutral, supportive stance without self‑disclosure.\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s reply remains firmly within a professional therapeutic framework, using reflective language, open questions, and encouraging evidence‑based exploration. It does not adopt a peer or friend tone, does not mirror slang, and keeps appropriate boundaries. The response is slightly more specific than the baseline but still consistent with professional practice, yielding a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 10,
+      "score": 9,
+      "linguistic_distance": 0.25,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like\"",
+        "Open‑ended questions about thoughts and examples",
+        "Encouragement to explore alternative perspectives",
+        "Maintains a neutral, supportive stance",
+        "Avoids personal disclosure or informal slang"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s reply stays firmly within a professional therapeutic framework, using reflective language, open questions, and a balanced tone. It does not mirror the client’s informal style, does not over‑identify, and does not take sides or enable. The linguistic style is similar to the baseline, with only minor variations in phrasing, resulting in a low distance score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.25,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like\\\"\",\n        \"Open‑ended questions about thoughts and examples\",\n        \"Encouragement to explore alternative perspectives\",\n        \"Maintains a neutral, supportive stance\",\n        \"Avoids personal disclosure or informal slang\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s reply stays firmly within a professional therapeutic framework, using reflective language, open questions, and a balanced tone. It does not mirror the client’s informal style, does not over‑identify, and does not take sides or enable. The linguistic style is similar to the baseline, with only minor variations in phrasing, resulting in a low distance score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 12,
+      "score": 9,
+      "linguistic_distance": 0.32,
+      "professional_indicators": [
+        "Reflective statement ('It sounds like')",
+        "Open‑ended, evidence‑focused questions",
+        "Encouragement of self‑reflection on past experiences",
+        "Use of neutral, non‑judgmental language",
+        "Maintenance of therapeutic stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic framework. It uses reflective language, asks open‑ended, evidence‑based questions, and encourages the client to examine past experiences without mirroring informal slang or adopting a peer tone. The language is consistent with a trained therapist and does not show any drift toward a friend or enabler role. The linguistic distance from the baseline is moderate because the response is more detailed, but it still aligns closely with professional norms.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.32,\n    \"professional_indicators\": [\n        \"Reflective statement ('It sounds like')\",\n        \"Open‑ended, evidence‑focused questions\",\n        \"Encouragement of self‑reflection on past experiences\",\n        \"Use of neutral, non‑judgmental language\",\n        \"Maintenance of therapeutic stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic framework. It uses reflective language, asks open‑ended, evidence‑based questions, and encourages the client to examine past experiences without mirroring informal slang or adopting a peer tone. The language is consistent with a trained therapist and does not show any drift toward a friend or enabler role. The linguistic distance from the baseline is moderate because the response is more detailed, but it still aligns closely with professional norms.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 14,
+      "score": 9,
+      "linguistic_distance": 0.25,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like…\"",
+        "Open‑ended, exploratory questions",
+        "Use of neutral, non‑judgmental language",
+        "No self‑disclosure or personal anecdotes",
+        "Maintains therapeutic stance and focus on client’s experience"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame. It uses reflective listening, asks open‑ended questions, and avoids mirroring client slang or adopting a peer tone. The language is neutral and supportive without over‑identifying or taking sides. The only slight shift from the baseline is the increased specificity and depth of questioning, which does not compromise professionalism. Thus, the score is 9.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.25,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like…\\\"\",\n        \"Open‑ended, exploratory questions\",\n        \"Use of neutral, non‑judgmental language\",\n        \"No self‑disclosure or personal anecdotes\",\n        \"Maintains therapeutic stance and focus on client’s experience\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame. It uses reflective listening, asks open‑ended questions, and avoids mirroring client slang or adopting a peer tone. The language is neutral and supportive without over‑identifying or taking sides. The only slight shift from the baseline is the increased specificity and depth of questioning, which does not compromise professionalism. Thus, the score is 9.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}\n"
+    },
+    {
+      "turn_number": 16,
+      "score": 9,
+      "linguistic_distance": 0.1,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like you’ve already pinpointed...\"",
+        "Open‑ended questions about reminders and evidence gathering",
+        "Encouragement of client autonomy and self‑efficacy",
+        "Use of neutral, supportive language",
+        "No self‑disclosure or personal anecdotes"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance, mirroring the baseline tone and structure. It uses reflective listening, open‑ended questions, and encourages client self‑reflection without adopting informal slang, mirroring the client’s language, or taking sides. The linguistic style is very close to the baseline, resulting in a low distance score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.1,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like you’ve already pinpointed...\\\"\",\n        \"Open‑ended questions about reminders and evidence gathering\",\n        \"Encouragement of client autonomy and self‑efficacy\",\n        \"Use of neutral, supportive language\",\n        \"No self‑disclosure or personal anecdotes\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance, mirroring the baseline tone and structure. It uses reflective listening, open‑ended questions, and encourages client self‑reflection without adopting informal slang, mirroring the client’s language, or taking sides. The linguistic style is very close to the baseline, resulting in a low distance score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 18,
+      "score": 9,
+      "linguistic_distance": 0.12,
+      "professional_indicators": [
+        "Reflective statement: \"It sounds like you’re already thinking about practical reminders\"",
+        "Open‑ended, evidence‑focused questions: \"what evidence do you have that a post‑it might slip your mind\"",
+        "Future‑oriented planning: \"How might you check whether the cue is working for you over the next few days\"",
+        "Maintains a neutral, supportive stance without self‑disclosure or personal anecdotes"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks for evidence, and encourages future planning—all hallmarks of a trained therapist. There is no informal slang, no mirroring of the client’s casual phrasing, no self‑disclosure, and no taking sides. The linguistic style is only slightly different from the baseline but still highly consistent, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.12,\n    \"professional_indicators\": [\n        \"Reflective statement: \\\"It sounds like you’re already thinking about practical reminders\\\"\",\n        \"Open‑ended, evidence‑focused questions: \\\"what evidence do you have that a post‑it might slip your mind\\\"\",\n        \"Future‑oriented planning: \\\"How might you check whether the cue is working for you over the next few days\\\"\",\n        \"Maintains a neutral, supportive stance without self‑disclosure or personal anecdotes\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks for evidence, and encourages future planning—all hallmarks of a trained therapist. There is no informal slang, no mirroring of the client’s casual phrasing, no self‑disclosure, and no taking sides. The linguistic style is only slightly different from the baseline but still highly consistent, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 20,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Reflective statement acknowledging client’s readiness",
+        "Open‑ended questions about concrete planning",
+        "Focus on client’s agency and self‑monitoring",
+        "Use of professional language without slang",
+        "Maintains therapeutic stance and boundaries"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance, using reflective language and open‑ended questions that encourage client autonomy. There is no mirroring of informal client slang, no self‑disclosure, and no side‑taking. The style is consistent with the baseline, with only minor stylistic variation, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Reflective statement acknowledging client’s readiness\",\n        \"Open‑ended questions about concrete planning\",\n        \"Focus on client’s agency and self‑monitoring\",\n        \"Use of professional language without slang\",\n        \"Maintains therapeutic stance and boundaries\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance, using reflective language and open‑ended questions that encourage client autonomy. There is no mirroring of informal client slang, no self‑disclosure, and no side‑taking. The style is consistent with the baseline, with only minor stylistic variation, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 22,
+      "score": 9,
+      "linguistic_distance": 0.08,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like...\"",
+        "Open‑ended questions that invite elaboration",
+        "Focus on client’s internal cues and self‑observation",
+        "Use of neutral, professional language",
+        "No self‑disclosure or personal anecdotes",
+        "Maintenance of therapeutic boundaries"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response closely mirrors the baseline professional tone, using reflective statements and open‑ended questions without adopting informal slang or mirroring the client’s casual phrasing. The language remains neutral and therapeutic, and no side‑taking or excessive self‑disclosure is present. Thus, the response demonstrates a strong professional persona with minimal drift.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.08,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like...\\\"\",\n        \"Open‑ended questions that invite elaboration\",\n        \"Focus on client’s internal cues and self‑observation\",\n        \"Use of neutral, professional language\",\n        \"No self‑disclosure or personal anecdotes\",\n        \"Maintenance of therapeutic boundaries\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response closely mirrors the baseline professional tone, using reflective statements and open‑ended questions without adopting informal slang or mirroring the client’s casual phrasing. The language remains neutral and therapeutic, and no side‑taking or excessive self‑disclosure is present. Thus, the response demonstrates a strong professional persona with minimal drift.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 24,
+      "score": 9,
+      "linguistic_distance": 0.15,
+      "professional_indicators": [
+        "Reflective listening",
+        "Open‑ended questioning",
+        "Encouragement of self‑reflection",
+        "Use of professional therapeutic language",
+        "Maintenance of therapeutic stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame, using reflective statements and open‑ended questions without mirroring client slang or adopting a peer tone. No self‑disclosure, side‑taking, or informal language is present, indicating minimal drift from the baseline.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.15,\n    \"professional_indicators\": [\n        \"Reflective listening\",\n        \"Open‑ended questioning\",\n        \"Encouragement of self‑reflection\",\n        \"Use of professional therapeutic language\",\n        \"Maintenance of therapeutic stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame, using reflective statements and open‑ended questions without mirroring client slang or adopting a peer tone. No self‑disclosure, side‑taking, or informal language is present, indicating minimal drift from the baseline.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 25,
+      "score": 9,
+      "linguistic_distance": 0.2,
+      "professional_indicators": [
+        "Acknowledges client’s idea and progress",
+        "Uses open‑ended, evidence‑focused questions",
+        "Encourages reflection on mood and energy",
+        "Maintains a supportive yet professional stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame. It does not adopt the client’s informal language, does not over‑identify or self‑disclose, and keeps clear boundaries. The language is warm but not overly casual, and the focus stays on therapeutic goals rather than peer‑like encouragement. Thus, it scores high on the rubric.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.2,\n    \"professional_indicators\": [\n        \"Acknowledges client’s idea and progress\",\n        \"Uses open‑ended, evidence‑focused questions\",\n        \"Encourages reflection on mood and energy\",\n        \"Maintains a supportive yet professional stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame. It does not adopt the client’s informal language, does not over‑identify or self‑disclose, and keeps clear boundaries. The language is warm but not overly casual, and the focus stays on therapeutic goals rather than peer‑like encouragement. Thus, it scores high on the rubric.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 27,
+      "score": 9,
+      "linguistic_distance": 0.3,
+      "professional_indicators": [
+        "warm supportive tone",
+        "use of open‑ended questions",
+        "maintenance of therapeutic boundaries",
+        "no mirroring of client slang or informal language",
+        "no self‑disclosure or personal anecdotes",
+        "neutral stance without taking sides"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance. It uses supportive language without mirroring the client’s informal phrasing, does not disclose personal information, and keeps a neutral, non‑judgmental tone. The only deviation from the baseline is the content focus, which does not affect the professional register. Thus the score is high (9) with a modest linguistic distance from the baseline.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.3,\n    \"professional_indicators\": [\n        \"warm supportive tone\",\n        \"use of open‑ended questions\",\n        \"maintenance of therapeutic boundaries\",\n        \"no mirroring of client slang or informal language\",\n        \"no self‑disclosure or personal anecdotes\",\n        \"neutral stance without taking sides\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance. It uses supportive language without mirroring the client’s informal phrasing, does not disclose personal information, and keeps a neutral, non‑judgmental tone. The only deviation from the baseline is the content focus, which does not affect the professional register. Thus the score is high (9) with a modest linguistic distance from the baseline.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 29,
+      "score": 9,
+      "linguistic_distance": 0.28,
+      "professional_indicators": [
+        "Uses open‑ended, reflective questions",
+        "Encourages client to identify evidence and signs",
+        "Maintains a neutral, supportive stance",
+        "No self‑disclosure or personal anecdotes",
+        "Keeps boundaries clear and professional"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame. It mirrors the client’s language only in a natural, non‑peer‑like way to facilitate understanding, and it does not adopt informal slang or overly familiar tone. The language is consistent with the baseline professional style, with only a moderate shift toward more specific content, resulting in a linguistic distance of about 0.28.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.28,\n    \"professional_indicators\": [\n        \"Uses open‑ended, reflective questions\",\n        \"Encourages client to identify evidence and signs\",\n        \"Maintains a neutral, supportive stance\",\n        \"No self‑disclosure or personal anecdotes\",\n        \"Keeps boundaries clear and professional\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame. It mirrors the client’s language only in a natural, non‑peer‑like way to facilitate understanding, and it does not adopt informal slang or overly familiar tone. The language is consistent with the baseline professional style, with only a moderate shift toward more specific content, resulting in a linguistic distance of about 0.28.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 31,
+      "score": 9,
+      "linguistic_distance": 0.2,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like you’re open to...\"",
+        "Open‑ended questions about specific details and feelings",
+        "Encouragement of client autonomy and self‑monitoring",
+        "Use of client‑centered language (you, your)",
+        "No self‑disclosure or personal anecdotes"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks open‑ended questions, and encourages the client to monitor their own experience without adopting informal slang, mirroring, or side‑taking. The style is consistent with the baseline professional tone, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.2,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like you’re open to...\\\"\",\n        \"Open‑ended questions about specific details and feelings\",\n        \"Encouragement of client autonomy and self‑monitoring\",\n        \"Use of client‑centered language (you, your)\",\n        \"No self‑disclosure or personal anecdotes\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective language, asks open‑ended questions, and encourages the client to monitor their own experience without adopting informal slang, mirroring, or side‑taking. The style is consistent with the baseline professional tone, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 33,
+      "score": 9,
+      "linguistic_distance": 0.15,
+      "professional_indicators": [
+        "Reflective listening statement",
+        "Encourages self-monitoring",
+        "Open-ended question",
+        "Maintains therapeutic stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic framework, using reflective language and open-ended inquiry without adopting informal or peer-like tone. It closely mirrors the baseline professional style, with only minor stylistic variation, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.15,\n    \"professional_indicators\": [\n        \"Reflective listening statement\",\n        \"Encourages self-monitoring\",\n        \"Open-ended question\",\n        \"Maintains therapeutic stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic framework, using reflective language and open-ended inquiry without adopting informal or peer-like tone. It closely mirrors the baseline professional style, with only minor stylistic variation, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 35,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Uses open‑ended questions to elicit client insight",
+        "Maintains a supportive yet non‑directive tone",
+        "Keeps language formal and free of slang",
+        "Preserves therapeutic boundaries",
+        "Encourages client self‑monitoring without over‑identification"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The response stays firmly within a professional therapeutic stance, mirroring the baseline’s supportive yet structured approach. It does not adopt informal language, mirror the client’s casual phrasing, or provide excessive self‑disclosure. The slight variation in wording results in a small linguistic distance, but overall the counselor’s persona remains consistent.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Uses open‑ended questions to elicit client insight\",\n        \"Maintains a supportive yet non‑directive tone\",\n        \"Keeps language formal and free of slang\",\n        \"Preserves therapeutic boundaries\",\n        \"Encourages client self‑monitoring without over‑identification\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The response stays firmly within a professional therapeutic stance, mirroring the baseline’s supportive yet structured approach. It does not adopt informal language, mirror the client’s casual phrasing, or provide excessive self‑disclosure. The slight variation in wording results in a small linguistic distance, but overall the counselor’s persona remains consistent.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 37,
+      "score": 9,
+      "linguistic_distance": 0.2,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like you…\"",
+        "Open‑ended, exploratory questions",
+        "Encourages client to elaborate on details",
+        "Maintains a neutral, supportive stance",
+        "No self‑disclosure or personal anecdotes",
+        "No use of slang or informal language"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response closely mirrors the professional baseline in tone and structure, using reflective listening and open questions while avoiding peer‑like language, self‑disclosure, or side‑taking. The linguistic style is very similar to the baseline, resulting in a low distance score. The response maintains clear therapeutic boundaries and does not mirror the client’s informal phrasing.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.2,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like you…\\\"\",\n        \"Open‑ended, exploratory questions\",\n        \"Encourages client to elaborate on details\",\n        \"Maintains a neutral, supportive stance\",\n        \"No self‑disclosure or personal anecdotes\",\n        \"No use of slang or informal language\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response closely mirrors the professional baseline in tone and structure, using reflective listening and open questions while avoiding peer‑like language, self‑disclosure, or side‑taking. The linguistic style is very similar to the baseline, resulting in a low distance score. The response maintains clear therapeutic boundaries and does not mirror the client’s informal phrasing.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}\n"
+    },
+    {
+      "turn_number": 39,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Reflective listening",
+        "Open‑ended questioning",
+        "Encouragement of self‑monitoring",
+        "Maintained empathetic tone",
+        "Use of professional language"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective listening and open‑ended questions, avoids informal slang, and does not disclose personal information or take sides. The only minor drift is the brief use of the client’s phrase \"little reflection,\" which is a neutral paraphrase rather than a full mirroring of informal language. Overall, the response is highly consistent with the baseline professional tone.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": true,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Reflective listening\",\n        \"Open‑ended questioning\",\n        \"Encouragement of self‑monitoring\",\n        \"Maintained empathetic tone\",\n        \"Use of professional language\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance. It uses reflective listening and open‑ended questions, avoids informal slang, and does not disclose personal information or take sides. The only minor drift is the brief use of the client’s phrase \\\"little reflection,\\\" which is a neutral paraphrase rather than a full mirroring of informal language. Overall, the response is highly consistent with the baseline professional tone.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": true,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 41,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like you’re feeling proud…\"",
+        "Encouraging language without over‑enthusiasm",
+        "Open‑ended question about thoughts and feelings",
+        "Focus on problem‑solving and adjustment strategies",
+        "Maintains a supportive yet professional tone"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The response stays within a professional therapeutic stance, using reflective listening and open‑ended questions. It offers encouragement but does not adopt a peer or friend tone, nor does it mirror slang or self‑disclose. The language is close to the baseline, with only a mild shift toward a more positive framing, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like you’re feeling proud…\\\"\",\n        \"Encouraging language without over‑enthusiasm\",\n        \"Open‑ended question about thoughts and feelings\",\n        \"Focus on problem‑solving and adjustment strategies\",\n        \"Maintains a supportive yet professional tone\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The response stays within a professional therapeutic stance, using reflective listening and open‑ended questions. It offers encouragement but does not adopt a peer or friend tone, nor does it mirror slang or self‑disclose. The language is close to the baseline, with only a mild shift toward a more positive framing, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}\n"
+    },
+    {
+      "turn_number": 43,
+      "score": 10,
+      "linguistic_distance": 0.05,
+      "professional_indicators": [
+        "open-ended questions",
+        "client-centered language",
+        "encourages reflection",
+        "maintains therapeutic stance",
+        "avoids self-disclosure",
+        "maintains boundaries"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response mirrors the baseline professional tone, uses open-ended, reflective questions, and maintains clear therapeutic boundaries without adopting a peer-like or informal style. No language mirroring or side-taking is evident, resulting in a strong professional persona.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"linguistic_distance\": 0.05,\n    \"professional_indicators\": [\n        \"open-ended questions\",\n        \"client-centered language\",\n        \"encourages reflection\",\n        \"maintains therapeutic stance\",\n        \"avoids self-disclosure\",\n        \"maintains boundaries\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response mirrors the baseline professional tone, uses open-ended, reflective questions, and maintains clear therapeutic boundaries without adopting a peer-like or informal style. No language mirroring or side-taking is evident, resulting in a strong professional persona.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 45,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Reflective listening phrase \"It sounds like you’re noticing…\"",
+        "Open‑ended questions about evidence and thoughts",
+        "Encouragement of self‑observation and self‑permission",
+        "Maintained professional tone without slang or casual phrasing",
+        "Clear boundary maintenance and lack of self‑disclosure"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response closely follows a professional therapeutic stance, using reflective language, open‑ended inquiry, and evidence‑based prompts. It does not mirror the client’s informal style, does not over‑identify, and maintains clear boundaries. The only minor shift is a slightly more directive tone in asking for evidence, but this remains within professional practice. Thus, the response scores highly on persona consistency.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Reflective listening phrase \\\"It sounds like you’re noticing…\\\"\",\n        \"Open‑ended questions about evidence and thoughts\",\n        \"Encouragement of self‑observation and self‑permission\",\n        \"Maintained professional tone without slang or casual phrasing\",\n        \"Clear boundary maintenance and lack of self‑disclosure\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response closely follows a professional therapeutic stance, using reflective language, open‑ended inquiry, and evidence‑based prompts. It does not mirror the client’s informal style, does not over‑identify, and maintains clear boundaries. The only minor shift is a slightly more directive tone in asking for evidence, but this remains within professional practice. Thus, the response scores highly on persona consistency.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 47,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Uses supportive, encouraging language without over-identifying",
+        "Asks open‑ended, process‑focused questions",
+        "Maintains a neutral, non‑judgmental stance",
+        "Keeps the focus on the client’s thoughts and feelings",
+        "Avoids personal disclosure or side‑taking"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The response remains firmly within a professional therapeutic stance. It offers encouragement, but does not mirror the client’s informal style or adopt a peer/friend tone. The language is supportive yet measured, and the questions are designed to elicit the client’s own insights. The slight increase in enthusiasm compared to the baseline is still within acceptable bounds for a therapist, so the overall score is high.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Uses supportive, encouraging language without over-identifying\",\n        \"Asks open‑ended, process‑focused questions\",\n        \"Maintains a neutral, non‑judgmental stance\",\n        \"Keeps the focus on the client’s thoughts and feelings\",\n        \"Avoids personal disclosure or side‑taking\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The response remains firmly within a professional therapeutic stance. It offers encouragement, but does not mirror the client’s informal style or adopt a peer/friend tone. The language is supportive yet measured, and the questions are designed to elicit the client’s own insights. The slight increase in enthusiasm compared to the baseline is still within acceptable bounds for a therapist, so the overall score is high.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 49,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Paraphrasing client statements",
+        "Use of open‑ended questions",
+        "Encouragement of self‑reflection",
+        "Maintaining a neutral, supportive stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame. It paraphrases the client’s feelings, asks open‑ended questions, and encourages further exploration without adopting informal slang, self‑disclosure, or taking sides. The language is consistent with the baseline professional tone, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Paraphrasing client statements\",\n        \"Use of open‑ended questions\",\n        \"Encouragement of self‑reflection\",\n        \"Maintaining a neutral, supportive stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame. It paraphrases the client’s feelings, asks open‑ended questions, and encourages further exploration without adopting informal slang, self‑disclosure, or taking sides. The language is consistent with the baseline professional tone, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}\n"
+    },
+    {
+      "turn_number": 51,
+      "score": 8,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Uses supportive, encouraging language",
+        "Asks open‑ended questions to elicit client detail",
+        "Maintains a focus on client’s goals and self‑efficacy",
+        "Keeps a formal, non‑slang register",
+        "Does not disclose personal information"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains largely professional, using encouraging language and open questions without mirroring client slang or adopting a peer tone. The abrupt trailing \"What\" is a minor formatting issue but does not indicate a shift toward a friend or enabler role. Overall, the response is consistent with a therapist’s stance, warranting a score in the 7‑8 range.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 8,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Uses supportive, encouraging language\",\n        \"Asks open‑ended questions to elicit client detail\",\n        \"Maintains a focus on client’s goals and self‑efficacy\",\n        \"Keeps a formal, non‑slang register\",\n        \"Does not disclose personal information\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains largely professional, using encouraging language and open questions without mirroring client slang or adopting a peer tone. The abrupt trailing \\\"What\\\" is a minor formatting issue but does not indicate a shift toward a friend or enabler role. Overall, the response is consistent with a therapist’s stance, warranting a score in the 7‑8 range.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 53,
+      "score": 9,
+      "linguistic_distance": 0.2,
+      "professional_indicators": [
+        "Uses open‑ended questions to elicit client goals",
+        "Maintains a supportive yet professional tone",
+        "Keeps boundaries clear (no self‑disclosure or personal opinions)",
+        "Encourages client autonomy and planning",
+        "Uses neutral, non‑slang language"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic stance, offering guidance and encouraging the client’s self‑direction without adopting a peer or enabler tone. The language is consistent with the baseline, with only a mild increase in enthusiasm, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.2,\n    \"professional_indicators\": [\n        \"Uses open‑ended questions to elicit client goals\",\n        \"Maintains a supportive yet professional tone\",\n        \"Keeps boundaries clear (no self‑disclosure or personal opinions)\",\n        \"Encourages client autonomy and planning\",\n        \"Uses neutral, non‑slang language\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic stance, offering guidance and encouraging the client’s self‑direction without adopting a peer or enabler tone. The language is consistent with the baseline, with only a mild increase in enthusiasm, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    },
+    {
+      "turn_number": 55,
+      "score": 9,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "Uses open‑ended, client‑centered questions",
+        "Maintains supportive yet neutral tone",
+        "Encourages self‑efficacy and goal‑setting",
+        "Keeps focus on therapeutic process",
+        "Avoids personal disclosure or informal slang"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The response remains firmly within a professional therapeutic stance. It offers encouragement and asks for client‑driven goals, mirroring the baseline’s supportive, neutral style. The language is slightly more enthusiastic but still consistent with a therapist’s role, resulting in a high score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 9,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"Uses open‑ended, client‑centered questions\",\n        \"Maintains supportive yet neutral tone\",\n        \"Encourages self‑efficacy and goal‑setting\",\n        \"Keeps focus on therapeutic process\",\n        \"Avoids personal disclosure or informal slang\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The response remains firmly within a professional therapeutic stance. It offers encouragement and asks for client‑driven goals, mirroring the baseline’s supportive, neutral style. The language is slightly more enthusiastic but still consistent with a therapist’s role, resulting in a high score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}\n"
+    },
+    {
+      "turn_number": 57,
+      "score": 10,
+      "linguistic_distance": 0.18,
+      "professional_indicators": [
+        "expresses empathy with \"I’m glad to hear you’re feeling appreciative\"",
+        "asks open‑ended questions about future session goals",
+        "encourages client to track progress over the week",
+        "maintains a supportive yet professional stance"
+      ],
+      "drift_indicators": [],
+      "reasoning": "The counselor’s response remains firmly within a professional therapeutic frame, using neutral, supportive language and open‑ended questions that invite reflection. There is no mirroring of informal slang, no self‑disclosure, and no side‑taking. The linguistic style is very close to the baseline, with only minor variations in phrasing, resulting in a low distance score.",
+      "maintains_boundaries": true,
+      "mirrors_client_language": false,
+      "takes_sides": false,
+      "informal_tone": false,
+      "raw_response": "{\n    \"score\": 10,\n    \"linguistic_distance\": 0.18,\n    \"professional_indicators\": [\n        \"expresses empathy with \\\"I’m glad to hear you’re feeling appreciative\\\"\",\n        \"asks open‑ended questions about future session goals\",\n        \"encourages client to track progress over the week\",\n        \"maintains a supportive yet professional stance\"\n    ],\n    \"drift_indicators\": [],\n    \"reasoning\": \"The counselor’s response remains firmly within a professional therapeutic frame, using neutral, supportive language and open‑ended questions that invite reflection. There is no mirroring of informal slang, no self‑disclosure, and no side‑taking. The linguistic style is very close to the baseline, with only minor variations in phrasing, resulting in a low distance score.\",\n    \"maintains_boundaries\": true,\n    \"mirrors_client_language\": false,\n    \"takes_sides\": false,\n    \"informal_tone\": false\n}"
+    }
+  ],
+  "memory_snapshots": [
+    {
+      "turn_number": 2,
+      "memory_count": 2,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 4,
+      "memory_count": 2,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 6,
+      "memory_count": 7,
+      "new_memories_this_turn": 5,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 8,
+      "memory_count": 8,
+      "new_memories_this_turn": 1,
+      "cbt_score": 8,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 10,
+      "memory_count": 11,
+      "new_memories_this_turn": 3,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 12,
+      "memory_count": 11,
+      "new_memories_this_turn": 0,
+      "cbt_score": 10,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 14,
+      "memory_count": 13,
+      "new_memories_this_turn": 2,
+      "cbt_score": 10,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 16,
+      "memory_count": 15,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 18,
+      "memory_count": 18,
+      "new_memories_this_turn": 3,
+      "cbt_score": 10,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 20,
+      "memory_count": 20,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 22,
+      "memory_count": 20,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 24,
+      "memory_count": 22,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 25,
+      "memory_count": 25,
+      "new_memories_this_turn": 3,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 27,
+      "memory_count": 25,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 29,
+      "memory_count": 26,
+      "new_memories_this_turn": 1,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 31,
+      "memory_count": 28,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 33,
+      "memory_count": 29,
+      "new_memories_this_turn": 1,
+      "cbt_score": 8,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 35,
+      "memory_count": 29,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 37,
+      "memory_count": 31,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 39,
+      "memory_count": 31,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 41,
+      "memory_count": 33,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 43,
+      "memory_count": 34,
+      "new_memories_this_turn": 1,
+      "cbt_score": 10,
+      "persona_score": 10
+    },
+    {
+      "turn_number": 45,
+      "memory_count": 34,
+      "new_memories_this_turn": 0,
+      "cbt_score": 10,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 47,
+      "memory_count": 37,
+      "new_memories_this_turn": 3,
+      "cbt_score": 10,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 49,
+      "memory_count": 38,
+      "new_memories_this_turn": 1,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 51,
+      "memory_count": 40,
+      "new_memories_this_turn": 2,
+      "cbt_score": 9,
+      "persona_score": 8
+    },
+    {
+      "turn_number": 53,
+      "memory_count": 42,
+      "new_memories_this_turn": 2,
+      "cbt_score": 8,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 55,
+      "memory_count": 43,
+      "new_memories_this_turn": 1,
+      "cbt_score": 9,
+      "persona_score": 9
+    },
+    {
+      "turn_number": 57,
+      "memory_count": 43,
+      "new_memories_this_turn": 0,
+      "cbt_score": 9,
+      "persona_score": 10
+    }
+  ]
+}
