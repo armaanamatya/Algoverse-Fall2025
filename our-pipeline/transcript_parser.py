@@ -237,18 +237,18 @@ def parse_gemma_transcript_text(transcript_text: str) -> List[ConversationTurn]:
     text = re.sub(r'<start_of_turn>\s*\w*', '', text)
     text = text.replace('[/END]', '')
 
-    # Pattern: line-number prefix (optional) then Therapist: or Client:
+    # Pattern: line-number prefix (optional) then Therapist:/Client: or THERAPIST:/PATIENT:
     turn_pattern = re.compile(
-        r'(?:^|\n)\s*(?:\d+→)?\s*(Therapist|Client):\s*(.*?)(?=(?:\n\s*(?:\d+→)?\s*(?:Therapist|Client):)|\Z)',
+        r'(?:^|\n)\s*(?:\d+→)?\s*(Therapist|Client|THERAPIST|PATIENT):\s*(.*?)(?=(?:\n\s*(?:\d+→)?\s*(?:Therapist|Client|THERAPIST|PATIENT):)|\Z)',
         re.DOTALL | re.IGNORECASE
     )
 
     matches = turn_pattern.findall(text)
 
     if not matches:
-        raise ValueError("No valid Therapist/Client turns found in transcript")
+        raise ValueError("No valid Therapist/Client/THERAPIST/PATIENT turns found in transcript")
 
-    role_map = {'therapist': 'counselor', 'client': 'patient'}
+    role_map = {'therapist': 'counselor', 'client': 'patient', 'patient': 'patient'}
     turns: List[ConversationTurn] = []
     turn_number = 0
 
@@ -325,8 +325,8 @@ def parse_transcript_auto(file_path: str) -> List[ConversationTurn]:
         except ValueError:
             pass
 
-    # Try Gemma format (Therapist:/Client:)
-    if 'Therapist:' in text or 'Client:' in text:
+    # Try Gemma format (Therapist:/Client:) or synthetic format (THERAPIST:/PATIENT:)
+    if 'Therapist:' in text or 'Client:' in text or 'THERAPIST:' in text:
         try:
             return parse_gemma_transcript_text(text)
         except ValueError:
