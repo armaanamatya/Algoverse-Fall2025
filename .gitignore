@@ -15,3 +15,13 @@ output_therapy_memnotincluded/
 output_llm_counselor_memincluded/
 output_llm_counselor_memnotincluded/
 0518-014_raw/
+# --- finale snapshot: exclude secrets, third-party repos, bloat ---
+sshkey
+sshkey.pub
+yes
+yes.pub
+dynamic-cheatsheet-main/
+e2e-main/
+New folder/
+nul
+*.zip

@@ -571,6 +571,218 @@ INFORMAL_LANGUAGE_MARKERS: List[str] = [
 ]
 
 
+# ============================================================================
+# DISTORTION RECOGNITION PROMPTS
+# ============================================================================
+
+def get_distortion_recognition_prompt(
+    counselor_response: str,
+    patient_statement: str,
+    distortion_context: str,
+    conversation_context: str,
+    turn_number: int
+) -> str:
+    """Generate prompt to evaluate if the counselor recognized and addressed a cognitive distortion.
+
+    Args:
+        counselor_response: The counselor's response to evaluate
+        patient_statement: The patient's statement containing the distortion
+        distortion_context: Description of what distortion was injected
+        conversation_context: Previous conversation for context
+        turn_number: Turn number in the conversation
+
+    Returns:
+        Formatted prompt for the judge
+    """
+    prompt = f"""You are an expert evaluator assessing whether a therapist correctly identified and addressed a cognitive distortion in a patient's statement.
+
+## Known Cognitive Distortions:
+- All-or-nothing thinking: Viewing situations in only two categories
+- Overgeneralization: Making sweeping conclusions from single events
+- Mental filter: Focusing exclusively on negative details
+- Mind reading: Assuming you know what others are thinking
+- Catastrophizing: Believing the worst possible outcome will occur
+- Should statements: Having rigid rules about how things should be
+- Labeling: Attaching fixed labels based on single events
+- Emotional reasoning: Assuming emotions reflect reality
+
+## Conversation Context (Turn {turn_number}):
+{conversation_context}
+
+## Patient Statement (contains an injected cognitive distortion):
+"{patient_statement}"
+
+## Known Distortion Injected:
+{distortion_context}
+
+## Counselor Response:
+"{counselor_response}"
+
+## Your Task:
+1. Did the counselor detect or acknowledge the cognitive distortion in the patient's statement?
+2. Did the counselor address or challenge the distortion therapeutically?
+3. Did the counselor correctly identify the TYPE of distortion?
+
+Respond in the following JSON format:
+{{
+    "score": <integer 1-10>,
+    "distortion_detected": <true if counselor showed awareness of distorted thinking>,
+    "distortion_addressed": <true if counselor actively challenged or reframed the distortion>,
+    "distortion_type_identified": "<type of distortion the counselor identified, or 'none' if not identified>",
+    "expected_distortion_type": "<type from the known distortion context>",
+    "reasoning": "Brief explanation of how well the counselor handled the distortion"
+}}
+"""
+    return prompt
+
+
+def get_distortion_recognition_prompt_memory_only(
+    counselor_response: str,
+    patient_statement: str,
+    distortion_context: str,
+    memories_context: str,
+    turn_number: int
+) -> str:
+    """Generate distortion recognition prompt using memories only (no conversation context)."""
+    prompt = f"""You are an expert evaluator assessing whether a therapist correctly identified and addressed a cognitive distortion in a patient's statement.
+
+## Known Cognitive Distortions:
+- All-or-nothing thinking: Viewing situations in only two categories
+- Overgeneralization: Making sweeping conclusions from single events
+- Mental filter: Focusing exclusively on negative details
+- Mind reading: Assuming you know what others are thinking
+- Catastrophizing: Believing the worst possible outcome will occur
+- Should statements: Having rigid rules about how things should be
+- Labeling: Attaching fixed labels based on single events
+- Emotional reasoning: Assuming emotions reflect reality
+
+## Turn Number: {turn_number}
+
+## Patient Information (From Stored Memories):
+{memories_context if memories_context and memories_context.strip() != "No memories stored." else "No memories extracted yet."}
+
+## Patient Statement (contains an injected cognitive distortion):
+"{patient_statement}"
+
+## Known Distortion Injected:
+{distortion_context}
+
+## Counselor Response:
+"{counselor_response}"
+
+## Your Task:
+1. Did the counselor detect or acknowledge the cognitive distortion in the patient's statement?
+2. Did the counselor address or challenge the distortion therapeutically?
+3. Did the counselor correctly identify the TYPE of distortion?
+
+Respond in the following JSON format:
+{{
+    "score": <integer 1-10>,
+    "distortion_detected": <true if counselor showed awareness of distorted thinking>,
+    "distortion_addressed": <true if counselor actively challenged or reframed the distortion>,
+    "distortion_type_identified": "<type of distortion the counselor identified, or 'none' if not identified>",
+    "expected_distortion_type": "<type from the known distortion context>",
+    "reasoning": "Brief explanation of how well the counselor handled the distortion"
+}}
+"""
+    return prompt
+
+
+# ============================================================================
+# FACTUAL CONSISTENCY PROMPTS
+# ============================================================================
+
+def get_factual_consistency_prompt(
+    counselor_response: str,
+    patient_statement: str,
+    patient_facts: str,
+    conversation_context: str,
+    turn_number: int
+) -> str:
+    """Generate prompt to evaluate if the counselor's response is consistent with known patient facts.
+
+    Args:
+        counselor_response: The counselor's response to evaluate
+        patient_statement: The patient's statement for this turn
+        patient_facts: Known facts about the patient from the factsheet
+        conversation_context: Previous conversation for context
+        turn_number: Turn number in the conversation
+
+    Returns:
+        Formatted prompt for the judge
+    """
+    prompt = f"""You are an expert evaluator assessing whether a therapist's response demonstrates accurate knowledge and recall of key patient facts across therapy sessions.
+
+## Conversation Context (Turn {turn_number}):
+{conversation_context}
+
+## Patient Statement:
+"{patient_statement}"
+
+## Known Patient Facts (ground truth from clinical records):
+{patient_facts}
+
+## Counselor Response:
+"{counselor_response}"
+
+## Your Task:
+1. Does the counselor's response reference or build upon any known patient facts?
+2. Does the counselor make any statements that CONTRADICT the known facts?
+3. Does the counselor demonstrate awareness of the patient's history and context?
+
+Respond in the following JSON format:
+{{
+    "score": <integer 1-10>,
+    "facts_referenced": ["list of patient facts the counselor correctly referenced or built upon"],
+    "facts_contradicted": ["list of patient facts the counselor contradicted, if any"],
+    "demonstrates_recall": <true if counselor showed knowledge of patient history beyond current turn>,
+    "reasoning": "Brief explanation of how well the counselor demonstrated factual consistency"
+}}
+"""
+    return prompt
+
+
+def get_factual_consistency_prompt_memory_only(
+    counselor_response: str,
+    patient_statement: str,
+    patient_facts: str,
+    memories_context: str,
+    turn_number: int
+) -> str:
+    """Generate factual consistency prompt using memories only (no conversation context)."""
+    prompt = f"""You are an expert evaluator assessing whether a therapist's response demonstrates accurate knowledge and recall of key patient facts across therapy sessions.
+
+## Turn Number: {turn_number}
+
+## Patient Information (From Stored Memories):
+{memories_context if memories_context and memories_context.strip() != "No memories stored." else "No memories extracted yet."}
+
+## Patient Statement:
+"{patient_statement}"
+
+## Known Patient Facts (ground truth from clinical records):
+{patient_facts}
+
+## Counselor Response:
+"{counselor_response}"
+
+## Your Task:
+1. Does the counselor's response reference or build upon any known patient facts?
+2. Does the counselor make any statements that CONTRADICT the known facts?
+3. Does the counselor demonstrate awareness of the patient's history and context?
+
+Respond in the following JSON format:
+{{
+    "score": <integer 1-10>,
+    "facts_referenced": ["list of patient facts the counselor correctly referenced or built upon"],
+    "facts_contradicted": ["list of patient facts the counselor contradicted, if any"],
+    "demonstrates_recall": <true if counselor showed knowledge of patient history beyond current turn>,
+    "reasoning": "Brief explanation of how well the counselor demonstrated factual consistency"
+}}
+"""
+    return prompt
+
+
 if __name__ == "__main__":
     # Display the framework elements
     print("=" * 60)

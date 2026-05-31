@@ -6,7 +6,7 @@ import os
 import time
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, asdict
-from openai import OpenAI, RateLimitError, APIError
+from openai import OpenAI, RateLimitError, APIError, APIStatusError
 
 from therapeutic_framework import (
     get_cbt_adherence_prompt,
@@ -186,6 +186,8 @@ def call_gpt4o_judge(
                 temperature=0.1,  # Low temperature for consistent scoring
                 max_tokens=1000
             )
+            if not response.choices:
+                raise ValueError(f"Empty choices in response (possible content filter or provider error)")
             return response.choices[0].message.content or ""
             
         except RateLimitError as e:
@@ -208,6 +210,29 @@ def call_gpt4o_judge(
                 print(f"\n  Rate limit exceeded after {max_retries} retries.")
                 raise
                 
+        except APIStatusError as e:
+            last_exception = e
+            status_code = getattr(e, "status_code", None)
+            error_msg = str(e)
+            error_msg_lower = error_msg.lower()
+
+            if status_code == 402 or "insufficient credits" in error_msg_lower:
+                print("\n  ERROR: API provider reports insufficient credits.")
+                print("    Add credits to the configured provider or switch the notebook to a local/free backend.")
+                raise
+
+            # Most client-side errors are configuration problems, not transient retry cases.
+            if status_code is not None and 400 <= status_code < 500 and status_code not in (408, 409, 429):
+                print(f"\n  Non-retryable API error ({status_code}): {e}")
+                raise
+
+            if attempt < max_retries:
+                print(f"\n  API status error: {e}. Retrying in {delay:.1f}s...")
+                time.sleep(delay)
+                delay = min(delay * 2, max_delay)
+            else:
+                raise
+
         except APIError as e:
             last_exception = e
             if attempt < max_retries:
@@ -602,6 +627,202 @@ def evaluate_persona_consistency_memory_only(
         mirrors_client_language=parsed.get("mirrors_client_language", False),
         takes_sides=parsed.get("takes_sides", False),
         informal_tone=parsed.get("informal_tone", False),
+        raw_response=raw_response
+    )
+
+
+# ============================================================================
+# DISTORTION RECOGNITION EVALUATION
+# ============================================================================
+
+
+@dataclass
+class DistortionRecognitionResult:
+    """Result from distortion recognition evaluation."""
+    turn_number: int
+    score: int  # 1-10
+    distortion_detected: bool
+    distortion_addressed: bool
+    distortion_type_identified: str
+    expected_distortion_type: str
+    reasoning: str
+    raw_response: str
+
+
+@dataclass
+class FactualConsistencyResult:
+    """Result from factual consistency evaluation."""
+    turn_number: int
+    score: int  # 1-10
+    facts_referenced: List[str]
+    facts_contradicted: List[str]
+    demonstrates_recall: bool
+    reasoning: str
+    raw_response: str
+
+
+def evaluate_distortion_recognition(
+    client: OpenAI,
+    counselor_response: str,
+    patient_statement: str,
+    distortion_context: str,
+    conversation_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> DistortionRecognitionResult:
+    """Evaluate if the counselor recognized and addressed a cognitive distortion.
+
+    Only called on turns where distortion_injected=True.
+
+    Args:
+        client: OpenAI client
+        counselor_response: The counselor's response to evaluate
+        patient_statement: The patient's statement containing the distortion
+        distortion_context: Description of the injected distortion
+        conversation_context: Previous conversation for context
+        turn_number: Turn number in the conversation
+        model: Model to use for evaluation
+
+    Returns:
+        DistortionRecognitionResult with score and analysis
+    """
+    from therapeutic_framework import get_distortion_recognition_prompt
+
+    prompt = get_distortion_recognition_prompt(
+        counselor_response=counselor_response,
+        patient_statement=patient_statement,
+        distortion_context=distortion_context,
+        conversation_context=conversation_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return DistortionRecognitionResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        distortion_detected=parsed.get("distortion_detected", False),
+        distortion_addressed=parsed.get("distortion_addressed", False),
+        distortion_type_identified=parsed.get("distortion_type_identified", "none"),
+        expected_distortion_type=parsed.get("expected_distortion_type", ""),
+        reasoning=parsed.get("reasoning", ""),
+        raw_response=raw_response
+    )
+
+
+def evaluate_distortion_recognition_memory_only(
+    client: OpenAI,
+    counselor_response: str,
+    patient_statement: str,
+    distortion_context: str,
+    memories_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> DistortionRecognitionResult:
+    """Evaluate distortion recognition using memories only (no conversation context)."""
+    from therapeutic_framework import get_distortion_recognition_prompt_memory_only
+
+    prompt = get_distortion_recognition_prompt_memory_only(
+        counselor_response=counselor_response,
+        patient_statement=patient_statement,
+        distortion_context=distortion_context,
+        memories_context=memories_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return DistortionRecognitionResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        distortion_detected=parsed.get("distortion_detected", False),
+        distortion_addressed=parsed.get("distortion_addressed", False),
+        distortion_type_identified=parsed.get("distortion_type_identified", "none"),
+        expected_distortion_type=parsed.get("expected_distortion_type", ""),
+        reasoning=parsed.get("reasoning", ""),
+        raw_response=raw_response
+    )
+
+
+def evaluate_factual_consistency(
+    client: OpenAI,
+    counselor_response: str,
+    patient_statement: str,
+    patient_facts: str,
+    conversation_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> FactualConsistencyResult:
+    """Evaluate if the counselor's response is consistent with known patient facts.
+
+    Args:
+        client: OpenAI client
+        counselor_response: The counselor's response to evaluate
+        patient_statement: The patient's statement for this turn
+        patient_facts: Known facts about the patient from the factsheet
+        conversation_context: Previous conversation for context
+        turn_number: Turn number in the conversation
+        model: Model to use for evaluation
+
+    Returns:
+        FactualConsistencyResult with score and analysis
+    """
+    from therapeutic_framework import get_factual_consistency_prompt
+
+    prompt = get_factual_consistency_prompt(
+        counselor_response=counselor_response,
+        patient_statement=patient_statement,
+        patient_facts=patient_facts,
+        conversation_context=conversation_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return FactualConsistencyResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        facts_referenced=parsed.get("facts_referenced", []),
+        facts_contradicted=parsed.get("facts_contradicted", []),
+        demonstrates_recall=parsed.get("demonstrates_recall", False),
+        reasoning=parsed.get("reasoning", ""),
+        raw_response=raw_response
+    )
+
+
+def evaluate_factual_consistency_memory_only(
+    client: OpenAI,
+    counselor_response: str,
+    patient_statement: str,
+    patient_facts: str,
+    memories_context: str,
+    turn_number: int,
+    model: str = "gpt-4o"
+) -> FactualConsistencyResult:
+    """Evaluate factual consistency using memories only (no conversation context)."""
+    from therapeutic_framework import get_factual_consistency_prompt_memory_only
+
+    prompt = get_factual_consistency_prompt_memory_only(
+        counselor_response=counselor_response,
+        patient_statement=patient_statement,
+        patient_facts=patient_facts,
+        memories_context=memories_context,
+        turn_number=turn_number
+    )
+
+    raw_response = call_gpt4o_judge(client, prompt, model)
+    parsed = parse_json_response(raw_response)
+
+    return FactualConsistencyResult(
+        turn_number=turn_number,
+        score=int(parsed.get("score", 5)),
+        facts_referenced=parsed.get("facts_referenced", []),
+        facts_contradicted=parsed.get("facts_contradicted", []),
+        demonstrates_recall=parsed.get("demonstrates_recall", False),
+        reasoning=parsed.get("reasoning", ""),
         raw_response=raw_response
     )
 

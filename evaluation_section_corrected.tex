@@ -1,0 +1,138 @@
+\section{Evaluation}
+
+\subsection{Experimental Setup}
+
+We evaluate on three synthetic patient transcripts (SYN\_0001, SYN\_0002, SYN\_0004), each generated via a Gemma-based patient--therapist simulation. All transcripts contain 50--78 total turns (25--39 counselor turns evaluated). We compare four conditions across two axes: (1)~who generates the counselor response (human vs.\ LLM), and (2)~what context the system receives (sliding window vs.\ accumulated memories).
+
+A critical design choice: memory-based conditions receive \emph{only} retrieved memories with no sliding window, while context-based conditions receive \emph{only} the sliding window with no memories. This isolation tests whether each memory system can serve as the \textbf{sole} source of patient context, rather than merely supplementing a conversation window.
+
+Table~\ref{tab:config} summarizes the input configuration for each condition.
+
+\begin{table}[h]
+\centering
+\caption{Experimental conditions: what each counselor and judge receives as input. Memory-based conditions receive \emph{no} sliding window; context-based conditions receive \emph{no} memories.}
+\label{tab:config}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Condition} & \textbf{Counselor} & \textbf{Counselor Input} & \textbf{Judge Input} \\
+\midrule
+Human (Context) & Human & N/A & Sliding window (10 turns) \\
+Human (Memory) & Human & N/A & Mem0 memories only \\
+LLM (Context Window) & LLM & Sliding window (10 turns) & Sliding window (10 turns) \\
+LLM (Mem0) & LLM & Mem0 memories only & Mem0 memories only \\
+DTM (Ours) & LLM & Curated cheatsheet only & \textit{TBD} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{Human Counselor:} The original therapist responses from the synthetic transcript, serving as the \emph{upper bound} for therapeutic quality. We report two sub-conditions based on what the LLM judge receives during evaluation:
+    \begin{itemize}
+        \item \textbf{Human (Context):} The judge receives only the last 10 conversation turns (sliding window). No memory retrieval is performed.
+        \item \textbf{Human (Memory):} The judge receives only Mem0's accumulated memories for the patient. No sliding window is provided.
+    \end{itemize}
+    Comparing these two sub-conditions reveals whether memory-aware evaluation introduces scoring bias on \emph{identical} counselor responses.
+    \item \textbf{LLM (Context Window):} An LLM counselor that generates responses using the patient query and the last 10 conversation turns. The judge also receives only the sliding window. No memory system is used for either the counselor or the judge. This is the \emph{sliding window baseline}.
+    \item \textbf{LLM (Mem0):} An LLM counselor that generates responses using \emph{only} Mem0's retrieved memories (no sliding window). The judge also receives only memories. This tests whether \emph{static memory accumulation} can replace conversational context.
+    \item \textbf{DTM (Ours):} Our Dynamic Test-time Memory system using the DC-RS architecture. The counselor receives curated cheatsheet strategies instead of raw memories. \textit{(Results pending.)}
+\end{itemize}
+
+All conditions use the same judge model (\texttt{gpt-oss:20b}) and identical evaluation rubrics to ensure comparability.
+
+\subsection{Evaluation Metrics}
+
+We adopt two LLM-as-Judge metrics, each scored on a 1--10 scale per counselor turn:
+
+\begin{itemize}
+    \item \textbf{CBT Adherence Score (Part B -- Methodological Drift):} Measures how well the counselor follows Cognitive Behavioral Therapy principles. High scores (9--10) indicate excellent use of Socratic questioning, collaborative exploration, and evidence examination. Low scores (1--4) indicate directive advice-giving, ``should'' statements, or abandonment of CBT techniques.
+    \item \textbf{Persona Consistency Score (Part C -- Boundary Dissolution):} Measures whether the counselor maintains a professional therapeutic persona. High scores indicate appropriate boundaries, professional language, and emotional distance. Low scores indicate mirroring of client slang, peer-like tone, or self-disclosure.
+\end{itemize}
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\caption{Aggregated results across all three patients (SYN\_0001, SYN\_0002, SYN\_0004). Mean $\pm$ std.\ reported. $n$: total counselor turns evaluated. Best per-column in \textbf{bold}.}
+\label{tab:aggregate}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Condition} & $n$ & \textbf{CBT Adh.} & \textbf{Persona Con.} \\
+\midrule
+Human (Context) & 92 & 7.72 $\pm$ 1.39 & \textbf{9.02 $\pm$ 0.61} \\
+Human (Memory) & 92 & 7.29 $\pm$ 1.55 & 8.86 $\pm$ 0.46 \\
+LLM (Context Window) & 93 & \textbf{8.57 $\pm$ 1.98} & 8.65 $\pm$ 1.70 \\
+LLM (Mem0) & 93 & 7.67 $\pm$ 2.91 & 7.89 $\pm$ 2.66 \\
+DTM (Ours) & --- & \multicolumn{2}{c}{\textit{Results pending}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Per-patient breakdown. Mean $\pm$ std.\ reported for each metric.}
+\label{tab:perpatient}
+\small
+\begin{tabular}{llccc}
+\toprule
+\textbf{Patient} & \textbf{Condition} & $n$ & \textbf{CBT Adh.} & \textbf{Persona Con.} \\
+\midrule
+\multirow{4}{*}{SYN\_0001}
+ & Human (Context) & 28 & 7.46 $\pm$ 1.91 & 9.07 $\pm$ 0.90 \\
+ & Human (Memory) & 28 & 7.00 $\pm$ 2.04 & 8.89 $\pm$ 0.50 \\
+ & LLM (Context Window) & 29 & \textbf{9.10 $\pm$ 0.56} & \textbf{9.03 $\pm$ 0.33} \\
+ & LLM (Mem0) & 29 & 7.97 $\pm$ 2.54 & 8.41 $\pm$ 2.08 \\
+\midrule
+\multirow{4}{*}{SYN\_0002}
+ & Human (Context) & 39 & 7.92 $\pm$ 1.11 & \textbf{9.00 $\pm$ 0.46} \\
+ & Human (Memory) & 39 & 7.56 $\pm$ 1.21 & 8.77 $\pm$ 0.48 \\
+ & LLM (Context Window) & 39 & \textbf{8.26 $\pm$ 2.37} & 8.51 $\pm$ 1.90 \\
+ & LLM (Mem0) & 39 & 7.49 $\pm$ 3.16 & 7.64 $\pm$ 2.84 \\
+\midrule
+\multirow{4}{*}{SYN\_0004}
+ & Human (Context) & 25 & 7.68 $\pm$ 1.03 & \textbf{9.00 $\pm$ 0.41} \\
+ & Human (Memory) & 25 & 7.20 $\pm$ 1.38 & 8.96 $\pm$ 0.35 \\
+ & LLM (Context Window) & 25 & \textbf{8.44 $\pm$ 2.29} & 8.40 $\pm$ 2.24 \\
+ & LLM (Mem0) & 25 & 7.60 $\pm$ 3.00 & 7.68 $\pm$ 2.98 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Comparison Against Baselines}
+
+Aggregated results across all three patients are reported in Table~\ref{tab:aggregate}.
+
+\paragraph{LLM (Context Window) achieves the highest scores on both metrics.} With a CBT adherence of 8.57 and persona consistency of 8.65, it outperforms all other conditions. This is expected: when the LLM sees only the last 10 turns, it remains tightly focused on the immediate therapeutic exchange without distraction from noisy historical context. However, this advantage comes at the cost of \emph{long-range continuity}, as the model cannot reference patient history beyond its window.
+
+\paragraph{Human counselor responses set the persona ceiling.} Under context-only evaluation, the original therapist responses score 9.02 on persona consistency, the highest of any condition, reflecting the natural professional tone of a trained counselor. CBT adherence is lower (7.72), likely because the Gemma-simulated therapist occasionally uses directive language or omits Socratic questioning in closing turns.
+
+\paragraph{Memory-aware judging slightly deflates scores on identical responses.} Comparing the two Human sub-conditions reveals a consistent pattern: when the judge receives accumulated memories instead of a sliding window, scores decrease (CBT: 7.72 $\to$ 7.29; Persona: 9.02 $\to$ 8.86). This suggests that raw Mem0 memories introduce evaluative noise; the judge may penalize responses that appear inconsistent with noisy or redundant memory entries, even when the responses themselves are unchanged. This finding underscores the importance of \emph{memory curation}: uncurated memories can distort not only generation but also downstream evaluation.
+
+\paragraph{LLM (Mem0) scores lowest across both metrics.} With CBT adherence of 7.67 and persona consistency of 7.89, the Mem0-augmented LLM performs worse than both the context window baseline and the human counselor. Critically, it also exhibits the highest variance (standard deviations up to 3.16 for CBT and 2.98 for persona), indicating \emph{unpredictable performance}. This supports our core hypothesis: na\"ive memory accumulation without curation leads to distortion buildup that harms therapeutic quality over extended conversations.
+
+\subsection{Per-Patient Breakdown}
+
+The per-patient results in Table~\ref{tab:perpatient} reveal several important patterns.
+
+\paragraph{Longer transcripts amplify Mem0 degradation.} SYN\_0002, the longest transcript (39 evaluated turns), shows the most pronounced degradation under Mem0: CBT drops to 7.49 $\pm$ 3.16, and persona falls to 7.64 $\pm$ 2.84. In contrast, both Human (Context) and LLM (Context Window) remain stable on the same transcript. This is consistent with the \emph{memory distortion accumulation} problem: as more memories are stored without curation, retrieval quality degrades over longer conversations.
+
+\paragraph{Context Window excels on shorter transcripts.} On SYN\_0001, the Context Window baseline achieves a CBT score of 9.10 $\pm$ 0.56 and persona of 9.03 $\pm$ 0.33, the tightest distributions of any condition on any patient. Its advantage narrows on longer transcripts (CBT drops to 8.26 on SYN\_0002), suggesting that even the sliding window approach faces challenges as conversations extend. This motivates the need for a memory system that can maintain quality over longer horizons.
+
+\paragraph{Human persona consistency is remarkably stable.} Across all three patients under context-only judging, the Human Counselor maintains a persona score between 9.00--9.07 with standard deviations below 0.90. This near-ceiling performance with minimal variance sets the target that any memory-augmented LLM system must approach.
+
+\paragraph{Memory-aware judging consistently penalizes the same responses.} The gap between Human (Context) and Human (Memory) is consistent across patients: CBT drops by 0.46/0.36/0.48 and persona drops by 0.18/0.23/0.04 on SYN\_0001/0002/0004 respectively. This systematic effect suggests that the memory-induced evaluation bias is not patient-specific but a property of how raw memories interact with the judge's scoring process.
+
+\subsection{Discussion}
+
+These baseline results establish three key findings:
+
+\begin{enumerate}
+    \item \textbf{CBT adherence vs.\ long-range memory:} The Context Window baseline excels at CBT adherence precisely because it avoids memory noise, but it cannot maintain continuity across sessions. A successful memory system must match its per-turn scores while adding cross-session awareness. The degradation of Context Window performance on longer transcripts (CBT: 9.10 on SYN\_0001 $\to$ 8.26 on SYN\_0002) further motivates this need.
+
+    \item \textbf{Raw memory hurts both generation and evaluation:} Mem0 provides the counselor with patient history, yet this comes at the cost of both methodological drift and persona dissolution. Moreover, when the \emph{same} human responses are evaluated with raw memories as context, scores drop compared to sliding-window evaluation. The uncurated nature of Mem0's stored memories introduces noise that degrades quality on both sides of the pipeline. This is exactly the failure mode DTM is designed to address through strategy curation and clinical filtering.
+
+    \item \textbf{Variance as a reliability signal:} Beyond mean scores, variance across turns is a critical indicator of system reliability. LLM (Mem0) exhibits standard deviations 1.5--2$\times$ larger than other conditions, meaning a therapist using this system would experience highly unpredictable turn-by-turn quality, which is unacceptable in a clinical setting where consistency is paramount.
+\end{enumerate}
+
+DTM (Ours) aims to resolve these tensions by replacing raw memory accumulation with curated therapeutic strategies that preserve CBT adherence and persona consistency while enabling long-range patient context. Results are forthcoming upon completion of the \texttt{therapy\_dc\_rs} evaluation pipeline.

@@ -1,0 +1,89 @@
+{
+  "notebook_name": "test",
+  "start_time": "2026-01-12T21:49:57.722423",
+  "end_time": "2026-01-12T21:50:02.094372",
+  "duration_seconds": 4.371949,
+  "snapshots": [
+    {
+      "timestamp": "2026-01-12T21:49:57.903962",
+      "ram_used_gb": 19.629505157470703,
+      "ram_percent": 62.6,
+      "ram_available_gb": 11.721675872802734,
+      "cpu_percent": 31.3,
+      "gpu_count": 1,
+      "gpu_usage": [
+        {
+          "id": 0,
+          "name": "NVIDIA GeForce RTX 5060 Ti",
+          "memory_used_mb": 15295.0,
+          "memory_total_mb": 16311.0,
+          "memory_percent": 93.77107473484152,
+          "gpu_util_percent": 18.0,
+          "temperature": 41.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-01-12T21:50:00.078763",
+      "ram_used_gb": 19.626739501953125,
+      "ram_percent": 62.6,
+      "ram_available_gb": 11.724441528320312,
+      "cpu_percent": 34.3,
+      "gpu_count": 1,
+      "gpu_usage": [
+        {
+          "id": 0,
+          "name": "NVIDIA GeForce RTX 5060 Ti",
+          "memory_used_mb": 15279.0,
+          "memory_total_mb": 16311.0,
+          "memory_percent": 93.67298142357919,
+          "gpu_util_percent": 17.0,
+          "temperature": 40.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-01-12T21:50:02.259472",
+      "ram_used_gb": 19.595508575439453,
+      "ram_percent": 62.5,
+      "ram_available_gb": 11.755672454833984,
+      "cpu_percent": 44.7,
+      "gpu_count": 1,
+      "gpu_usage": [
+        {
+          "id": 0,
+          "name": "NVIDIA GeForce RTX 5060 Ti",
+          "memory_used_mb": 15271.0,
+          "memory_total_mb": 16311.0,
+          "memory_percent": 93.62393476794801,
+          "gpu_util_percent": 31.0,
+          "temperature": 43.0
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "ram": {
+      "peak_gb": 19.629505157470703,
+      "average_gb": 19.61725107828776,
+      "min_gb": 19.595508575439453,
+      "peak_percent": 62.6,
+      "average_percent": 62.56666666666666,
+      "delta_gb": -0.03399658203125
+    },
+    "cpu": {
+      "peak_percent": 44.7,
+      "average_percent": 36.766666666666666
+    },
+    "gpu": [
+      {
+        "id": 0,
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "peak_memory_mb": 15295.0,
+        "average_memory_mb": 15281.666666666666,
+        "peak_utilization_percent": 31.0,
+        "average_utilization_percent": 22.0
+      }
+    ]
+  }
+}

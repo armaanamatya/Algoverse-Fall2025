@@ -85,6 +85,8 @@ def generate_counselor_response(
         max_tokens=300
     )
 
+    if not response.choices:
+        raise ValueError(f"Empty choices in response from {model} (possible content filter or provider error)")
     return response.choices[0].message.content.strip()
 
 
@@ -158,6 +160,8 @@ def generate_counselor_response_memory_only(
         max_tokens=300
     )
 
+    if not response.choices:
+        raise ValueError(f"Empty choices in response from {model} (possible content filter or provider error)")
     return response.choices[0].message.content.strip()
 
 
