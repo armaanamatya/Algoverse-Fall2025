@@ -1,0 +1,133 @@
+\section{Methodology: Dynamic Test-Time Memory}
+
+We introduce Dynamic Test-Time Memory (DTM), a prompt-level framework for inference-time continual learning in multi-session therapeutic conversations. DTM operates through a \textbf{Generator-Extractor} loop that curates a domain-specific memory structure---the \emph{Therapeutic Cheatsheet}---without requiring architectural modifications or weight updates to the underlying LLM. Figure~\ref{fig:architecture} illustrates the overall architecture.
+
+\subsection{Problem Formulation}
+
+Consider a multi-session therapeutic conversation as a sequence of patient--counselor turn pairs $\{(p_t, c_t)\}_{t=1}^{T}$, where $p_t$ is the patient utterance and $c_t$ is the counselor response at turn $t$. At each turn $t$, the system must generate a therapeutically appropriate response $\hat{c}_t$ given $p_t$ and some form of historical context.
+
+In a standard sliding-window approach, the model conditions on the $k$ most recent turns: $\hat{c}_t = f_\theta(p_t \mid \{(p_i, c_i)\}_{i=t-k}^{t-1})$. This discards all history beyond the window. In a na\"ive memory-augmented approach (e.g., Mem0), the model conditions on retrieved memories $\mathcal{M}_t$: $\hat{c}_t = f_\theta(p_t \mid \mathcal{M}_t)$. However, $\mathcal{M}_t$ accumulates raw facts without clinical curation, leading to distortion contamination.
+
+DTM instead maintains a \emph{curated strategy state} $\mathcal{S}_t$ that evolves at each turn:
+\begin{equation}
+    \hat{c}_t = \textsc{Generator}(p_t, \textsc{Retrieve}(\mathcal{S}_{t-1}, p_t))
+\end{equation}
+\begin{equation}
+    \mathcal{S}_t = \textsc{Extractor}(\mathcal{S}_{t-1}, p_t, \hat{c}_t)
+\end{equation}
+where $\textsc{Retrieve}$ selects relevant strategies from the current state, $\textsc{Generator}$ produces a therapeutic response conditioned on those strategies, and $\textsc{Extractor}$ updates the state by extracting new curated strategies from the exchange. This recursive loop constitutes inference-time continual learning: the memory state $\mathcal{S}_t$ evolves with each interaction without modifying model weights $\theta$.
+
+\subsection{The Therapeutic Cheatsheet}
+
+The core memory structure in DTM is the \emph{Therapeutic Cheatsheet} $\mathcal{S}$, a structured collection of five clinically motivated categories:
+
+\begin{enumerate}
+    \item \textbf{CBT Techniques} ($\mathcal{S}^{\text{cbt}}$): Effective technique templates, e.g., ``For catastrophizing: ask `What evidence supports this worst-case scenario?'\,''
+    \item \textbf{Distortion Patterns} ($\mathcal{S}^{\text{pat}}$): Anonymized cognitive distortion patterns observed in the patient, e.g., ``Mind-reading pattern about workplace relationships''
+    \item \textbf{Effective Interventions} ($\mathcal{S}^{\text{int}}$): Intervention approaches that have proven effective with this patient
+    \item \textbf{Boundary Templates} ($\mathcal{S}^{\text{bnd}}$): Professional boundary maintenance strategies for handling requests for validation or collusion
+    \item \textbf{Session Insights} ($\mathcal{S}^{\text{ins}}$): Higher-level therapeutic observations about patient progress and recurring themes
+\end{enumerate}
+
+A critical design decision distinguishes the cheatsheet from raw memory systems: it stores \emph{transferable therapeutic strategies}, not patient statements. For example, when a patient says ``My boss hates me,'' Mem0 might store the raw fact ``Patient's boss hates them,'' accepting a cognitive distortion as truth. DTM instead stores the curated strategy: ``Mind-reading pattern about workplace; use evidence examination.'' This transformation---from raw content to actionable clinical insight---is enforced by the Extractor's clinical filtering rules (Section~\ref{sec:extractor}).
+
+\subsection{The Generator-Extractor Architecture}
+
+DTM consists of two LLM-mediated components that operate in a closed loop at each turn pair.
+
+\subsubsection{The Generator}
+\label{sec:generator}
+
+The Generator produces a therapeutic response $\hat{c}_t$ given the current patient utterance $p_t$ and a subset of relevant strategies retrieved from the cheatsheet. The Generator's system prompt embeds the retrieved strategies alongside six CBT guidelines that enforce: (1)~Socratic questioning over directive advice, (2)~evidence examination for and against patient cognitions, (3)~collaborative empiricism, (4)~professional boundary maintenance, (5)~emotion validation before cognitive exploration, and (6)~application of relevant cheatsheet strategies.
+
+Critically, in the DTM condition the Generator receives \emph{no sliding window context}---it must rely entirely on the cheatsheet for patient history. This design choice isolates the contribution of the memory system: any long-range coherence must come from the curated strategies rather than raw conversational history.
+
+\subsubsection{The Extractor}
+\label{sec:extractor}
+
+After each turn pair $(p_t, \hat{c}_t)$, the Extractor updates the cheatsheet by analyzing the exchange and producing curated additions. The Extractor is prompted as a ``clinical supervisor'' with explicit transformation rules that enforce clinical filtering:
+
+\paragraph{Extraction rules.} The Extractor is instructed to extract transferable strategies (CBT techniques used, distortion \emph{patterns} observed, successful approaches, boundary strategies, session insights) while filtering out raw patient statements stored as facts, third-party judgments, unverified claims, and cognitive distortions accepted as truth.
+
+\paragraph{Transformation examples.} The Extractor prompt includes explicit transformation examples that demonstrate the desired behavior:
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Patient Says} & \textbf{Raw (Mem0)} & \textbf{Curated (DTM)} \\
+\midrule
+``My boss hates me'' & ``Boss hates patient'' & ``Mind-reading pattern; evidence exam.'' \\
+``I always fail'' & ``Patient always fails'' & ``All-or-nothing thinking; scaled rating'' \\
+``Everyone abandons me'' & ``People abandon patient'' & ``Overgeneralization; explore instances'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The Extractor returns structured output containing new strategies for each category, a list of filtered content (creating an audit trail), and reasoning for its decisions. New strategies are deduplicated against existing entries before being appended to the cheatsheet.
+
+\subsection{Chain-of-Thought Retrieval}
+\label{sec:cot_retrieval}
+
+As the cheatsheet grows, injecting all accumulated strategies into the Generator's prompt becomes inefficient and risks exceeding context limits. We introduce a two-phase \emph{Chain-of-Thought (CoT) Retrieval} mechanism inspired by Retrieval-augmented Language Models (RLM). Rather than passing the entire cheatsheet, we query the LLM to select only the strategies relevant to the current patient utterance.
+
+\paragraph{Phase 1: Clinical Analysis.} The retrieval module first analyzes the patient statement to identify: (a)~cognitive distortions present (e.g., catastrophizing, mind-reading), (b)~emotional themes (e.g., anxiety, hopelessness), and (c)~a recommended CBT approach.
+
+\paragraph{Phase 2: Targeted Retrieval.} Based on the Phase~1 analysis, the module selects relevant strategies from an indexed representation of the cheatsheet (each strategy is assigned a numerical index). At most $k$ items per category are retrieved (we use $k=3$), keeping the Generator's context focused.
+
+The Generator then receives both the Phase~1 clinical analysis and the retrieved strategy subset, providing richer context than either raw retrieval or full cheatsheet injection. This two-phase approach treats the cheatsheet as a queryable ``environment'' that the LLM navigates with clinical reasoning, rather than a static document to be consumed whole.
+
+\subsection{Dynamic Summarization}
+\label{sec:summarization}
+
+To prevent unbounded growth of the cheatsheet, DTM employs a \emph{dynamic summarization} mechanism triggered by the estimated token count of the cheatsheet's prompt representation. We define two thresholds:
+
+\begin{itemize}
+    \item \textbf{Normal threshold} ($\tau_n = 2000$ tokens): Summarization is triggered when the cheatsheet exceeds this size, provided a minimum number of strategies ($m = 15$) have accumulated.
+    \item \textbf{Emergency threshold} ($\tau_e = 4000$ tokens): Summarization is forced regardless of strategy count.
+\end{itemize}
+
+When triggered, summarization consolidates the cheatsheet by prompting the LLM to: (1)~merge similar strategies, (2)~retain the most actionable formulations, (3)~preserve diversity across technique types, and (4)~reduce each category to at most $n$ items (we use $n = 10$). This consolidation step is itself a form of continual learning---it distills accumulated experience into a compact, high-quality representation, analogous to memory consolidation in cognitive science.
+
+Unlike fixed-interval summarization (every $N$ turns), dynamic summarization adapts to the actual growth rate of the cheatsheet. Conversations that produce many novel strategies trigger consolidation more frequently, while repetitive exchanges do not.
+
+\subsection{Inference-Time Continual Learning}
+\label{sec:continual_learning}
+
+The Generator-Extractor loop implements a form of continual learning that operates entirely at inference time. At each turn $t$, the system:
+
+\begin{enumerate}
+    \item \textbf{Retrieves} relevant strategies from $\mathcal{S}_{t-1}$ via CoT retrieval (Section~\ref{sec:cot_retrieval})
+    \item \textbf{Generates} a therapeutic response $\hat{c}_t$ conditioned on retrieved strategies
+    \item \textbf{Extracts} new curated strategies from the exchange $(p_t, \hat{c}_t)$ with clinical filtering
+    \item \textbf{Updates} the cheatsheet: $\mathcal{S}_t = \mathcal{S}_{t-1} \cup \Delta\mathcal{S}_t$ (with deduplication)
+    \item \textbf{Consolidates} $\mathcal{S}_t$ via dynamic summarization if token thresholds are exceeded
+\end{enumerate}
+
+This loop is \emph{recursive}: the cheatsheet state $\mathcal{S}_t$ at turn $t$ depends on all prior states, but is kept compact through summarization. The system ``learns'' patient-specific therapeutic strategies---which CBT techniques resonate, what distortion patterns recur, which interventions succeed---without any gradient updates. The learning is embedded in the evolving prompt context rather than in model parameters.
+
+This design directly addresses the three failure modes identified in our baseline analysis: (1)~\emph{context loss} from sliding windows is replaced by persistent curated strategies; (2)~\emph{distortion contamination} from raw memory is prevented by clinical filtering; and (3)~\emph{high variance} from noisy retrieval is mitigated by strategy curation and CoT-guided selection.
+
+\subsection{Comparison with Mem0}
+
+To contextualize DTM's design, we highlight key architectural differences with Mem0, our primary baseline:
+
+\begin{table}[h]
+\centering
+\caption{Architectural comparison between DTM and Mem0 memory systems.}
+\label{tab:architecture}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Dimension} & \textbf{DTM (Ours)} & \textbf{Mem0} \\
+\midrule
+Storage unit & Curated therapeutic strategies & Raw extracted facts \\
+Curation & Clinical filtering via Extractor & Automatic (opaque) \\
+Retrieval & CoT two-phase analysis & Embedding similarity \\
+Growth control & Token-aware summarization & Automatic UPDATE/DELETE \\
+Clinical safety & Distortion transformation rules & No domain-specific filtering \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The fundamental distinction is that Mem0 performs \emph{domain-agnostic} memory operations---it stores what was said---while DTM performs \emph{domain-aware} memory curation---it stores what was clinically relevant about what was said. This distinction is critical in therapeutic contexts where patients' cognitive distortions should inform treatment strategy but must not be accepted as factual reality by the system.

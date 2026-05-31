@@ -1,0 +1,59 @@
+\section{Experimental Setup}
+
+\subsection{Dataset}
+
+We evaluate on synthetic multi-session therapy transcripts generated via a Gemma-based patient-therapist simulation. Each transcript simulates a realistic longitudinal therapeutic relationship in which a patient presents with cognitive distortions characteristic of anxiety, depression, or interpersonal difficulties. The simulation produces alternating \texttt{Therapist:}/\texttt{Client:} turns across seven sessions per patient, yielding extended dialogues that test long-horizon memory and alignment.
+
+We use three synthetic patient profiles (SYN\_0001, SYN\_0002, SYN\_0004), each containing between 50 and 78 total turns (25 to 39 counselor turns evaluated per patient, 92 to 93 total counselor turns across conditions). The transcripts vary in length and thematic complexity: SYN\_0001 is the shortest and most focused, SYN\_0002 is the longest with the most diverse emotional content, and SYN\_0004 falls between the two. This variation allows us to examine how each memory condition scales with conversation length.
+
+\subsection{Models and Infrastructure}
+
+All experiments use \texttt{gpt-oss:20b} as both the generation model and the evaluation judge. The model is served via Ollama on a Lambda Cloud GPU instance, accessed through an SSH tunnel (\texttt{ssh -L 11434:localhost:11434 ubuntu@<ip>}). Using the same model for generation and evaluation ensures consistency across the pipeline while avoiding confounds introduced by model mismatch. Evaluation calls use a low temperature of 0.1 to ensure scoring consistency, while generation calls use a temperature of 0.7 to produce natural therapeutic responses.
+
+For the Mem0 baseline, we use ChromaDB as the vector store backend with \texttt{nomic-embed-text} (512-dimensional embeddings) for memory retrieval. Mem0's internal operations (ADD, UPDATE, DELETE) are handled by the same \texttt{gpt-oss:20b} model, ensuring that any performance differences between Mem0 and DTM are attributable to the memory architecture rather than the underlying language model.
+
+\subsection{Evaluation}
+
+We evaluate on three synthetic patient transcripts (SYN\_0001, SYN\_0002, SYN\_0004), each generated via a Gemma-based patient-therapist simulation. All transcripts contain 50 to 78 total turns (25 to 39 counselor turns evaluated). We compare four conditions across two axes: (1)~who generates the counselor response (human vs.\ LLM), and (2)~what context the system receives (sliding window vs.\ accumulated memories).
+
+A critical design choice is that memory-based conditions receive \emph{only} retrieved memories with no sliding window, while context-based conditions receive \emph{only} the sliding window with no memories. This isolation tests whether each memory system can serve as the \textbf{sole} source of patient context, rather than merely supplementing a conversation window.
+
+Table~\ref{tab:config} summarizes the input configuration for each condition.
+
+\begin{table}[h]
+\centering
+\caption{Experimental conditions: what each counselor and judge receives as input. Memory-based conditions receive \emph{no} sliding window; context-based conditions receive \emph{no} memories.}
+\label{tab:config}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Condition} & \textbf{Counselor} & \textbf{Counselor Input} & \textbf{Judge Input} \\
+\midrule
+Human (Context) & Human & N/A & Sliding window (10 turns) \\
+Human (Memory) & Human & N/A & Mem0 memories only \\
+LLM (Context Window) & LLM & Sliding window (10 turns) & Sliding window (10 turns) \\
+LLM (Mem0) & LLM & Mem0 memories only & Mem0 memories only \\
+DTM (Ours) & LLM & Curated cheatsheet only & Sliding window (10 turns) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \textbf{Human Counselor} condition uses the original therapist responses from the synthetic transcript, serving as the upper bound for therapeutic quality. We report two sub-conditions based on what the LLM judge receives during evaluation. In \textbf{Human (Context)}, the judge receives only the last 10 conversation turns (sliding window) with no memory retrieval performed. In \textbf{Human (Memory)}, the judge receives only Mem0's accumulated memories for the patient with no sliding window provided. Comparing these two sub-conditions reveals whether memory-aware evaluation introduces scoring bias on \emph{identical} counselor responses.
+
+The \textbf{LLM (Context Window)} condition uses an LLM counselor that generates responses using the patient query and the last 10 conversation turns. The judge also receives only the sliding window. No memory system is used for either the counselor or the judge. This is the sliding window baseline.
+
+The \textbf{LLM (Mem0)} condition uses an LLM counselor that generates responses using \emph{only} Mem0's retrieved memories with no sliding window. The judge also receives only memories. This tests whether static memory accumulation can replace conversational context.
+
+The \textbf{DTM (Ours)} condition uses our Dynamic Test-Time Memory system with the DC-RS architecture described in Section~3. The counselor receives curated cheatsheet strategies instead of raw memories, with no sliding window. Chain-of-Thought retrieval selects at most 3 strategies per category for each turn, and dynamic summarization consolidates the cheatsheet when it exceeds 2000 tokens.
+
+All conditions use the same judge model (\texttt{gpt-oss:20b}) and identical evaluation rubrics to ensure comparability.
+
+\subsection{Evaluation Metrics}
+
+We adopt two LLM-as-Judge metrics, each scored on a 1 to 10 scale per counselor turn.
+
+\paragraph{CBT Adherence Score (Methodological Drift).} This metric measures how well the counselor follows Cognitive Behavioral Therapy principles. High scores (9 to 10) indicate excellent use of Socratic questioning, collaborative exploration, and evidence examination. Low scores (1 to 4) indicate directive advice-giving, ``should'' statements, or abandonment of CBT techniques.
+
+\paragraph{Persona Consistency Score (Boundary Dissolution).} This metric measures whether the counselor maintains a professional therapeutic persona. High scores indicate appropriate boundaries, professional language, and emotional distance. Low scores indicate mirroring of client slang, peer-like tone, or self-disclosure.
+
+Both metrics are evaluated at every counselor turn, producing per-turn trajectories that reveal not just average quality but temporal patterns of degradation or improvement. This longitudinal evaluation design is critical for assessing memory systems, as single-turn evaluations would miss the progressive drift that accumulates over extended conversations.

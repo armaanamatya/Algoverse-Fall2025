@@ -1,0 +1,56 @@
+\section{Methodology: Dynamic Test-Time Memory}
+
+We propose \textbf{Dynamic Test-Time Memory (DTM)}, a continual learning framework for therapeutic conversations that replaces raw memory accumulation with curated clinical strategies. The core architectural insight is a separation between \emph{what happened} (patient statements) and \emph{what to do about it} (therapeutic strategies). Where static memory systems like Mem0 store ``Patient's boss hates them'' as fact, DTM extracts ``Mind-reading pattern about workplace relationships; use evidence examination,'' which is a transferable, clinically appropriate strategy.
+
+DTM is implemented as the \textbf{DC-RS} (Dynamic Cheatsheet with Retrieval and Summarization) system, built on three components: (1)~a \emph{Generator-Extractor} loop that learns strategies at test time, (2)~an \emph{adaptive retrieval} mechanism that selects relevant strategies per turn, and (3)~a \emph{dynamic summarization} module that prevents unbounded context growth.
+
+\subsection{The Generator-Extractor Architecture}
+
+The DC-RS system operates as a dual-component loop executed after every patient--counselor exchange.
+
+\paragraph{The Extractor (Strategy Learner).}
+After each turn pair (patient utterance + counselor response), the Extractor analyzes the exchange and populates a structured \texttt{TherapeuticCheatsheet} organized into five categories of transferable knowledge. \textbf{CBT Techniques} capture reusable technique templates such as ``Socratic questioning for catastrophizing.'' \textbf{Distortion Patterns} record anonymized cognitive distortion signatures (for instance, ``All-or-nothing thinking about work performance; graduated scaling may help'') without storing any raw patient content. \textbf{Effective Interventions} preserve approaches that produced constructive patient engagement in prior turns. \textbf{Boundary Templates} encode patterns for maintaining professional distance when patients seek validation of harmful cognitions. Finally, \textbf{Session Insights} capture higher-level therapeutic observations about the patient's trajectory across turns.
+
+Critically, the Extractor enforces \textbf{clinical filtering rules} that prevent distortion leakage into the strategy store:
+
+\begin{center}
+\small
+\begin{tabular}{p{0.44\linewidth}p{0.44\linewidth}}
+\toprule
+\textbf{Extracted (Curated Strategy)} & \textbf{Filtered Out (Raw Distortion)} \\
+\midrule
+``Mind-reading pattern about workplace; use evidence examination'' & ``Patient's boss hates them'' \\
+``All-or-nothing thinking; graduated scaling (1--10) may help'' & ``Patient always fails at everything'' \\
+``Overgeneralization pattern; explore specific instances'' & ``Everyone abandons the patient'' \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This transformation is the key mechanism that prevents the \emph{distortion accumulation} failure mode observed in Mem0: cognitive distortions are never stored as facts, only as patterns to be therapeutically addressed.
+
+\paragraph{The Generator (Response Producer).}
+Given a new patient utterance, the Generator produces a counselor response informed by the current cheatsheet state. Unlike Mem0, which injects raw patient memories into the prompt, the Generator receives only \emph{curated strategies}, that is, therapeutic patterns rather than patient statements. This means the LLM's generation is steered toward evidence-based responses rather than being contaminated by distortion-laden ``facts'' about the patient.
+
+\paragraph{The Loop.}
+At each turn $t$, the Generator first produces a counselor response $r_t$ using patient turn $p_t$ and the current cheatsheet $\mathcal{C}_{t-1}$. The Extractor then analyzes the $(p_t, r_t)$ pair and updates the cheatsheet: $\mathcal{C}_t = \text{Extract}(\mathcal{C}_{t-1}, p_t, r_t)$. Any filtered content (raw distortions, third-party judgments, unverified claims) is logged for auditability but \emph{not} added to $\mathcal{C}_t$. This creates a recursive update loop: the cheatsheet evolves with every exchange, capturing emerging patterns while filtering noise, constituting \emph{continual learning without weight updates}.
+
+\subsection{Inference-Time Continual Learning}
+
+The cheatsheet $\mathcal{C}_t$ represents a \emph{test-time memory state} that evolves during inference. Unlike fine-tuning, no model weights are modified; instead, the prompt context adapts through three mechanisms.
+
+\paragraph{Strategy Accumulation.}
+New strategies are appended to the cheatsheet after each turn. Duplicate detection prevents redundant entries: before adding a strategy, the system checks if an equivalent item already exists in the relevant category. This ensures the cheatsheet grows only when genuinely novel therapeutic insights emerge from the conversation.
+
+\paragraph{Adaptive Retrieval (RLM-Inspired).}
+Rather than injecting the full cheatsheet into every prompt, which would cause linear context growth, we adopt a retrieval mechanism inspired by the Retrieval-augmented Language Model (RLM) paradigm. The cheatsheet is formatted as an indexed ``environment'' where each strategy is assigned a numerical identifier, and a retrieval call selects the most relevant indices (up to 3 per category) for the current patient turn. Only those selected strategies are included in the generation prompt, keeping the effective context bounded even as the cheatsheet grows.
+
+We further enhance retrieval with a \textbf{Chain-of-Thought (CoT)} phase that performs clinical analysis before strategy selection. In Phase~1, the retrieval module analyzes the patient statement to identify cognitive distortions present, extract emotional themes, and recommend a therapeutic approach. In Phase~2, it uses this analysis to select cheatsheet strategies that specifically address the identified distortions and themes. Both the Phase~1 analysis and the Phase~2 retrieved strategies are included in the generation prompt, providing the Generator with clinically grounded context for response production.
+
+\paragraph{Dynamic Summarization.}
+As the cheatsheet accumulates strategies over many turns, it must be periodically consolidated to prevent context bloat. Rather than using a fixed summarization interval (e.g., every 100 turns), we employ \textbf{token-based dynamic summarization} with a three-level trigger. An emergency threshold at 4000 tokens forces summarization regardless of other conditions. A normal threshold at 2000 tokens triggers summarization if a sufficient number of strategies have accumulated. A minimum guard of 15 strategies prevents summarization when the cheatsheet is still sparse, preserving early diversity. When triggered, the summarization module merges similar strategies, retains the most actionable versions, and preserves category diversity, consolidating the cheatsheet to a target of 10 items per category. This ensures the memory state remains compact and high-signal even over extended conversations spanning 100+ turns.
+
+\subsection{CBT Integration}
+
+All conditions share an identical CBT system prompt enforcing Socratic questioning, collaborative empiricism, evidence examination, distortion identification, professional boundaries, and emotion validation before cognitive exploration. This ensures that performance differences across conditions are attributable solely to the memory system.
+
+When DC-RS is active, the generation prompt layers this shared CBT prompt with the Phase~1 clinical analysis and Phase~2 retrieved strategies, providing the Generator with both stable therapeutic guidelines and turn-specific strategy recommendations.
